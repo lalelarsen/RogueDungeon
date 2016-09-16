@@ -17,8 +17,10 @@ public class Physics {
 
     GameObject body;
     public boolean gravity = true;
+    public boolean grounded = false;
     public boolean resistenceX = true;
     public boolean resistenceY = true;
+    public boolean isSolid = false;
     int maxForceX = 24;
     int maxForceY = 24;
     

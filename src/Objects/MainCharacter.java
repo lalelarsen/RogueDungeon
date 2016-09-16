@@ -26,14 +26,19 @@ public class MainCharacter extends GameObject implements Plottable{
     public MainCharacter(){
         String path = "C:\\Users\\frederik.larsen\\Pictures\\stickman.png";
         File fil = new File(path);
+        BufferedImage imgg = null;
         //Get Image from path
         try {
-            img = ImageIO.read(fil);
+            imgg = ImageIO.read(fil);
         } catch (IOException e) {
             System.out.println("The image was not loaded.");
         }
         
         addPhysics();
+        getPhysics().gravity = true;
+        height = imgg.getHeight();
+        width = imgg.getWidth();
+        img = imgg;
     }
     
     public void move(int dir) {

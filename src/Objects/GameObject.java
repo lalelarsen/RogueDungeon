@@ -19,8 +19,10 @@ public class GameObject implements Plottable {
     Point pos = new Point(0,0);
     public Point forceDir = new Point(0,0);
     Image img;
-    int speed;
     Physics physics;
+    int speed;
+    public int height;
+    public int width;
     public int lastX = 0;
     public int lastY = 0;
     

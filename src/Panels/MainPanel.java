@@ -40,7 +40,7 @@ public class MainPanel extends JPanel {
             Point point = currObject.nextPos();
             Image img = currObject.getImage();
             g.drawImage(img, point.x, point.y, null);
-            
+            g.drawOval(50, 50, 2, 2);
         }
     }
 

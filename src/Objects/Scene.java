@@ -16,7 +16,7 @@ public class Scene {
     public Scene(){
         OC = new ObjectsController();
     }
-    public void frame1(){OC.bounce();};
+    public void frame1(){/*OC.bounce();*/ OC.solidCollisionDetetection();};
     public void frame2(){};
     public void frame3(){};
     public void frame4(){};
@@ -25,5 +25,5 @@ public class Scene {
     public void frame7(){};
     public void frame8(){};
     public void frame9(){};
-    public void frame10(){OC.updateGravAndResis();};
+    public void frame10(){OC.objectsUpdate();};
 }
