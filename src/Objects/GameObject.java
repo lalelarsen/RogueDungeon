@@ -9,6 +9,7 @@ import Components.Physics;
 import Interfaces.Plottable;
 import java.awt.Image;
 import java.awt.Point;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,10 +18,10 @@ import java.awt.Point;
 public class GameObject implements Plottable {
     
     Point pos = new Point(0,0);
-    public Point forceDir = new Point(0,0);
     Image img;
     Physics physics;
-    int speed;
+    int speed = 5;
+    public Point forceDir = new Point(0,0);
     public int height;
     public int width;
     public int lastX = 0;
@@ -54,6 +55,16 @@ public class GameObject implements Plottable {
     @Override
     public Point getCords() {
         return pos;
+    }
+    
+    public ArrayList<Point> getHitboxCords(){
+        ArrayList<Point> hitboxCords = new ArrayList();
+        for (int x = pos.x; x < pos.x+width; x++) {
+            for (int y = pos.y; y < pos.y+height; y++) {
+                hitboxCords.add(new Point(x,y));
+            }
+        }
+        return hitboxCords;
     }
     
     public void addPhysics(){

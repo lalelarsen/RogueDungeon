@@ -55,17 +55,46 @@ public class ObjectsController {
     public void solidCollisionDetetection() {
         for (int j = 0; j < units.size(); j++) {
             GameObject go = units.get(j);
-            for (int i = 0; i < units.size(); i++) {
-                GameObject currGO = units.get(i);
-                if (!go.equals(currGO)) {
-                    if (go.getCords().x < currGO.getCords().x + currGO.width && go.getCords().x + go.width > currGO.getCords().x && go.getCords().y < currGO.getCords().y + currGO.height && go.getCords().y + go.height > currGO.getCords().y) {
-                        currGO.setForceDir(new Point(0,0));
-                        currGO.setCords(currGO.lastX, currGO.lastY);
-                        currGO.getPhysics().grounded = true;
+            if (!go.getPhysics().isSolid) {
+                for (int i = 0; i < units.size(); i++) {
+                    GameObject currGO = units.get(i);
+                    if (!go.equals(currGO)) {
+                        if (go.getCords().x < currGO.getCords().x + currGO.width && go.getCords().x + go.width > currGO.getCords().x && go.getCords().y < currGO.getCords().y + currGO.height && go.getCords().y + go.height > currGO.getCords().y) {
+                            ArrayList<Integer> xCords = new ArrayList();
+                            ArrayList<Integer> yCords = new ArrayList();
+                            ArrayList<Point> goHB = go.getHitboxCords();
+                            ArrayList<Point> currGoHB = currGO.getHitboxCords();
+                            for (int k = 0; k < goHB.size(); k++) {
+                                for (int l = 0; l < currGoHB.size(); l++) {
+                                    if (goHB.get(k).equals(currGoHB.get(l))) {
+                                        if (!xCords.contains(goHB.get(k).x)) {
+                                            xCords.add(goHB.get(k).x);
+                                        }
+                                        if (!yCords.contains(goHB.get(k).y)) {
+                                            yCords.add(goHB.get(k).y);
+                                        }
+                                    }
+                                }
+                            }
+                            if (xCords.size() < yCords.size()) {
+                                if (go.getCords().x > currGO.getCords().x) {
+                                    go.setCords(go.getCords().x + xCords.size(), go.getCords().y);
+                                    go.setForceDir(new Point(0,go.getForceDir().y));
+                                } else {
+                                    go.setCords(go.getCords().x - xCords.size(), go.getCords().y);
+                                    go.setForceDir(new Point(0,go.getForceDir().y));
+                                }
+                            } else if (go.getCords().y > currGO.getCords().y) {
+                                go.setCords(go.getCords().x, go.getCords().y + yCords.size());
+                                go.setForceDir(new Point(go.getForceDir().x,0));
+                            } else {
+                                go.setCords(go.getCords().x, go.getCords().y - yCords.size());
+                                go.setForceDir(new Point(go.getForceDir().x,0));
+                            }
+                        }
                     }
                 }
             }
-
         }
     }
 

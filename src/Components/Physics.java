@@ -21,8 +21,8 @@ public class Physics {
     public boolean resistenceX = true;
     public boolean resistenceY = true;
     public boolean isSolid = false;
-    int maxForceX = 24;
-    int maxForceY = 24;
+    int maxForceX = 12;
+    int maxForceY = 12;
     
     public Physics(GameObject body) {
         this.body = body;

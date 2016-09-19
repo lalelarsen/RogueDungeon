@@ -29,8 +29,9 @@ public class Block extends GameObject implements Plottable{
         }
         addPhysics();
         getPhysics().gravity = false;
+        getPhysics().isSolid = true;
         height = imgg.getHeight();
-        width = imgg.getWidth();
+        width = imgg.getWidth()+300;
         img = imgg;
     }
     

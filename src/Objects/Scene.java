@@ -16,14 +16,14 @@ public class Scene {
     public Scene(){
         OC = new ObjectsController();
     }
-    public void frame1(){/*OC.bounce();*/ OC.solidCollisionDetetection();};
-    public void frame2(){};
-    public void frame3(){};
-    public void frame4(){};
-    public void frame5(){};
-    public void frame6(){};
-    public void frame7(){};
-    public void frame8(){};
-    public void frame9(){};
     public void frame10(){OC.objectsUpdate();};
+    public void frame9(){};
+    public void frame8(){};
+    public void frame7(){};
+    public void frame6(){};
+    public void frame5(){};
+    public void frame4(){};
+    public void frame3(){};
+    public void frame2(){};
+    public void frame1(){/*OC.bounce();*/ OC.solidCollisionDetetection();};
 }

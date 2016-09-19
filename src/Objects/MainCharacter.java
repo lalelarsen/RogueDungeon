@@ -50,6 +50,7 @@ public class MainCharacter extends GameObject implements Plottable{
                 break;
             case 38:
                 physics.applyForce(new Point(0,-1));
+                //setCords(currPoint.x, currPoint.y-speed);
                 break;
             case 39:
                 physics.applyForce(new Point(1,0));
@@ -57,6 +58,7 @@ public class MainCharacter extends GameObject implements Plottable{
                 break;
             case 40:
                 physics.applyForce(new Point(0,1));
+                //setCords(currPoint.x, currPoint.y+speed);
                 break;
             
         }
