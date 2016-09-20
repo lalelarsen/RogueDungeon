@@ -35,9 +35,8 @@ public class MainCharacter extends GameObject implements Plottable{
         }
         
         addPhysics();
+        addHitbox(imgg.getHeight(), imgg.getWidth());
         getPhysics().gravity = true;
-        height = imgg.getHeight();
-        width = imgg.getWidth();
         img = imgg;
     }
     

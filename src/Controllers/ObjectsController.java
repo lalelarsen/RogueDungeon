@@ -59,11 +59,11 @@ public class ObjectsController {
                 for (int i = 0; i < units.size(); i++) {
                     GameObject currGO = units.get(i);
                     if (!go.equals(currGO)) {
-                        if (go.getCords().x < currGO.getCords().x + currGO.width && go.getCords().x + go.width > currGO.getCords().x && go.getCords().y < currGO.getCords().y + currGO.height && go.getCords().y + go.height > currGO.getCords().y) {
+                        if (go.getCords().x < currGO.getCords().x + currGO.getHitbox().width && go.getCords().x + go.getHitbox().width > currGO.getCords().x && go.getCords().y < currGO.getCords().y + currGO.getHitbox().height && go.getCords().y + go.getHitbox().height > currGO.getCords().y) {
                             ArrayList<Integer> xCords = new ArrayList();
                             ArrayList<Integer> yCords = new ArrayList();
-                            ArrayList<Point> goHB = go.getHitboxCords();
-                            ArrayList<Point> currGoHB = currGO.getHitboxCords();
+                            ArrayList<Point> goHB = go.getHitbox().getHitboxCords();
+                            ArrayList<Point> currGoHB = currGO.getHitbox().getHitboxCords();
                             for (int k = 0; k < goHB.size(); k++) {
                                 for (int l = 0; l < currGoHB.size(); l++) {
                                     if (goHB.get(k).equals(currGoHB.get(l))) {

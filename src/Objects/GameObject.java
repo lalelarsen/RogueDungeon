@@ -5,6 +5,7 @@
  */
 package Objects;
 
+import Components.Hitbox;
 import Components.Physics;
 import Interfaces.Plottable;
 import java.awt.Image;
@@ -20,10 +21,9 @@ public class GameObject implements Plottable {
     Point pos = new Point(0,0);
     Image img;
     Physics physics;
+    Hitbox hitbox;
     int speed = 5;
     public Point forceDir = new Point(0,0);
-    public int height;
-    public int width;
     public int lastX = 0;
     public int lastY = 0;
     
@@ -57,14 +57,12 @@ public class GameObject implements Plottable {
         return pos;
     }
     
-    public ArrayList<Point> getHitboxCords(){
-        ArrayList<Point> hitboxCords = new ArrayList();
-        for (int x = pos.x; x < pos.x+width; x++) {
-            for (int y = pos.y; y < pos.y+height; y++) {
-                hitboxCords.add(new Point(x,y));
-            }
-        }
-        return hitboxCords;
+    public void addHitbox(int width,int height){
+        hitbox = new Hitbox(height,width,this);
+    }
+    
+    public Hitbox getHitbox(){
+        return this.hitbox;
     }
     
     public void addPhysics(){

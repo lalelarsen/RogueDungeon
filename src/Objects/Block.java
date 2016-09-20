@@ -28,10 +28,9 @@ public class Block extends GameObject implements Plottable{
             System.out.println("The image was not loaded.");
         }
         addPhysics();
+        addHitbox(imgg.getHeight(), imgg.getWidth());
         getPhysics().gravity = false;
         getPhysics().isSolid = true;
-        height = imgg.getHeight();
-        width = imgg.getWidth()+300;
         img = imgg;
     }
     
