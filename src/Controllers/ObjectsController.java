@@ -60,36 +60,40 @@ public class ObjectsController {
                     GameObject currGO = units.get(i);
                     if (!go.equals(currGO)) {
                         if (go.getCords().x < currGO.getCords().x + currGO.getHitbox().width && go.getCords().x + go.getHitbox().width > currGO.getCords().x && go.getCords().y < currGO.getCords().y + currGO.getHitbox().height && go.getCords().y + go.getHitbox().height > currGO.getCords().y) {
-                            ArrayList<Integer> xCords = new ArrayList();
-                            ArrayList<Integer> yCords = new ArrayList();
-                            ArrayList<Point> goHB = go.getHitbox().getHitboxCords();
-                            ArrayList<Point> currGoHB = currGO.getHitbox().getHitboxCords();
-                            for (int k = 0; k < goHB.size(); k++) {
-                                for (int l = 0; l < currGoHB.size(); l++) {
-                                    if (goHB.get(k).equals(currGoHB.get(l))) {
-                                        if (!xCords.contains(goHB.get(k).x)) {
-                                            xCords.add(goHB.get(k).x);
-                                        }
-                                        if (!yCords.contains(goHB.get(k).y)) {
-                                            yCords.add(goHB.get(k).y);
-                                        }
-                                    }
-                                }
-                            }
-                            if (xCords.size() < yCords.size()) {
+//                            ArrayList<Integer> xCords = new ArrayList();
+//                            ArrayList<Integer> yCords = new ArrayList();
+//                            ArrayList<Point> goHB = go.getHitbox().getHitboxCords();
+//                            ArrayList<Point> currGoHB = currGO.getHitbox().getHitboxCords();
+//
+//                            for (int k = 0; k < goHB.size(); k++) {
+//                                for (int l = 0; l < currGoHB.size(); l++) {
+//                                    if (goHB.get(k).equals(currGoHB.get(l))) {
+//                                        if (!xCords.contains(goHB.get(k).x)) {
+//                                            xCords.add(goHB.get(k).x);
+//                                        }
+//                                        if (!yCords.contains(goHB.get(k).y)) {
+//                                            yCords.add(goHB.get(k).y);
+//                                        }
+//                                    }
+//                                }
+//                            }
+                            Point aPoint = go.getHitbox().getOverlapped(currGO.getHitbox());
+                            
+                            if (aPoint.x < aPoint.y) {
                                 if (go.getCords().x > currGO.getCords().x) {
-                                    go.setCords(go.getCords().x + xCords.size(), go.getCords().y);
-                                    go.setForceDir(new Point(0,go.getForceDir().y));
+                                    go.setCords(go.getCords().x + aPoint.x, go.getCords().y);
+                                    go.setForceDir(new Point(0, go.getForceDir().y));
                                 } else {
-                                    go.setCords(go.getCords().x - xCords.size(), go.getCords().y);
-                                    go.setForceDir(new Point(0,go.getForceDir().y));
+                                    go.setCords(go.getCords().x - aPoint.x, go.getCords().y);
+                                    go.setForceDir(new Point(0, go.getForceDir().y));
                                 }
                             } else if (go.getCords().y > currGO.getCords().y) {
-                                go.setCords(go.getCords().x, go.getCords().y + yCords.size());
-                                go.setForceDir(new Point(go.getForceDir().x,0));
+                                go.setCords(go.getCords().x, go.getCords().y + aPoint.y);
+                                go.setForceDir(new Point(go.getForceDir().x, 0));
                             } else {
-                                go.setCords(go.getCords().x, go.getCords().y - yCords.size());
-                                go.setForceDir(new Point(go.getForceDir().x,0));
+                                go.setCords(go.getCords().x, go.getCords().y - aPoint.y);
+                                go.getPhysics().gravity = false;
+                                go.setForceDir(new Point(go.getForceDir().x, 0));
                             }
                         }
                     }
