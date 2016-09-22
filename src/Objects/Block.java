@@ -19,7 +19,7 @@ import javax.imageio.ImageIO;
 public class Block extends BaseObject implements Plottable{
 
     public Block() {
-        String path = "C:\\Users\\frederik.larsen\\Pictures\\block.png";
+        String path = "block.png";
         File fil = new File(path);
         BufferedImage imgg = null;
         //Get Image from path

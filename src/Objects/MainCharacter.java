@@ -25,7 +25,7 @@ import Interfaces.Plottable;
 public class MainCharacter extends BaseObject implements Plottable{
     
     public MainCharacter(){
-        String path = "C:\\Users\\frederik.larsen\\Pictures\\stickman.png";
+        String path = "stickman.png";
         File fil = new File(path);
         BufferedImage imgg = null;
         //Get Image from path
