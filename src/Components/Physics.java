@@ -6,7 +6,6 @@
 package Components;
 
 import Interfaces.Plottable;
-import Objects.GameObject;
 import java.awt.Point;
 
 /**
@@ -15,7 +14,7 @@ import java.awt.Point;
  */
 public class Physics {
 
-    GameObject body;
+    BaseObject body;
     public boolean gravity = true;
     public boolean grounded = false;
     public boolean resistenceX = true;
@@ -24,7 +23,7 @@ public class Physics {
     int maxForceX = 12;
     int maxForceY = 12;
     
-    public Physics(GameObject body) {
+    public Physics(BaseObject body) {
         this.body = body;
     }
 

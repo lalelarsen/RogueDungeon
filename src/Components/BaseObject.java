@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Objects;
+package Components;
 
 import Components.Hitbox;
 import Components.Physics;
@@ -16,13 +16,13 @@ import java.util.ArrayList;
  *
  * @author frederik.larsen
  */
-public class GameObject implements Plottable {
+public class BaseObject implements Plottable {
     
-    Point pos = new Point(0,0);
-    Image img;
-    Physics physics;
-    Hitbox hitbox;
-    int speed = 5;
+    public Point pos = new Point(0,0);
+    public Image img;
+    public Physics physics;
+    public Hitbox hitbox;
+    public int speed = 5;
     public Point forceDir = new Point(0,0);
     public int lastX = 0;
     public int lastY = 0;

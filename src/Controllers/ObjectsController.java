@@ -6,7 +6,7 @@
 package Controllers;
 
 import Objects.Block;
-import Objects.GameObject;
+import Components.BaseObject;
 import Objects.MainCharacter;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
  */
 public class ObjectsController {
 
-    public ArrayList<GameObject> units = new ArrayList();
+    public ArrayList<BaseObject> units = new ArrayList();
     public MainCharacter Hero = new MainCharacter();
     public Block block = new Block();
 
@@ -30,7 +30,7 @@ public class ObjectsController {
 
     public void bounce() {
         for (int i = 0; i < units.size(); i++) {
-            GameObject currGO = units.get(i);
+            BaseObject currGO = units.get(i);
             if (currGO.getCords().y > 150) {
                 currGO.getPhysics().gravity = false;
                 currGO.setForceDir(new Point(currGO.getForceDir().x, 0));
@@ -46,7 +46,7 @@ public class ObjectsController {
 
     public void objectsUpdate() {
         for (int i = 0; i < units.size(); i++) {
-            GameObject currGO = units.get(i);
+            BaseObject currGO = units.get(i);
             updateGravAndResis(currGO);
         }
     }
@@ -54,12 +54,12 @@ public class ObjectsController {
 
     public void solidCollisionDetetection() {
         for (int j = 0; j < units.size(); j++) {
-            GameObject go = units.get(j);
-            if (!go.getPhysics().isSolid) {
+            BaseObject MainBaseObject = units.get(j);
+            if (!MainBaseObject.getPhysics().isSolid) {
                 for (int i = 0; i < units.size(); i++) {
-                    GameObject currGO = units.get(i);
-                    if (!go.equals(currGO)) {
-                        if (go.getCords().x < currGO.getCords().x + currGO.getHitbox().width && go.getCords().x + go.getHitbox().width > currGO.getCords().x && go.getCords().y < currGO.getCords().y + currGO.getHitbox().height && go.getCords().y + go.getHitbox().height > currGO.getCords().y) {
+                    BaseObject SecondBaseObject = units.get(i);
+                    if (!MainBaseObject.equals(SecondBaseObject)) {
+                        if (MainBaseObject.getCords().x < SecondBaseObject.getCords().x + SecondBaseObject.getHitbox().width && MainBaseObject.getCords().x + MainBaseObject.getHitbox().width > SecondBaseObject.getCords().x && MainBaseObject.getCords().y < SecondBaseObject.getCords().y + SecondBaseObject.getHitbox().height && MainBaseObject.getCords().y + MainBaseObject.getHitbox().height > SecondBaseObject.getCords().y) {
 //                            ArrayList<Integer> xCords = new ArrayList();
 //                            ArrayList<Integer> yCords = new ArrayList();
 //                            ArrayList<Point> goHB = go.getHitbox().getHitboxCords();
@@ -77,23 +77,23 @@ public class ObjectsController {
 //                                    }
 //                                }
 //                            }
-                            Point aPoint = go.getHitbox().getOverlapped(currGO.getHitbox());
+                            Point aPoint = MainBaseObject.getHitbox().getOverlapped(SecondBaseObject.getHitbox());
                             
                             if (aPoint.x < aPoint.y) {
-                                if (go.getCords().x > currGO.getCords().x) {
-                                    go.setCords(go.getCords().x + aPoint.x, go.getCords().y);
-                                    go.setForceDir(new Point(0, go.getForceDir().y));
+                                if (MainBaseObject.getCords().x > SecondBaseObject.getCords().x) {
+                                    MainBaseObject.setCords(MainBaseObject.getCords().x + aPoint.x, MainBaseObject.getCords().y);
+                                    MainBaseObject.setForceDir(new Point(0, MainBaseObject.getForceDir().y));
                                 } else {
-                                    go.setCords(go.getCords().x - aPoint.x, go.getCords().y);
-                                    go.setForceDir(new Point(0, go.getForceDir().y));
+                                    MainBaseObject.setCords(MainBaseObject.getCords().x - aPoint.x, MainBaseObject.getCords().y);
+                                    MainBaseObject.setForceDir(new Point(0, MainBaseObject.getForceDir().y));
                                 }
-                            } else if (go.getCords().y > currGO.getCords().y) {
-                                go.setCords(go.getCords().x, go.getCords().y + aPoint.y);
-                                go.setForceDir(new Point(go.getForceDir().x, 0));
+                            } else if (MainBaseObject.getCords().y > SecondBaseObject.getCords().y) {
+                                MainBaseObject.setCords(MainBaseObject.getCords().x, MainBaseObject.getCords().y + aPoint.y);
+                                MainBaseObject.setForceDir(new Point(MainBaseObject.getForceDir().x, 0));
                             } else {
-                                go.setCords(go.getCords().x, go.getCords().y - aPoint.y);
-                                go.getPhysics().gravity = false;
-                                go.setForceDir(new Point(go.getForceDir().x, 0));
+                                MainBaseObject.setCords(MainBaseObject.getCords().x, MainBaseObject.getCords().y - aPoint.y);
+                                MainBaseObject.getPhysics().gravity = false;
+                                MainBaseObject.setForceDir(new Point(MainBaseObject.getForceDir().x, 0));
                             }
                         }
                     }
@@ -102,7 +102,7 @@ public class ObjectsController {
         }
     }
 
-    public void updateGravAndResis(GameObject currGO) {
+    public void updateGravAndResis(BaseObject currGO) {
         if (currGO.getPhysics().resistenceX) {
             if (currGO.getForceDir().x < 2 && currGO.getForceDir().x > -2) {
                 currGO.getForceDir().x = 0;

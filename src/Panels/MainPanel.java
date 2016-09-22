@@ -14,7 +14,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import Interfaces.Plottable;
-import Objects.GameObject;
+import Components.BaseObject;
 
 public class MainPanel extends JPanel {
     
@@ -36,7 +36,7 @@ public class MainPanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         for (int i = 0; i < SC.OC.units.size(); i++) {
-            GameObject currObject = SC.OC.units.get(i);
+            BaseObject currObject = SC.OC.units.get(i);
             Point point = currObject.nextPos();
             Image img = currObject.getImage();
             g.drawImage(img, point.x, point.y, null);

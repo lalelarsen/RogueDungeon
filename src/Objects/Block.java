@@ -5,6 +5,7 @@
  */
 package Objects;
 
+import Components.BaseObject;
 import Interfaces.Plottable;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -15,7 +16,7 @@ import javax.imageio.ImageIO;
  *
  * @author frederik.larsen
  */
-public class Block extends GameObject implements Plottable{
+public class Block extends BaseObject implements Plottable{
 
     public Block() {
         String path = "C:\\Users\\frederik.larsen\\Pictures\\block.png";

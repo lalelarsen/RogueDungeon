@@ -5,7 +5,6 @@
  */
 package Components;
 
-import Objects.GameObject;
 import java.awt.Point;
 import java.util.ArrayList;
 
@@ -17,10 +16,10 @@ public class Hitbox {
 
     public int width;
     public int height;
-    GameObject body;
+    BaseObject body;
     ArrayList<Point> area = new ArrayList<Point>();
 
-    public Hitbox(int width, int height, GameObject body) {
+    public Hitbox(int width, int height, BaseObject body) {
         this.width = width;
         this.height = height;
         this.body = body;
@@ -39,18 +38,35 @@ public class Hitbox {
             } else {
                 oPoint = new Point(hb.getBody().getCords().x, this.getBody().getCords().y);
                 oWidth = this.getBody().getCords().x + width - hb.getBody().getCords().x;
-                oHeight = hb.getBody().getCords().y + height - this.getBody().getCords().y;
+                if (this.getBody().getCords().y + height < hb.getBody().getCords().y + hb.getHeight()) {
+                    oHeight = this.getHeight();
+                } else {
+                    oHeight = hb.getBody().getCords().y + hb.getHeight() - this.getBody().getCords().y;
+                }
             }
         } else if (this.getBody().getCords().y < hb.getBody().getCords().y) {
             oPoint = new Point(this.getBody().getCords().x, hb.getBody().getCords().y);
-            oWidth = hb.getBody().getCords().x + width - this.getBody().getCords().x;
+            if (this.getBody().getCords().x + width < hb.getBody().getCords().x + hb.getWidth()) {
+                oWidth = this.getWidth();
+            } else {
+                oWidth = hb.getBody().getCords().x + hb.getWidth() - this.getBody().getCords().x;
+            }
             oHeight = this.getBody().getCords().y + height - hb.getBody().getCords().y;
         } else {
             oPoint = this.getBody().getCords();
-            oWidth = hb.getBody().getCords().x + width - this.getBody().getCords().x;
-            oHeight = hb.getBody().getCords().y + height - this.getBody().getCords().y;
+            if (this.getBody().getCords().x + width < hb.getBody().getCords().x + hb.getWidth()) {
+                oWidth = this.getWidth();
+            } else {
+                oWidth = hb.getBody().getCords().x + hb.getWidth() - this.getBody().getCords().x;
+            }
+            if (this.getBody().getCords().y + height < hb.getBody().getCords().y + hb.getHeight()) {
+                oHeight = this.getHeight();
+            } else {
+                oHeight = hb.getBody().getCords().y + hb.getHeight() - this.getBody().getCords().y;
+
+            }
         }
-        return new Point(oWidth,oHeight);
+        return new Point(oWidth, oHeight);
     }
 
     public void setHitbox() {
@@ -85,11 +101,11 @@ public class Hitbox {
         this.height = height;
     }
 
-    public GameObject getBody() {
+    public BaseObject getBody() {
         return body;
     }
 
-    public void setBody(GameObject body) {
+    public void setBody(BaseObject body) {
         this.body = body;
     }
 

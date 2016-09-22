@@ -19,7 +19,7 @@ public class KeyboardController implements KeyListener{
     public KeyboardController(){
         activeKeys = new HashSet<Integer>();
     }
-     
+    
     @Override
     public void keyPressed(KeyEvent e) {
         activeKeys.add(e.getKeyCode());
@@ -32,6 +32,7 @@ public class KeyboardController implements KeyListener{
  
     @Override
     public void keyTyped(KeyEvent e) {
+        System.out.println(e.getKeyCode());
     }
      
     public static HashSet<Integer> getActiveKeys(){

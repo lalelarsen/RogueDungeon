@@ -5,11 +5,12 @@
  */
 package Objects;
 
+import Components.Scene;
 import Controllers.ObjectsController;
 import Objects.MainCharacter;
 import java.util.ArrayList;
 import Interfaces.Plottable;
-import Objects.GameObject;
+import Components.BaseObject;
 
 /**
  *

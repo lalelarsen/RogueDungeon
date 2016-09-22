@@ -5,6 +5,7 @@
  */
 package Objects;
 
+import Components.BaseObject;
 import Components.Physics;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -21,7 +22,7 @@ import Interfaces.Plottable;
  *
  * @author frederik.larsen
  */
-public class MainCharacter extends GameObject implements Plottable{
+public class MainCharacter extends BaseObject implements Plottable{
     
     public MainCharacter(){
         String path = "C:\\Users\\frederik.larsen\\Pictures\\stickman.png";
@@ -36,7 +37,7 @@ public class MainCharacter extends GameObject implements Plottable{
         
         addPhysics();
         addHitbox(imgg.getHeight(), imgg.getWidth());
-        getPhysics().gravity = true;
+        getPhysics().gravity = false;
         img = imgg;
     }
     
@@ -44,20 +45,20 @@ public class MainCharacter extends GameObject implements Plottable{
         Point currPoint = getCords();
         switch(dir){
             case 37:
-                physics.applyForce(new Point(-1,0));
-                //setCords(currPoint.x - speed, currPoint.y);
+                //physics.applyForce(new Point(-1,0));
+                setCords(currPoint.x - speed, currPoint.y);
                 break;
             case 38:
-                physics.applyForce(new Point(0,-1));
-                //setCords(currPoint.x, currPoint.y-speed);
+                //physics.applyForce(new Point(0,-1));
+                setCords(currPoint.x, currPoint.y-speed);
                 break;
             case 39:
-                physics.applyForce(new Point(1,0));
-                //setCords(currPoint.x + speed, currPoint.y);
+                //physics.applyForce(new Point(1,0));
+                setCords(currPoint.x + speed, currPoint.y);
                 break;
             case 40:
-                physics.applyForce(new Point(0,1));
-                //setCords(currPoint.x, currPoint.y+speed);
+                //physics.applyForce(new Point(0,1));
+                setCords(currPoint.x, currPoint.y+speed);
                 break;
             
         }
