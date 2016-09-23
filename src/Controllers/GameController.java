@@ -98,6 +98,10 @@ public class GameController {
             //move left
             currScene.OC.Hero.move(KeyEvent.VK_UP);
         }
+        if(currentKeys.contains(KeyEvent.VK_SPACE)){
+            currScene.OC.Hero.move(KeyEvent.VK_SPACE);
+            currScene.OC.Hero.getPhysics().gravity = true;
+        }
         if (currentKeys.isEmpty()) {
             //if the player is not pressing keys, the protagonist stands still
             currScene.OC.Hero.stop();

@@ -20,12 +20,15 @@ public class ObjectsController {
     public ArrayList<BaseObject> units = new ArrayList();
     public MainCharacter Hero = new MainCharacter();
     public Block block = new Block();
+    public Block block2 = new Block();
 
     public ObjectsController() {
         block.setCords(300, 300);
+        block2.setCords(40, 350);
         Hero.setCords(50, 50);
         units.add(Hero);
         units.add(block);
+        units.add(block2);
     }
 
     public void bounce() {
@@ -92,7 +95,7 @@ public class ObjectsController {
                                 MainBaseObject.setForceDir(new Point(MainBaseObject.getForceDir().x, 0));
                             } else {
                                 MainBaseObject.setCords(MainBaseObject.getCords().x, MainBaseObject.getCords().y - aPoint.y);
-                                MainBaseObject.getPhysics().gravity = false;
+                                //MainBaseObject.getPhysics().gravity = false;
                                 MainBaseObject.setForceDir(new Point(MainBaseObject.getForceDir().x, 0));
                             }
                         }

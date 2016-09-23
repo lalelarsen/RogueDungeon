@@ -22,9 +22,9 @@ import Interfaces.Plottable;
  *
  * @author frederik.larsen
  */
-public class MainCharacter extends BaseObject implements Plottable{
-    
-    public MainCharacter(){
+public class MainCharacter extends BaseObject implements Plottable {
+
+    public MainCharacter() {
         String path = "stickman.png";
         File fil = new File(path);
         BufferedImage imgg = null;
@@ -34,23 +34,23 @@ public class MainCharacter extends BaseObject implements Plottable{
         } catch (IOException e) {
             System.out.println("The image was not loaded.");
         }
-        
+
         addPhysics();
         addHitbox(imgg.getHeight(), imgg.getWidth());
-        getPhysics().gravity = false;
+        getPhysics().gravity = true;
         img = imgg;
     }
-    
+
     public void move(int dir) {
         Point currPoint = getCords();
-        switch(dir){
+        switch (dir) {
             case 37:
                 //physics.applyForce(new Point(-1,0));
                 setCords(currPoint.x - speed, currPoint.y);
                 break;
             case 38:
                 //physics.applyForce(new Point(0,-1));
-                setCords(currPoint.x, currPoint.y-speed);
+                //setCords(currPoint.x, currPoint.y-speed);
                 break;
             case 39:
                 //physics.applyForce(new Point(1,0));
@@ -58,14 +58,19 @@ public class MainCharacter extends BaseObject implements Plottable{
                 break;
             case 40:
                 //physics.applyForce(new Point(0,1));
-                setCords(currPoint.x, currPoint.y+speed);
+                //setCords(currPoint.x, currPoint.y+speed);
                 break;
-            
+            case 32:
+                //if (!physics.gravity) {
+                    physics.applyForce(new Point(0, -5));
+                //}
+                break;
+
         }
     }
-    
+
     public void stop() {
-        
+
     }
-    
+
 }
