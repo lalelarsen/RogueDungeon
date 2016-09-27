@@ -63,23 +63,6 @@ public class ObjectsController {
                     BaseObject SecondBaseObject = units.get(i);
                     if (!MainBaseObject.equals(SecondBaseObject)) {
                         if (MainBaseObject.getCords().x < SecondBaseObject.getCords().x + SecondBaseObject.getHitbox().width && MainBaseObject.getCords().x + MainBaseObject.getHitbox().width > SecondBaseObject.getCords().x && MainBaseObject.getCords().y < SecondBaseObject.getCords().y + SecondBaseObject.getHitbox().height && MainBaseObject.getCords().y + MainBaseObject.getHitbox().height > SecondBaseObject.getCords().y) {
-//                            ArrayList<Integer> xCords = new ArrayList();
-//                            ArrayList<Integer> yCords = new ArrayList();
-//                            ArrayList<Point> goHB = go.getHitbox().getHitboxCords();
-//                            ArrayList<Point> currGoHB = currGO.getHitbox().getHitboxCords();
-//
-//                            for (int k = 0; k < goHB.size(); k++) {
-//                                for (int l = 0; l < currGoHB.size(); l++) {
-//                                    if (goHB.get(k).equals(currGoHB.get(l))) {
-//                                        if (!xCords.contains(goHB.get(k).x)) {
-//                                            xCords.add(goHB.get(k).x);
-//                                        }
-//                                        if (!yCords.contains(goHB.get(k).y)) {
-//                                            yCords.add(goHB.get(k).y);
-//                                        }
-//                                    }
-//                                }
-//                            }
                             Point aPoint = MainBaseObject.getHitbox().getOverlapped(SecondBaseObject.getHitbox());
                             
                             if (aPoint.x < aPoint.y) {
