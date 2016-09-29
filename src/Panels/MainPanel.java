@@ -40,7 +40,10 @@ public class MainPanel extends JPanel {
             Point point = currObject.nextPos();
             Image img = currObject.getImage();
             g.drawImage(img, point.x, point.y, null);
-            g.drawOval(50, 50, 2, 2);
+            try {
+                g.drawOval(currObject.getHitbox().getGroundPoint().x, currObject.getHitbox().getGroundPoint().y, 2, 2);
+            } catch (Exception e) {
+            }
         }
     }
 

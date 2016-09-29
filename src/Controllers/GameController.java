@@ -51,19 +51,28 @@ public class GameController {
     public void run(MainPanel mp) {
         while (true) {
             //manage the keys currently pressed
-            manageKeys();
             mp.repaint();
+            manageKeys();
             currScene.frame1();
-            if(counter2 == 2){currScene.frame2(); counter2 = 0;}
+            if(counter2 == 2){currScene.frame2(); counter2 = 0; }
             if(counter3 == 3){currScene.frame3(); counter3 = 0;}
             if(counter4 == 4){currScene.frame4(); counter4 = 0;}
             if(counter5 == 5){currScene.frame5(); counter5 = 0;}
             if(counter6 == 6){currScene.frame6(); counter6 = 0;}
             if(counter7 == 7){currScene.frame7(); counter7 = 0;}
             if(counter7 == 8){currScene.frame8(); counter8 = 0;}
-            if(counter8 == 9){currScene.frame9(); counter8 = 0;}
+            if(counter8 == 9){currScene.frame9(); counter8 = 0;manageKeys();}
             if(counter10 == 10){currScene.frame10(); counter10 = 0;}
-            counter1 = counter2 = counter3 = counter4 = counter5 = counter6 = counter7 = counter8 = counter9 = counter10++;
+            counter1++;
+            counter2++;
+            counter3++;
+            counter4++;
+            counter5++;
+            counter6++;
+            counter7++;
+            counter8++;
+            counter9++; 
+            counter10++;
             
             
             try {

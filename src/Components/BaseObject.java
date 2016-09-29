@@ -18,11 +18,11 @@ import java.util.ArrayList;
  */
 public class BaseObject implements Plottable {
     
+    
     public Point pos = new Point(0,0);
     public Image img;
     public Physics physics;
     public Hitbox hitbox;
-    public int speed = 5;
     public Point forceDir = new Point(0,0);
     public int lastX = 0;
     public int lastY = 0;
@@ -80,15 +80,5 @@ public class BaseObject implements Plottable {
     public void setForceDir(Point forceDir) {
         this.forceDir = forceDir;
     }
-
-    public int getSpeed() {
-        return speed;
-    }
-
-    public void setSpeed(int speed) {
-        this.speed = speed;
-    }
-
-    
     
 }

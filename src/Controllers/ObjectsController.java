@@ -21,11 +21,13 @@ public class ObjectsController {
     public MainCharacter Hero = new MainCharacter();
     public Block block = new Block();
     public Block block2 = new Block();
-
+    Point high = new Point(20,999);
+    Point last = new Point();
+    
     public ObjectsController() {
         block.setCords(300, 300);
         block2.setCords(40, 350);
-        Hero.setCords(50, 50);
+        Hero.setCords(50, 270);
         units.add(Hero);
         units.add(block);
         units.add(block2);
@@ -56,7 +58,12 @@ public class ObjectsController {
     int c = 0;
 
     public void solidCollisionDetetection() {
+        if(high.y != last.y){
+            System.out.println(high.y);
+            last.y = high.y;
+        }
         for (int j = 0; j < units.size(); j++) {
+            boolean grav = true;
             BaseObject MainBaseObject = units.get(j);
             if (!MainBaseObject.getPhysics().isSolid) {
                 for (int i = 0; i < units.size(); i++) {
@@ -64,7 +71,7 @@ public class ObjectsController {
                     if (!MainBaseObject.equals(SecondBaseObject)) {
                         if (MainBaseObject.getCords().x < SecondBaseObject.getCords().x + SecondBaseObject.getHitbox().width && MainBaseObject.getCords().x + MainBaseObject.getHitbox().width > SecondBaseObject.getCords().x && MainBaseObject.getCords().y < SecondBaseObject.getCords().y + SecondBaseObject.getHitbox().height && MainBaseObject.getCords().y + MainBaseObject.getHitbox().height > SecondBaseObject.getCords().y) {
                             Point aPoint = MainBaseObject.getHitbox().getOverlapped(SecondBaseObject.getHitbox());
-                            
+
                             if (aPoint.x < aPoint.y) {
                                 if (MainBaseObject.getCords().x > SecondBaseObject.getCords().x) {
                                     MainBaseObject.setCords(MainBaseObject.getCords().x + aPoint.x, MainBaseObject.getCords().y);
@@ -81,9 +88,20 @@ public class ObjectsController {
                                 //MainBaseObject.getPhysics().gravity = false;
                                 MainBaseObject.setForceDir(new Point(MainBaseObject.getForceDir().x, 0));
                             }
+
+                        }
+                        MainBaseObject.getHitbox().updateGroundPoint();
+                        if (MainBaseObject.getHitbox().getGroundPoint().x < SecondBaseObject.getCords().x + SecondBaseObject.getHitbox().width && MainBaseObject.getHitbox().getGroundPoint().x + MainBaseObject.getHitbox().width > SecondBaseObject.getCords().x && MainBaseObject.getHitbox().getGroundPoint().y < SecondBaseObject.getCords().y + SecondBaseObject.getHitbox().height && MainBaseObject.getHitbox().getGroundPoint().y + MainBaseObject.getHitbox().height > SecondBaseObject.getCords().y) {
+                            grav = false;
                         }
                     }
                 }
+            }
+            if(!MainBaseObject.physics.isSolid){
+                if(MainBaseObject.getCords().y < high.y){
+                    high.y = MainBaseObject.getCords().y;
+                }
+                MainBaseObject.getPhysics().gravity = grav;
             }
         }
     }
@@ -103,7 +121,7 @@ public class ObjectsController {
                 currGO.getPhysics().applyForce(new Point(dirX, 0));
             }
         }
-        if (currGO.getPhysics().gravity && !currGO.getPhysics().grounded) {
+        if (currGO.getPhysics().gravity) {
             currGO.getPhysics().applyForce(new Point(0, 2));
         } else if (currGO.getPhysics().resistenceY) {
             if (currGO.getForceDir().y < 2 && currGO.getForceDir().y > -2) {

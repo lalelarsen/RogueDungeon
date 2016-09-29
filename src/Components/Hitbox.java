@@ -18,12 +18,15 @@ public class Hitbox {
     public int height;
     BaseObject body;
     ArrayList<Point> area = new ArrayList<Point>();
+    Point groundPoint = new Point();
+    ArrayList<Point> groundArea = new ArrayList<Point>();
 
     public Hitbox(int width, int height, BaseObject body) {
         this.width = width;
         this.height = height;
         this.body = body;
         setHitbox();
+        groundPoint = new Point(body.getCords().x, body.getCords().y+height+1);
     }
 
     public Point getOverlapped(Hitbox hb) {
@@ -69,6 +72,29 @@ public class Hitbox {
         return new Point(oWidth, oHeight);
     }
 
+    public void updateGroundPoint(){
+        groundPoint = new Point(body.getCords().x, body.getCords().y +height+2);
+    }
+    
+    public Point getGroundPoint() {
+        return groundPoint;
+    }
+
+    public void setGroundPoint(Point groundPoint) {
+        this.groundPoint = groundPoint;
+    }
+    
+    public ArrayList<Point> getGroundArea(){
+        ArrayList<Point> hitboxCords = new ArrayList();
+        groundPoint = new Point(body.getCords().x, body.getCords().y);
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < width; j++) {
+                hitboxCords.add(new Point(groundPoint.x + j,groundPoint.y +i));
+            }
+        }
+        return hitboxCords;
+    }
+    
     public void setHitbox() {
         for (int x = 0; x < body.getCords().x + width; x++) {
             for (int y = 0; y < body.getCords().y + height; y++) {
