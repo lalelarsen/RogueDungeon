@@ -7,6 +7,7 @@ package Objects;
 
 import Components.BaseObject;
 import Components.Physics;
+import Controllers.SpriteController;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
@@ -34,8 +35,8 @@ public class MainCharacter extends BaseObject implements Plottable {
         BufferedImage imgg = null;
         //Get Image from path
         try {
-            imgg = ImageIO.read(fil);
-        } catch (IOException e) {
+            imgg = SpriteController.loadSingleSprite();
+        } catch (Exception e) {
             System.out.println("The image was not loaded.");
         }
 
