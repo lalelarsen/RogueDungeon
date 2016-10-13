@@ -38,7 +38,13 @@ public class MainPanel extends JPanel {
         for (int i = 0; i < SC.OC.units.size(); i++) {
             BaseObject currObject = SC.OC.units.get(i);
             Point point = currObject.nextPos();
-            Image img = currObject.getImage();
+            Image img = null;
+            try {
+                img = currObject.getSpriteManager().nextImage();
+                
+            } catch (Exception e) {
+                img = currObject.getImage();
+            }
             g.drawImage(img, point.x, point.y, null);
             
         }

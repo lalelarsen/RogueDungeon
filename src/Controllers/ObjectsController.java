@@ -23,6 +23,7 @@ public class ObjectsController {
     public Block block2 = new Block();
     Point high = new Point(20,999);
     Point last = new Point();
+    int c = 0;
     
     public ObjectsController() {
         block.setCords(300, 300);
@@ -33,37 +34,15 @@ public class ObjectsController {
         units.add(block2);
     }
 
-    public void bounce() {
-        for (int i = 0; i < units.size(); i++) {
-            BaseObject currGO = units.get(i);
-            if (currGO.getCords().y > 150) {
-                currGO.getPhysics().gravity = false;
-                currGO.setForceDir(new Point(currGO.getForceDir().x, 0));
-                currGO.setCords(currGO.getCords().x, currGO.lastY);
-                //currGO.getPhysics().applyForce(new Point(0, (-Math.abs(currGO.getForceDir().y) * 2) + 2));
-            }
-            if (currGO.getCords().y < 149) {
-                currGO.getPhysics().gravity = true;
-
-            }
-        }
-    }
-
     public void objectsUpdate() {
         for (int i = 0; i < units.size(); i++) {
             BaseObject currGO = units.get(i);
             updateGravAndResis(currGO);
         }
     }
-    int c = 0;
 
     public void solidCollisionDetetection() {
-        if(high.y != last.y){
-            System.out.println(high.y);
-            last.y = high.y;
-        }
         for (int j = 0; j < units.size(); j++) {
-            boolean grav = true;
             BaseObject MainBaseObject = units.get(j);
             if (!MainBaseObject.getPhysics().isSolid) {
                 for (int i = 0; i < units.size(); i++) {
@@ -90,18 +69,8 @@ public class ObjectsController {
                             }
 
                         }
-                        MainBaseObject.getHitbox().updateGroundPoint();
-                        if (MainBaseObject.getHitbox().getGroundPoint().x < SecondBaseObject.getCords().x + SecondBaseObject.getHitbox().width && MainBaseObject.getHitbox().getGroundPoint().x + MainBaseObject.getHitbox().width > SecondBaseObject.getCords().x && MainBaseObject.getHitbox().getGroundPoint().y < SecondBaseObject.getCords().y + SecondBaseObject.getHitbox().height && MainBaseObject.getHitbox().getGroundPoint().y + MainBaseObject.getHitbox().height > SecondBaseObject.getCords().y) {
-                            grav = false;
-                        }
                     }
                 }
-            }
-            if(!MainBaseObject.physics.isSolid){
-                if(MainBaseObject.getCords().y < high.y){
-                    high.y = MainBaseObject.getCords().y;
-                }
-                MainBaseObject.getPhysics().gravity = grav;
             }
         }
     }

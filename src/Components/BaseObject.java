@@ -7,6 +7,8 @@ package Components;
 
 import Components.Hitbox;
 import Components.Physics;
+import static Controllers.SpriteController.loadSpriteRoll;
+import Controllers.SpriteManager;
 import Interfaces.Plottable;
 import java.awt.Image;
 import java.awt.Point;
@@ -18,11 +20,12 @@ import java.util.ArrayList;
  */
 public class BaseObject implements Plottable {
     
-    
     public Point pos = new Point(0,0);
     public Image img;
     public Physics physics;
     public Hitbox hitbox;
+    public SpriteManager SM;
+    Sprite images;
     public Point forceDir = new Point(0,0);
     public int lastX = 0;
     public int lastY = 0;
@@ -55,6 +58,14 @@ public class BaseObject implements Plottable {
     @Override
     public Point getCords() {
         return pos;
+    }
+    
+    public void addSpriteManager(Enum status){
+        SM = new SpriteManager(status);
+    }
+    
+    public SpriteManager getSpriteManager(){
+        return SM;
     }
     
     public void addHitbox(int width,int height){

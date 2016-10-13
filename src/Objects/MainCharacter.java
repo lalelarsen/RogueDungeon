@@ -7,7 +7,8 @@ package Objects;
 
 import Components.BaseObject;
 import Components.Physics;
-import Controllers.SpriteController;
+import Components.Sprite;
+import static Controllers.SpriteController.loadSpriteRoll;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
@@ -18,6 +19,9 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import Interfaces.Plottable;
+import enums.FourDir;
+import enums.PlayerStatus;
+import enums.SpriteSheet;
 import java.util.Date;
 import javafx.scene.chart.PieChart;
 
@@ -27,7 +31,7 @@ import javafx.scene.chart.PieChart;
  */
 public class MainCharacter extends BaseObject implements Plottable {
     long lastJump;
-    public int speed = 5;
+    public int speed = 1;
     public MainCharacter() {
         lastJump = System.currentTimeMillis();
         String path = "stickman.png";
@@ -35,11 +39,16 @@ public class MainCharacter extends BaseObject implements Plottable {
         BufferedImage imgg = null;
         //Get Image from path
         try {
-            imgg = SpriteController.loadSingleSprite();
+            imgg = ImageIO.read(fil);
         } catch (Exception e) {
             System.out.println("The image was not loaded.");
         }
-
+        
+        addSpriteManager(PlayerStatus.NORTH);
+        getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM, FourDir.RIGHT, 40, 8, 16, 16,16,0, 2, PlayerStatus.SOUTH);
+        getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM, FourDir.RIGHT, 40, 40, 16, 16,16,0, 2, PlayerStatus.EAST);
+        getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM, FourDir.RIGHT, 40, 104, 16, 16,16,0, 2, PlayerStatus.NORTH);
+        getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM, FourDir.RIGHT, 40, 168, 16, 16,16,0, 2, PlayerStatus.WEST);
         addPhysics();
         addHitbox(imgg.getHeight(), imgg.getWidth());
         getPhysics().gravity = false;
@@ -52,18 +61,22 @@ public class MainCharacter extends BaseObject implements Plottable {
         switch (dir) {
             case 37:
                 //physics.applyForce(new Point(-1,0));
-                setCords(currPoint.x - speed-5, currPoint.y);
+                setCords(currPoint.x - speed, currPoint.y);
+                getSpriteManager().setStatus(PlayerStatus.WEST);
                 break;
             case 38:
                 //physics.applyForce(new Point(0,-1));
+                getSpriteManager().setStatus(PlayerStatus.NORTH);
                 setCords(currPoint.x, currPoint.y-speed);
                 break;
             case 39:
                 //physics.applyForce(new Point(1,0));
-                setCords(currPoint.x + speed+5, currPoint.y);
+                getSpriteManager().setStatus(PlayerStatus.EAST);
+                setCords(currPoint.x + speed, currPoint.y);
                 break;
             case 40:
                 //physics.applyForce(new Point(0,1));
+                getSpriteManager().setStatus(PlayerStatus.SOUTH);
                 setCords(currPoint.x, currPoint.y+speed);
                 break;
             case 32:

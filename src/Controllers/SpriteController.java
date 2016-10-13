@@ -5,6 +5,9 @@
  */
 package Controllers;
 
+import Components.Sprite;
+import enums.FourDir;
+import enums.SpriteSheet;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -16,37 +19,47 @@ import javax.imageio.ImageIO;
  * @author frederik.larsen
  */
 public class SpriteController {
-    ArrayList<Object> sprites = new ArrayList();
-    
-    public SpriteController(){
-        
-    }
-    
-    public void loadDungeon(){
-        String path = "dungeon_sheet.png";
-        File fil = new File(path);
-        BufferedImage img = null;
-        //Get Image from path
+
+    ArrayList<Sprite> sprites = new ArrayList();
+    static BufferedImage dungeon;
+    static BufferedImage knightAnim;
+
+    public SpriteController() {
         try {
-            img = ImageIO.read(fil);
+            dungeon = ImageIO.read(this.getClass().getResourceAsStream("/pictures/dungeon_sheet.png"));
+            knightAnim = ImageIO.read(this.getClass().getResourceAsStream("/pictures/knightanim3.png"));
         } catch (IOException e) {
             System.out.println("The image was not loaded.");
         }
-        //64,112
-        
-        
     }
-    
-    public static BufferedImage loadSingleSprite(){
-        String path = "C:\\Users\\frederik.larsen\\OneDrive\\Java\\2D art\\dungeon_sheet.png";
-        File fil = new File(path);
-        BufferedImage img = null;
-        //Get Image from path
-        try {
-            img = ImageIO.read(fil);
-        } catch (IOException e) {
-            System.out.println("The image was not loaded.");
+
+    public static Sprite loadSpriteRoll(SpriteSheet sheet, FourDir dir, int x, int y, int width, int height, int wSpace, int hSpace, int amount, Enum status) {
+        BufferedImage[] images = new BufferedImage[amount];
+        BufferedImage curr = null;
+        switch (sheet) {
+            case DUNGEON:
+                curr = dungeon;
+                break;
+            case KNIGHTANIM:
+                curr = knightAnim;
+                break;
         }
-        return img.getSubimage(64, 112, 16, 16);
+        for (int i = 0; i < amount; i++) {
+            images[i] = curr.getSubimage(x, y, width, height);
+            switch (dir) {
+                case DOWN:
+                    break;
+                case RIGHT:
+                    x = x + width + wSpace;
+                    break;
+            }
+        }
+        Sprite s = new Sprite(images, status);
+        return s;
+    }
+
+    public static BufferedImage loadSingleSpriteDungeon(int x, int y, int width, int height) {
+
+        return dungeon.getSubimage(x, y, width, height);
     }
 }

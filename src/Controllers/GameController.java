@@ -34,6 +34,7 @@ public class GameController {
     
 
     public void StartGame() {
+        SpriteController sController = new SpriteController();
         currScene = new SceneOne();
         MainPanel mp = new MainPanel(KC, currScene);
         JFrame frame = new JFrame("Test");
