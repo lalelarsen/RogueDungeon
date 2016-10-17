@@ -10,5 +10,5 @@ package enums;
  * @author frederik.larsen
  */
 public enum SpriteSheet {
-    DUNGEON,KNIGHTANIM;
+    DUNGEON,KNIGHTANIM,KNIGHTANIM_HIGHRES;
 }

@@ -15,6 +15,8 @@ import java.awt.Point;
 public class Physics {
 
     BaseObject body;
+    public Point velocity = new Point(0,0);
+    public Point acceleration = new Point (0,0);
     public boolean gravity = true;
     public boolean grounded = false;
     public boolean resistenceX = true;
@@ -28,13 +30,39 @@ public class Physics {
     }
 
     public void applyForce(Point dir) {
-        Point oldForce = body.getForceDir();
+        Point oldForce = getVelocity();
         Point newForce = new Point(oldForce.x + dir.x, oldForce.y + dir.y);
         if(newForce.x > maxForceX){newForce.x = maxForceX;}
         if(newForce.x < -maxForceX){newForce.x = -maxForceX;}
         if(newForce.y > maxForceY){newForce.y = maxForceY;}
         if(newForce.y < -maxForceY){newForce.y = -maxForceY;}
-        body.setForceDir(newForce);
+        setVelocity(newForce);
     }
+
+    public Point update(){
+        velocity.x += acceleration.x;
+        velocity.y += acceleration.y;
+        Point p = new Point(body.getCords().x + velocity.x,body.getCords().y + velocity.y);
+        
+        body.setCords(p.x,p.y);
+        return p;
+    }
+    
+    public Point getAcceleration() {
+        return acceleration;
+    }
+
+    public void setAcceleration(Point acceleration) {
+        this.acceleration = acceleration;
+    }
+    
+    public Point getVelocity() {
+        return velocity;
+    }
+
+    public void setVelocity(Point forceDir) {
+        this.velocity = forceDir;
+    }
+    
     
 }

@@ -43,10 +43,9 @@ public class MainPanel extends JPanel {
                 img = currObject.getSpriteManager().nextImage();
                 
             } catch (Exception e) {
-                img = currObject.getImage();
+                System.out.println(currObject.getClass().getName() + " har intet billede");
             }
             g.drawImage(img, point.x, point.y, null);
-            
         }
     }
 

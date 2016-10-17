@@ -19,20 +19,18 @@ import java.util.ArrayList;
  * @author frederik.larsen
  */
 public class BaseObject implements Plottable {
-    
-    public Point pos = new Point(0,0);
+
+    public Point pos = new Point(0, 0);
     public Image img;
     public Physics physics;
     public Hitbox hitbox;
     public SpriteManager SM;
-    Sprite images;
-    public Point forceDir = new Point(0,0);
     public int lastX = 0;
     public int lastY = 0;
-    
+
     @Override
     public void setCords(int x, int y) {
-        Point p = new Point(x,y);
+        Point p = new Point(x, y);
         lastX = this.pos.x;
         lastY = this.pos.y;
         this.pos = p;
@@ -49,47 +47,40 @@ public class BaseObject implements Plottable {
     }
 
     @Override
-    public Point nextPos(){
-        Point newPos = new Point(pos.x + forceDir.x, pos.y + forceDir.y);
-        setCords(newPos.x, newPos.y);
-        return newPos;
+    public Point nextPos() {
+//        Point newPos = new Point(pos.x + physics.getVelocity().x + physics.getAcceleration().x, pos.y + physics.getVelocity().y + physics.getAcceleration().y);
+//        setCords(newPos.x, newPos.y);
+//        return newPos;
+        return physics.update();
     }
-    
+
     @Override
     public Point getCords() {
         return pos;
     }
-    
-    public void addSpriteManager(Enum status){
+
+    public void addSpriteManager(Enum status) {
         SM = new SpriteManager(status);
     }
-    
-    public SpriteManager getSpriteManager(){
+
+    public SpriteManager getSpriteManager() {
         return SM;
     }
-    
-    public void addHitbox(int width,int height){
-        hitbox = new Hitbox(height,width,this);
-    }
-    
-    public Hitbox getHitbox(){
-        return this.hitbox;
-    }
-    
-    public void addPhysics(){
-         physics = new Physics(this);
-    }
-    
-    public Physics getPhysics(){
-        return this.physics;
-    }
-    
-    public Point getForceDir() {
-        return forceDir;
+
+    public void addHitbox(int width, int height) {
+        hitbox = new Hitbox(height, width, this);
     }
 
-    public void setForceDir(Point forceDir) {
-        this.forceDir = forceDir;
+    public Hitbox getHitbox() {
+        return this.hitbox;
     }
-    
+
+    public void addPhysics() {
+        physics = new Physics(this);
+    }
+
+    public Physics getPhysics() {
+        return this.physics;
+    }
+
 }

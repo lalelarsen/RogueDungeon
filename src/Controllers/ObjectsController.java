@@ -5,7 +5,6 @@
  */
 package Controllers;
 
-import Objects.Block;
 import Components.BaseObject;
 import Objects.MainCharacter;
 import java.awt.Point;
@@ -19,25 +18,19 @@ public class ObjectsController {
 
     public ArrayList<BaseObject> units = new ArrayList();
     public MainCharacter Hero = new MainCharacter();
-    public Block block = new Block();
-    public Block block2 = new Block();
     Point high = new Point(20,999);
     Point last = new Point();
     int c = 0;
     
     public ObjectsController() {
-        block.setCords(300, 300);
-        block2.setCords(40, 350);
         Hero.setCords(50, 270);
         units.add(Hero);
-        units.add(block);
-        units.add(block2);
     }
 
     public void objectsUpdate() {
         for (int i = 0; i < units.size(); i++) {
             BaseObject currGO = units.get(i);
-            updateGravAndResis(currGO);
+            updatePhysics(currGO);
         }
     }
 
@@ -54,18 +47,18 @@ public class ObjectsController {
                             if (aPoint.x < aPoint.y) {
                                 if (MainBaseObject.getCords().x > SecondBaseObject.getCords().x) {
                                     MainBaseObject.setCords(MainBaseObject.getCords().x + aPoint.x, MainBaseObject.getCords().y);
-                                    MainBaseObject.setForceDir(new Point(0, MainBaseObject.getForceDir().y));
+                                    MainBaseObject.getPhysics().setVelocity(new Point(0, MainBaseObject.getPhysics().getVelocity().y));
                                 } else {
                                     MainBaseObject.setCords(MainBaseObject.getCords().x - aPoint.x, MainBaseObject.getCords().y);
-                                    MainBaseObject.setForceDir(new Point(0, MainBaseObject.getForceDir().y));
+                                    MainBaseObject.getPhysics().setVelocity(new Point(0, MainBaseObject.getPhysics().getVelocity().y));
                                 }
                             } else if (MainBaseObject.getCords().y > SecondBaseObject.getCords().y) {
                                 MainBaseObject.setCords(MainBaseObject.getCords().x, MainBaseObject.getCords().y + aPoint.y);
-                                MainBaseObject.setForceDir(new Point(MainBaseObject.getForceDir().x, 0));
+                                MainBaseObject.getPhysics().setVelocity(new Point(MainBaseObject.getPhysics().getVelocity().x, 0));
                             } else {
                                 MainBaseObject.setCords(MainBaseObject.getCords().x, MainBaseObject.getCords().y - aPoint.y);
                                 //MainBaseObject.getPhysics().gravity = false;
-                                MainBaseObject.setForceDir(new Point(MainBaseObject.getForceDir().x, 0));
+                                MainBaseObject.getPhysics().setVelocity(new Point(MainBaseObject.getPhysics().getVelocity().x, 0));
                             }
 
                         }
@@ -75,17 +68,14 @@ public class ObjectsController {
         }
     }
 
-    public void updateGravAndResis(BaseObject currGO) {
+    public void updatePhysics(BaseObject currGO) {
         if (currGO.getPhysics().resistenceX) {
-            if (currGO.getForceDir().x < 2 && currGO.getForceDir().x > -2) {
-                currGO.getForceDir().x = 0;
+            if (currGO.getPhysics().getVelocity().x < 2 && currGO.getPhysics().getVelocity().x > -2) {
+                currGO.getPhysics().getVelocity().x = 0;
             } else {
                 int dirX = 0;
-                if (currGO.getForceDir().x < 0) {
-                    dirX = -currGO.getForceDir().x / 2;
-                }
-                if (currGO.getForceDir().x > 0) {
-                    dirX = -currGO.getForceDir().x / 2;
+                if (currGO.getPhysics().getVelocity().x != 0) {
+                    dirX = -currGO.getPhysics().getVelocity().x / 2;
                 }
                 currGO.getPhysics().applyForce(new Point(dirX, 0));
             }
@@ -93,15 +83,12 @@ public class ObjectsController {
         if (currGO.getPhysics().gravity) {
             currGO.getPhysics().applyForce(new Point(0, 2));
         } else if (currGO.getPhysics().resistenceY) {
-            if (currGO.getForceDir().y < 2 && currGO.getForceDir().y > -2) {
-                currGO.getForceDir().y = 0;
+            if (currGO.getPhysics().getVelocity().y < 2 && currGO.getPhysics().getVelocity().y > -2) {
+                currGO.getPhysics().getVelocity().y = 0;
             } else {
                 int dirY = 0;
-                if (currGO.getForceDir().y < 0) {
-                    dirY = -currGO.getForceDir().y / 2;
-                }
-                if (currGO.getForceDir().y > 0) {
-                    dirY = -currGO.getForceDir().y / 2;
+                if (currGO.getPhysics().getVelocity().y != 0) {
+                    dirY = -currGO.getPhysics().getVelocity().y / 2;
                 }
                 currGO.getPhysics().applyForce(new Point(0, dirY));
             }

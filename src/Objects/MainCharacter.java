@@ -30,8 +30,10 @@ import javafx.scene.chart.PieChart;
  * @author frederik.larsen
  */
 public class MainCharacter extends BaseObject implements Plottable {
+
     long lastJump;
-    public int speed = 1;
+    public int speed = 5;
+
     public MainCharacter() {
         lastJump = System.currentTimeMillis();
         String path = "stickman.png";
@@ -43,50 +45,60 @@ public class MainCharacter extends BaseObject implements Plottable {
         } catch (Exception e) {
             System.out.println("The image was not loaded.");
         }
-        
+
         addSpriteManager(PlayerStatus.NORTH);
-        getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM, FourDir.RIGHT, 40, 8, 16, 16,16,0, 2, PlayerStatus.SOUTH);
-        getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM, FourDir.RIGHT, 40, 40, 16, 16,16,0, 2, PlayerStatus.EAST);
-        getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM, FourDir.RIGHT, 40, 104, 16, 16,16,0, 2, PlayerStatus.NORTH);
-        getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM, FourDir.RIGHT, 40, 168, 16, 16,16,0, 2, PlayerStatus.WEST);
+//        getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM, FourDir.RIGHT, 40, 8, 16, 16,16,0, 2, PlayerStatus.SOUTH);
+//        getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM, FourDir.RIGHT, 40, 40, 16, 16,16,0, 2, PlayerStatus.EAST);
+//        getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM, FourDir.RIGHT, 40, 104, 16, 16,16,0, 2, PlayerStatus.NORTH);
+//        getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM, FourDir.RIGHT, 40, 168, 16, 16,16,0, 2, PlayerStatus.WEST);
+//        getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM, FourDir.RIGHT, 8, 8, 16, 16, 0, 0, 1, PlayerStatus.IDLE);
+
+        getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM_HIGHRES, FourDir.RIGHT, 160, 32, 64, 64, 64, 0, 2, PlayerStatus.SOUTH);
+        getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM_HIGHRES, FourDir.RIGHT, 160, 160, 64, 64, 64, 0, 2, PlayerStatus.EAST);
+        getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM_HIGHRES, FourDir.RIGHT, 160, 416, 64, 64, 64, 0, 2, PlayerStatus.NORTH);
+        getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM_HIGHRES, FourDir.RIGHT, 160, 672, 64, 64, 64, 0, 2, PlayerStatus.WEST);
+        getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM_HIGHRES, FourDir.RIGHT, 32, 32, 64, 64, 0, 0, 1, PlayerStatus.IDLE);
+
         addPhysics();
-        addHitbox(imgg.getHeight(), imgg.getWidth());
+        //getPhysics().setAcceleration(new Point(1,1));
+        addHitbox(64, 64);
         getPhysics().gravity = false;
-        img = imgg;
+//        getPhysics().resistenceX = false;
+//        getPhysics().resistenceY = false;
         
+        img = imgg;
+
     }
 
     public void move(int dir) {
         Point currPoint = getCords();
         switch (dir) {
             case 37:
-                //physics.applyForce(new Point(-1,0));
-                setCords(currPoint.x - speed, currPoint.y);
+                //left
+                physics.applyForce(new Point(-1, 0));
+                //setCords(currPoint.x - speed, currPoint.y);
                 getSpriteManager().setStatus(PlayerStatus.WEST);
                 break;
             case 38:
-                //physics.applyForce(new Point(0,-1));
+                //up
+                physics.applyForce(new Point(0, -1));
+                //setCords(currPoint.x, currPoint.y-speed);
                 getSpriteManager().setStatus(PlayerStatus.NORTH);
-                setCords(currPoint.x, currPoint.y-speed);
                 break;
             case 39:
-                //physics.applyForce(new Point(1,0));
+                //right
+                physics.applyForce(new Point(1, 0));
+                //setCords(currPoint.x + speed, currPoint.y);
                 getSpriteManager().setStatus(PlayerStatus.EAST);
-                setCords(currPoint.x + speed, currPoint.y);
                 break;
             case 40:
-                //physics.applyForce(new Point(0,1));
+                //down
+                physics.applyForce(new Point(0, 1));
+                //setCords(currPoint.x, currPoint.y+speed);
                 getSpriteManager().setStatus(PlayerStatus.SOUTH);
-                setCords(currPoint.x, currPoint.y+speed);
                 break;
             case 32:
-                if (!physics.gravity) {
-                    if(lastJump + 1000 < System.currentTimeMillis()){
-                        lastJump = System.currentTimeMillis();
-                        physics.applyForce(new Point(0, -5));
-                        physics.gravity = true;
-                    }
-                }
+                //space
                 break;
 
         }
