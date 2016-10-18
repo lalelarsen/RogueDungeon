@@ -22,6 +22,7 @@ public class KeyboardController implements KeyListener{
     
     @Override
     public void keyPressed(KeyEvent e) {
+        System.out.println(e.getKeyCode());
         activeKeys.add(e.getKeyCode());
     }
  

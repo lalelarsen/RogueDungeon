@@ -21,11 +21,12 @@ import javax.imageio.ImageIO;
 public class SpriteController {
 
     ArrayList<Sprite> sprites = new ArrayList();
-    static BufferedImage dungeon;
-    static BufferedImage knightAnim;
-    static BufferedImage knightAnimHiRes;
+    public static BufferedImage dungeon;
+    public static BufferedImage knightAnim;
+    public static BufferedImage knightAnimHiRes;
 
     public SpriteController() {
+        System.out.println("hej");
         try {
             dungeon = ImageIO.read(this.getClass().getResourceAsStream("/pictures/dungeon_sheet.png"));
             knightAnim = ImageIO.read(this.getClass().getResourceAsStream("/pictures/knightanim3.png"));
@@ -35,9 +36,20 @@ public class SpriteController {
         }
     }
 
+    public static void loadPictures(){
+        try {
+            dungeon = ImageIO.read(new File("/pictures/dungeon_sheet.png"));
+            knightAnim = ImageIO.read(new File("/pictures/knightanim3.png"));
+            knightAnimHiRes = ImageIO.read(new File("/pictures/knightanim3_HiRes.png"));
+        } catch (IOException e) {
+            System.out.println("The image was not loaded.");
+        }
+    }
+    
     public static Sprite loadSpriteRoll(SpriteSheet sheet, FourDir dir, int x, int y, int width, int height, int wSpace, int hSpace, int amount, Enum status) {
         BufferedImage[] images = new BufferedImage[amount];
         BufferedImage curr = null;
+        
         switch (sheet) {
             case DUNGEON:
                 curr = dungeon;

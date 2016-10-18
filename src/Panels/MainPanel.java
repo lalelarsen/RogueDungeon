@@ -15,17 +15,24 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import Interfaces.Plottable;
 import Components.BaseObject;
+import Components.GameScene;
+import java.awt.Graphics2D;
 
 public class MainPanel extends JPanel {
     
-    SceneOne SC;
-    BufferedImage background;
-    int xSize;
-    int ySize;
-    int xStartPoint;
-    int yStartPoint;
+    GameScene SC = null;
+    int viewX = 800;
+    int viewY = 600;
+    int WorldX = 1600;
+    int WorldY = 1200;
+    int offSetMaxX = WorldX - viewX;
+    int offSetMaxY = WorldY - viewY;
+    int offSetMinX = 0;
+    int offSetMinY = 0;
+    int camX = 0;
+    int camY = 0;
     
-    public MainPanel(KeyListener KL,SceneOne SC) {
+    public MainPanel(KeyListener KL,GameScene SC) {
         initComponents();
         this.setFocusable(true);
         this.addKeyListener(KL);
@@ -35,6 +42,9 @@ public class MainPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        camX = SC.OC.Hero.getCords().x-viewX/2;
+        camY = SC.OC.Hero.getCords().y-viewY/2;
+        g.translate(-camX, -camY);
         for (int i = 0; i < SC.OC.units.size(); i++) {
             BaseObject currObject = SC.OC.units.get(i);
             Point point = currObject.nextPos();
@@ -47,6 +57,7 @@ public class MainPanel extends JPanel {
             }
             g.drawImage(img, point.x, point.y, null);
         }
+        
     }
 
     @SuppressWarnings("unchecked")

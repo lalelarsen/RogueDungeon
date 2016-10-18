@@ -36,16 +36,7 @@ public class MainCharacter extends BaseObject implements Plottable {
 
     public MainCharacter() {
         lastJump = System.currentTimeMillis();
-        String path = "stickman.png";
-        File fil = new File(path);
-        BufferedImage imgg = null;
-        //Get Image from path
-        try {
-            imgg = ImageIO.read(fil);
-        } catch (Exception e) {
-            System.out.println("The image was not loaded.");
-        }
-
+        
         addSpriteManager(PlayerStatus.NORTH);
 //        getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM, FourDir.RIGHT, 40, 8, 16, 16,16,0, 2, PlayerStatus.SOUTH);
 //        getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM, FourDir.RIGHT, 40, 40, 16, 16,16,0, 2, PlayerStatus.EAST);
@@ -66,7 +57,6 @@ public class MainCharacter extends BaseObject implements Plottable {
 //        getPhysics().resistenceX = false;
 //        getPhysics().resistenceY = false;
         
-        img = imgg;
 
     }
 

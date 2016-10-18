@@ -43,7 +43,6 @@ public class Physics {
         velocity.x += acceleration.x;
         velocity.y += acceleration.y;
         Point p = new Point(body.getCords().x + velocity.x,body.getCords().y + velocity.y);
-        
         body.setCords(p.x,p.y);
         return p;
     }

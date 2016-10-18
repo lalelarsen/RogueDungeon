@@ -11,9 +11,9 @@ import Controllers.ObjectsController;
  *
  * @author frederik.larsen
  */
-public class Scene {
+public class GameScene {
     public ObjectsController OC;
-    public Scene(){
+    public GameScene(){
         OC = new ObjectsController();
     }
     public void frame10(){OC.objectsUpdate();};

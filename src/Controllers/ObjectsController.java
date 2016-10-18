@@ -7,6 +7,7 @@ package Controllers;
 
 import Components.BaseObject;
 import Objects.MainCharacter;
+import Objects.Wall;
 import java.awt.Point;
 import java.util.ArrayList;
 
@@ -18,13 +19,16 @@ public class ObjectsController {
 
     public ArrayList<BaseObject> units = new ArrayList();
     public MainCharacter Hero = new MainCharacter();
+    public Wall w = new Wall();
     Point high = new Point(20,999);
     Point last = new Point();
     int c = 0;
     
     public ObjectsController() {
         Hero.setCords(50, 270);
+        w.setCords(30, 240);
         units.add(Hero);
+        units.add(w);
     }
 
     public void objectsUpdate() {

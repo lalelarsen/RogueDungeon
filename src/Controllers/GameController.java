@@ -5,6 +5,7 @@
  */
 package Controllers;
 
+import Components.GameScene;
 import Objects.SceneOne;
 import Panels.MainPanel;
 import enums.PlayerStatus;
@@ -19,7 +20,7 @@ import javax.swing.JFrame;
  */
 public class GameController {
 
-    SceneOne currScene;
+    GameScene currScene;
     KeyboardController KC = new KeyboardController();
     int FRAMES60_PER_SECOND = 16;
     int counter1 = 1;
@@ -41,10 +42,9 @@ public class GameController {
         JFrame frame = new JFrame("Test");
         frame.setLayout(new BorderLayout());
         frame.add(mp);
-        //frame.setUndecorated(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setLocationRelativeTo(null);
-        frame.setLocation(150, 150);
         frame.setVisible(true);
 
         run(mp);

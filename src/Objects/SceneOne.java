@@ -5,7 +5,7 @@
  */
 package Objects;
 
-import Components.Scene;
+import Components.GameScene;
 import Controllers.ObjectsController;
 import Objects.MainCharacter;
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import Components.BaseObject;
  *
  * @author frederik.larsen
  */
-public class SceneOne extends Scene{
+public class SceneOne extends GameScene{
     
     
 }
