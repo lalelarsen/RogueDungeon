@@ -6,6 +6,7 @@
 package Components;
 
 import Controllers.ObjectsController;
+import Interfaces.PlayerOne;
 
 /**
  *
@@ -13,6 +14,7 @@ import Controllers.ObjectsController;
  */
 public class GameScene {
     public ObjectsController OC;
+    public PlayerOne p1;
     public GameScene(){
         OC = new ObjectsController();
     }

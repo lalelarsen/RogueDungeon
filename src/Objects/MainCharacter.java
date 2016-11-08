@@ -9,6 +9,7 @@ import Components.BaseObject;
 import Components.Physics;
 import Components.Sprite;
 import static Controllers.SpriteController.loadSpriteRoll;
+import Interfaces.PlayerOne;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
@@ -29,14 +30,14 @@ import javafx.scene.chart.PieChart;
  *
  * @author frederik.larsen
  */
-public class MainCharacter extends BaseObject implements Plottable {
+public class MainCharacter extends BaseObject implements Plottable, PlayerOne {
 
     long lastJump;
-    public int speed = 5;
+    public int speed = 4;
 
     public MainCharacter() {
         lastJump = System.currentTimeMillis();
-        
+
         addSpriteManager(PlayerStatus.NORTH);
 //        getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM, FourDir.RIGHT, 40, 8, 16, 16,16,0, 2, PlayerStatus.SOUTH);
 //        getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM, FourDir.RIGHT, 40, 40, 16, 16,16,0, 2, PlayerStatus.EAST);
@@ -53,49 +54,58 @@ public class MainCharacter extends BaseObject implements Plottable {
         addPhysics();
         //getPhysics().setAcceleration(new Point(1,1));
         addHitbox(64, 64);
+        
         getPhysics().gravity = false;
 //        getPhysics().resistenceX = false;
 //        getPhysics().resistenceY = false;
-        
 
-    }
-
-    public void move(int dir) {
-        Point currPoint = getCords();
-        switch (dir) {
-            case 37:
-                //left
-                physics.applyForce(new Point(-1, 0));
-                //setCords(currPoint.x - speed, currPoint.y);
-                getSpriteManager().setStatus(PlayerStatus.WEST);
-                break;
-            case 38:
-                //up
-                physics.applyForce(new Point(0, -1));
-                //setCords(currPoint.x, currPoint.y-speed);
-                getSpriteManager().setStatus(PlayerStatus.NORTH);
-                break;
-            case 39:
-                //right
-                physics.applyForce(new Point(1, 0));
-                //setCords(currPoint.x + speed, currPoint.y);
-                getSpriteManager().setStatus(PlayerStatus.EAST);
-                break;
-            case 40:
-                //down
-                physics.applyForce(new Point(0, 1));
-                //setCords(currPoint.x, currPoint.y+speed);
-                getSpriteManager().setStatus(PlayerStatus.SOUTH);
-                break;
-            case 32:
-                //space
-                break;
-
-        }
     }
 
     public void stop() {
 
+    }
+
+    @Override
+    public void up() {
+        //physics.applyForce(new Point(0, -1));
+        setCords(getCords().x, getCords().y-speed);
+        getSpriteManager().setStatus(PlayerStatus.NORTH);
+    }
+
+    @Override
+    public void down() {
+        //physics.applyForce(new Point(0, 1));
+        setCords(getCords().x, getCords().y+speed);
+        getSpriteManager().setStatus(PlayerStatus.SOUTH);
+    }
+
+    @Override
+    public void left() {
+        //physics.applyForce(new Point(-1, 0));
+        setCords(getCords().x - speed, getCords().y);
+        getSpriteManager().setStatus(PlayerStatus.WEST);
+    }
+
+    @Override
+    public void right() {
+        //physics.applyForce(new Point(1, 0));
+        setCords(getCords().x + speed, getCords().y);
+        getSpriteManager().setStatus(PlayerStatus.EAST);
+    }
+
+    @Override
+    public void space() {
+        System.out.println("space");
+    }
+
+    @Override
+    public void enter() {
+        System.out.println("nothing");
+    }
+
+    @Override
+    public void nothing() {
+        getSpriteManager().setStatus(PlayerStatus.IDLE);
     }
 
 }

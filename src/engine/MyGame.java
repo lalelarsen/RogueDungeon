@@ -116,29 +116,29 @@ public class MyGame extends Canvas implements Runnable {
         //get the currently pressed keys from the KeyboardController
         HashSet<Integer> currentKeys = KeyboardController.getActiveKeys();
 
-        if (currentKeys.contains(KeyEvent.VK_RIGHT)) {
-            currScene.OC.Hero.move(KeyEvent.VK_RIGHT);
-        }
-        if (currentKeys.contains(KeyEvent.VK_LEFT)) {
-            //move left
-            currScene.OC.Hero.move(KeyEvent.VK_LEFT);
-        } 
-        if (currentKeys.contains(KeyEvent.VK_DOWN)) {
-            //move left
-            currScene.OC.Hero.move(KeyEvent.VK_DOWN);
-        }
-        if (currentKeys.contains(KeyEvent.VK_UP)) {
-            //move left
-            currScene.OC.Hero.move(KeyEvent.VK_UP);
-        }
-        if(currentKeys.contains(KeyEvent.VK_SPACE)){
-            currScene.OC.Hero.move(KeyEvent.VK_SPACE);
-            currScene.OC.Hero.getPhysics().gravity = true;
-        }
-        if (currentKeys.isEmpty()) {
-            //if the player is not pressing keys, the protagonist stands still
-            currScene.OC.Hero.getSpriteManager().setStatus(PlayerStatus.IDLE);
-        }
+//        if (currentKeys.contains(KeyEvent.VK_RIGHT)) {
+//            currScene.OC.Hero.move(KeyEvent.VK_RIGHT);
+//        }
+//        if (currentKeys.contains(KeyEvent.VK_LEFT)) {
+//            //move left
+//            currScene.OC.Hero.move(KeyEvent.VK_LEFT);
+//        } 
+//        if (currentKeys.contains(KeyEvent.VK_DOWN)) {
+//            //move left
+//            currScene.OC.Hero.move(KeyEvent.VK_DOWN);
+//        }
+//        if (currentKeys.contains(KeyEvent.VK_UP)) {
+//            //move left
+//            currScene.OC.Hero.move(KeyEvent.VK_UP);
+//        }
+//        if(currentKeys.contains(KeyEvent.VK_SPACE)){
+//            currScene.OC.Hero.move(KeyEvent.VK_SPACE);
+//            currScene.OC.Hero.getPhysics().gravity = true;
+//        }
+//        if (currentKeys.isEmpty()) {
+//            //if the player is not pressing keys, the protagonist stands still
+//            currScene.OC.Hero.getSpriteManager().setStatus(PlayerStatus.IDLE);
+//        }
 
     }
     

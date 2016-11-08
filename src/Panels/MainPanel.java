@@ -19,8 +19,8 @@ import Components.GameScene;
 import java.awt.Graphics2D;
 
 public class MainPanel extends JPanel {
-    
-    GameScene SC = null;
+
+    public GameScene SC = null;
     int viewX = 800;
     int viewY = 600;
     int WorldX = 1600;
@@ -31,8 +31,8 @@ public class MainPanel extends JPanel {
     int offSetMinY = 0;
     int camX = 0;
     int camY = 0;
-    
-    public MainPanel(KeyListener KL,GameScene SC) {
+
+    public MainPanel(KeyListener KL, GameScene SC) {
         initComponents();
         this.setFocusable(true);
         this.addKeyListener(KL);
@@ -42,22 +42,26 @@ public class MainPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        camX = SC.OC.Hero.getCords().x-viewX/2;
-        camY = SC.OC.Hero.getCords().y-viewY/2;
-        g.translate(-camX, -camY);
+//        camX = SC.OC.Hero.getCords().x-viewX/2;
+//        camY = SC.OC.Hero.getCords().y-viewY/2;
+//        g.translate(-camX, -camY);
         for (int i = 0; i < SC.OC.units.size(); i++) {
             BaseObject currObject = SC.OC.units.get(i);
             Point point = currObject.nextPos();
-            Image img = null;
-            try {
-                img = currObject.getSpriteManager().nextImage();
-                
-            } catch (Exception e) {
-                System.out.println(currObject.getClass().getName() + " har intet billede");
+            if (currObject.getSpriteManager() == null) {
+                g.drawImage(currObject.getImage(), point.x, point.y, null);
+            } else {
+                Image img = null;
+                try {
+                    img = currObject.getSpriteManager().nextImage();
+
+                } catch (Exception e) {
+                    System.out.println(currObject.getClass().getName() + " har intet billede");
+                }
+                g.drawImage(img, point.x, point.y, null);
             }
-            g.drawImage(img, point.x, point.y, null);
         }
-        
+
     }
 
     @SuppressWarnings("unchecked")

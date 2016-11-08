@@ -51,6 +51,9 @@ public class BaseObject implements Plottable {
 //        Point newPos = new Point(pos.x + physics.getVelocity().x + physics.getAcceleration().x, pos.y + physics.getVelocity().y + physics.getAcceleration().y);
 //        setCords(newPos.x, newPos.y);
 //        return newPos;
+        if(physics == null){
+            return getCords();
+        }
         return physics.update();
     }
 

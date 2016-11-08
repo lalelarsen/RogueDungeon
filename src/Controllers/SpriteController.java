@@ -26,7 +26,6 @@ public class SpriteController {
     public static BufferedImage knightAnimHiRes;
 
     public SpriteController() {
-        System.out.println("hej");
         try {
             dungeon = ImageIO.read(this.getClass().getResourceAsStream("/pictures/dungeon_sheet.png"));
             knightAnim = ImageIO.read(this.getClass().getResourceAsStream("/pictures/knightanim3.png"));

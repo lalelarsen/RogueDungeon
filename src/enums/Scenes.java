@@ -7,8 +7,8 @@ package enums;
 
 /**
  *
- * @author frederik.larsen
+ * @author Frederik
  */
-public enum SpriteSheet {
-    DUNGEON,KNIGHTANIM,KNIGHTANIM_HIGHRES,POINTER;
+public enum Scenes {
+    MainMenu,LevelOne
 }
