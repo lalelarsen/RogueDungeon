@@ -5,6 +5,7 @@
  */
 package Controllers;
 
+import Components.BaseObject;
 import Components.GameScene;
 import Interfaces.PlayerOne;
 import Objects.Menues.MainMenu.MenuScene;
@@ -24,6 +25,7 @@ import javax.swing.JFrame;
 public class GameController {
 
     static GameScene currScene;
+    static BaseObject camera;
     KeyboardController KC = new KeyboardController();
     static MainPanel mp;
     int FRAMES60_PER_SECOND = 16;
@@ -122,6 +124,10 @@ public class GameController {
             currScene.p1.nothing();
         }
 
+    }
+    
+    public static GameScene getCurrScene(){
+        return currScene;
     }
     
     public static void changeScene(Scenes e){
