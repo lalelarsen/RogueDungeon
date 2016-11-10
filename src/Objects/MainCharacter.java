@@ -95,12 +95,12 @@ public class MainCharacter extends BaseObject implements Plottable, PlayerOne {
 
     @Override
     public void space() {
-        System.out.println("space");
+        
     }
 
     @Override
     public void enter() {
-        System.out.println("nothing");
+        
     }
 
     @Override

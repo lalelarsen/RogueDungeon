@@ -5,22 +5,24 @@
  */
 package Objects;
 
-import Components.GameScene;
-import Controllers.ObjectsController;
-import Objects.MainCharacter;
-import java.util.ArrayList;
-import Interfaces.Plottable;
 import Components.BaseObject;
+import Components.GameScene;
+import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import static java.util.concurrent.Executors.callable;
+import java.util.concurrent.Future;
 
 /**
  *
  * @author frederik.larsen
  */
-public class SceneOne extends GameScene{
+public class SceneOne extends GameScene {
+
     public MainCharacter Hero;
     public Wall w;
-    public SceneOne(){
-        System.out.println("runned");
+
+    public SceneOne() {
         Hero = new MainCharacter();
         w = new Wall();
         Hero.setCords(50, 270);
@@ -28,8 +30,21 @@ public class SceneOne extends GameScene{
         OC.units.add(Hero);
         OC.units.add(w);
         p1 = Hero;
+
+        Generator g = new Generator(OC.units);
+        ExecutorService pool = Executors.newFixedThreadPool(3);
+        Future<ArrayList<BaseObject>> future = pool.submit(g);
         
+        while (!future.isDone()) {
+            System.out.println(future.isDone());
+            try {
+
+                OC.units.addAll(future.get());
+            } catch (Exception e) {
+                
+            }
+        }
+
     }
-    
-    
+
 }

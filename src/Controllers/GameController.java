@@ -62,7 +62,7 @@ public class GameController {
             //manage the keys currently pressed
             mp.repaint();
             manageKeys();
-            System.out.println(currScene.getClass().getName());
+            //System.out.println(currScene.getClass().getName());
             currScene.frame1();
             if(counter2 == 2){currScene.frame2(); counter2 = 0; }
             if(counter3 == 3){currScene.frame3(); counter3 = 0;}

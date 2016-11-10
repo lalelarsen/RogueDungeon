@@ -22,8 +22,8 @@ public class BaseObject implements Plottable {
 
     public Point pos = new Point(0, 0);
     public Image img;
-    public Physics physics;
-    public Hitbox hitbox;
+    public Physics physics = null;
+    public Hitbox hitbox = null;
     public SpriteManager SM;
     public int lastX = 0;
     public int lastY = 0;
