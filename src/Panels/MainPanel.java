@@ -17,6 +17,7 @@ import Interfaces.Plottable;
 import Components.BaseObject;
 import Components.GameScene;
 import java.awt.Graphics2D;
+import sun.java2d.pipe.BufferedOpCodes;
 
 public class MainPanel extends JPanel {
 
@@ -60,6 +61,10 @@ public class MainPanel extends JPanel {
                 }
                 g.drawImage(img, point.x, point.y, null);
             }
+            for (int j = 0; j < currObject.getHitboxes().size(); j++) {
+                g.drawRect(currObject.getCords().x + currObject.getHitboxes().get(j).cords.x, currObject.getCords().y + currObject.getHitboxes().get(j).cords.y, currObject.getHitboxes().get(j).width, currObject.getHitboxes().get(j).height);
+            }
+
         }
 
     }

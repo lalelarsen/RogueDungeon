@@ -24,6 +24,7 @@ public class BaseObject implements Plottable {
     public Image img;
     public Physics physics = null;
     public Hitbox hitbox = null;
+    public ArrayList<Hitbox> hitboxes = new ArrayList<Hitbox>();
     public SpriteManager SM;
     public int lastX = 0;
     public int lastY = 0;
@@ -71,9 +72,19 @@ public class BaseObject implements Plottable {
     }
 
     public void addHitbox(int width, int height) {
-        hitbox = new Hitbox(height, width, this);
+        Hitbox hb = new Hitbox(height, width, this,new Point(0,0));
+        hitboxes.add(hb);
+    }
+    
+    public void addHitbox(int width, int height, Point p) {
+        Hitbox hb = new Hitbox(height, width, this,p);
+        hitboxes.add(hb);
     }
 
+    public ArrayList<Hitbox> getHitboxes(){
+        return hitboxes;
+    }
+    
     public Hitbox getHitbox() {
         return this.hitbox;
     }

@@ -7,6 +7,7 @@ package Objects;
 
 import Components.BaseObject;
 import Components.GameScene;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -26,9 +27,8 @@ public class SceneOne extends GameScene {
         Hero = new MainCharacter();
         w = new Wall();
         Hero.setCords(50, 270);
+        Hero.addHitbox(20, 20, new Point(200,200));
         w.setCords(30, 240);
-        OC.units.add(Hero);
-        OC.units.add(w);
         p1 = Hero;
 
         Generator g = new Generator(OC.units);
@@ -44,6 +44,8 @@ public class SceneOne extends GameScene {
                 
             }
         }
+        OC.units.add(Hero);
+        OC.units.add(w);
 
     }
 

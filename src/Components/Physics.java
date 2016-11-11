@@ -17,13 +17,14 @@ public class Physics {
     BaseObject body;
     public Point velocity = new Point(0,0);
     public Point acceleration = new Point (0,0);
+    public boolean immovable = false;
     public boolean gravity = true;
     public boolean grounded = false;
     public boolean resistenceX = true;
     public boolean resistenceY = true;
-    public boolean isSolid = false;
     int maxForceX = 12;
     int maxForceY = 12;
+    
     
     public Physics(BaseObject body) {
         this.body = body;

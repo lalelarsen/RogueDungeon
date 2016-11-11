@@ -14,7 +14,7 @@ import enums.Walls;
  *
  * @author Frederik
  */
-public class WallTileLevelOne extends BaseObject{
+public class WallTileLevelOne extends BaseObject {
 
     Walls wallE;
 
@@ -91,7 +91,54 @@ public class WallTileLevelOne extends BaseObject{
             case W_N:
                 img = SpriteController.loadSingleSpriteDungeon(144, 160, 16, 32);
                 break;
-
+            case N_E_SE_S:
+                img = SpriteController.loadSingleSpriteDungeon(192, 160, 16, 32);
+                break;
+            case E_SE_S_W:
+                img = SpriteController.loadSingleSpriteDungeon(208, 160, 16, 32);
+                break;
+            case N_S_SW_W:
+                img = SpriteController.loadSingleSpriteDungeon(224, 160, 16, 32);
+                break;
+            case E_S_SW_W:
+                img = SpriteController.loadSingleSpriteDungeon(240, 160, 16, 32);
+                break;
+            case N_S_W_NW:
+                img = SpriteController.loadSingleSpriteDungeon(256, 160, 16, 32);
+                break;
+            case N_E_W_NW:
+                img = SpriteController.loadSingleSpriteDungeon(272, 160, 16, 32);
+                break;
+            case N_NE_E_W:
+                img = SpriteController.loadSingleSpriteDungeon(288, 160, 16, 32);
+                break;
+            case N_NE_E_S:
+                img = SpriteController.loadSingleSpriteDungeon(304, 160, 16, 32);
+                break;
+            case N_E_S:
+                img = SpriteController.loadSingleSpriteDungeon(320, 160, 16, 32);
+                break;
+            case E_S_W:
+                img = SpriteController.loadSingleSpriteDungeon(336, 160, 16, 32);
+                break;
+            case N_S_W:
+                img = SpriteController.loadSingleSpriteDungeon(352, 160, 16, 32);
+                break;
+            case N_E_W:
+                img = SpriteController.loadSingleSpriteDungeon(368, 160, 16, 32);
+                break;
+            case N_NE_E_SE_S_W:
+                img = SpriteController.loadSingleSpriteDungeon(192, 192, 16, 32);
+                break;
+            case N_E_S_SW_W_NW:
+                img = SpriteController.loadSingleSpriteDungeon(208, 192, 16, 32);
+                break;
+            case N_NE_E_S_W_NW:
+                img = SpriteController.loadSingleSpriteDungeon(224, 192, 16, 32);
+                break;
+            case N_E_SE_S_SW_W:
+                img = SpriteController.loadSingleSpriteDungeon(240, 192, 16, 32);
+                break;
         }
     }
 }

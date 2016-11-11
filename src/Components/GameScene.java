@@ -27,5 +27,5 @@ public class GameScene {
     public void frame4(){};
     public void frame3(){};
     public void frame2(){};
-    public void frame1(){/*OC.bounce();*/ OC.solidCollisionDetetection();};
+    public void frame1(){/*OC.bounce();*/ OC.solidCollisionDetetection2();};
 }
