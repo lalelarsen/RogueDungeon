@@ -14,25 +14,28 @@ import java.util.ArrayList;
  */
 public class Hitbox {
 
+    public boolean isTrigger = false;
     public int width;
     public int height;
     public Point cords;
     BaseObject body;
     ArrayList<Point> area = new ArrayList<Point>();
 
-    public Hitbox(int width, int height, BaseObject body) {
+    public Hitbox(int width, int height, BaseObject body,boolean isTrigger) {
         this.width = width;
         this.height = height;
         this.body = body;
         this.cords = body.getCords();
+        this.isTrigger = isTrigger;
         setArea();
     }
 
-    public Hitbox(int width, int height, BaseObject body, Point p) {
+    public Hitbox(int width, int height, BaseObject body, Point p, boolean isTrigger) {
         this.width = width;
         this.height = height;
         this.body = body;
         this.cords = p;
+        this.isTrigger = isTrigger;
         setArea();
     }
 

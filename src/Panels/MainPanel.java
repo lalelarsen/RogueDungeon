@@ -22,6 +22,7 @@ import sun.java2d.pipe.BufferedOpCodes;
 public class MainPanel extends JPanel {
 
     public GameScene SC = null;
+    Point camera = new Point(0,0);
     int viewX = 800;
     int viewY = 600;
     int WorldX = 1600;
@@ -33,6 +34,10 @@ public class MainPanel extends JPanel {
     int camX = 0;
     int camY = 0;
 
+    public void updateCameraCord(Point p){
+        this.camera = p;
+    }
+    
     public MainPanel(KeyListener KL, GameScene SC) {
         initComponents();
         this.setFocusable(true);

@@ -139,6 +139,25 @@ public class WallTileLevelOne extends BaseObject {
             case N_E_SE_S_SW_W:
                 img = SpriteController.loadSingleSpriteDungeon(240, 192, 16, 32);
                 break;
+            case N_NE_E_S_W:
+                img = SpriteController.loadSingleSpriteDungeon(304, 192, 16, 32);
+                break;
+            case N_E_S_SW_W:
+                img = SpriteController.loadSingleSpriteDungeon(272, 192, 16, 32);
+                break;
+            case N_E_S_W_NW:
+                img = SpriteController.loadSingleSpriteDungeon(288, 192, 16, 32);
+                break;
+            case N_E_SE_S_W:
+                img = SpriteController.loadSingleSpriteDungeon(256, 192, 16, 32);
+                break;
+            case N_NE_E_S_SW_W:
+                img = SpriteController.loadSingleSpriteDungeon(336, 192, 16, 32);
+                break;
+            case N_E_SE_S_W_NW:
+                img = SpriteController.loadSingleSpriteDungeon(320, 192, 16, 32);
+                break;
+
         }
     }
 }

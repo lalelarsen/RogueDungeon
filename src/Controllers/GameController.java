@@ -14,6 +14,7 @@ import Panels.MainPanel;
 import enums.PlayerStatus;
 import enums.Scenes;
 import java.awt.BorderLayout;
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.util.HashSet;
 import javax.swing.JFrame;
@@ -124,6 +125,10 @@ public class GameController {
             currScene.p1.nothing();
         }
 
+    }
+    
+    public static void updateCameraCords(Point p){
+        mp.updateCameraCord(p);
     }
     
     public static GameScene getCurrScene(){

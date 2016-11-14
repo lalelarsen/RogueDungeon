@@ -71,13 +71,13 @@ public class BaseObject implements Plottable {
         return SM;
     }
 
-    public void addHitbox(int width, int height) {
-        Hitbox hb = new Hitbox(height, width, this,new Point(0,0));
+    public void addHitbox(int width, int height, boolean isTrigger) {
+        Hitbox hb = new Hitbox(height, width, this,new Point(0,0), isTrigger);
         hitboxes.add(hb);
     }
     
-    public void addHitbox(int width, int height, Point p) {
-        Hitbox hb = new Hitbox(height, width, this,p);
+    public void addHitbox(int width, int height, Point p, boolean isTrigger) {
+        Hitbox hb = new Hitbox(height, width, this,p,isTrigger);
         hitboxes.add(hb);
     }
 
