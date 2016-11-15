@@ -19,5 +19,6 @@ public enum Walls {
     N_E_S,E_S_W,N_S_W,N_E_W,
     N_NE_E_S_W,N_E_SE_S_W,N_E_S_SW_W,N_E_S_W_NW,
     N_NE_E_S_SW_W,N_E_SE_S_W_NW,
-    P
+    P,
+    EMPTY
 }

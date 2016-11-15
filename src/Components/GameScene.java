@@ -7,6 +7,7 @@ package Components;
 
 import Controllers.ObjectsController;
 import Interfaces.PlayerOne;
+import java.awt.Point;
 
 /**
  *
@@ -15,6 +16,8 @@ import Interfaces.PlayerOne;
 public class GameScene {
     public ObjectsController OC;
     public PlayerOne p1;
+    public BaseObject camera = new BaseObject();
+    
     public GameScene(){
         OC = new ObjectsController();
     }
@@ -27,5 +30,9 @@ public class GameScene {
     public void frame4(){};
     public void frame3(){};
     public void frame2(){};
-    public void frame1(){/*OC.bounce();*/ OC.solidCollisionDetetection2();};
+    public void frame1(){OC.solidCollisionDetetection();};
+    
+    public Point getCameraPos(){
+        return camera.getCords();
+    }
 }

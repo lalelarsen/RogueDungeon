@@ -22,6 +22,9 @@ public class WallTileLevelOne extends BaseObject {
     public WallTileLevelOne(Walls w) {
         this.wallE = w;
         switch (w) {
+            case EMPTY:
+                img = SpriteController.loadSingleSpriteDungeon(352, 192, 16, 32);
+                break;
             case E:
                 img = SpriteController.loadSingleSpriteDungeon(16, 160, 16, 32);
                 break;

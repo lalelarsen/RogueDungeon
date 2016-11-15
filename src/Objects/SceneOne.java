@@ -30,7 +30,8 @@ public class SceneOne extends GameScene {
         Hero.addHitbox(20, 20, new Point(100,100),false);
         w.setCords(30, 240);
         p1 = Hero;
-
+        camera = Hero;
+        
         Generator g = new Generator(OC.units);
         ExecutorService pool = Executors.newFixedThreadPool(3);
         Future<ArrayList<BaseObject>> future = pool.submit(g);

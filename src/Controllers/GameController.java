@@ -26,7 +26,6 @@ import javax.swing.JFrame;
 public class GameController {
 
     static GameScene currScene;
-    static BaseObject camera;
     KeyboardController KC = new KeyboardController();
     static MainPanel mp;
     int FRAMES60_PER_SECOND = 16;
@@ -63,9 +62,9 @@ public class GameController {
             //manage the keys currently pressed
             mp.repaint();
             manageKeys();
-            //System.out.println(currScene.getClass().getName());
+            mp.camera = currScene.getCameraPos();
             currScene.frame1();
-            if(counter2 == 2){currScene.frame2(); counter2 = 0; }
+            if(counter2 == 2){currScene.frame2(); counter2 = 0;}
             if(counter3 == 3){currScene.frame3(); counter3 = 0;}
             if(counter4 == 4){currScene.frame4(); counter4 = 0;}
             if(counter5 == 5){currScene.frame5(); counter5 = 0;}

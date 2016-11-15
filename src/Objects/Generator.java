@@ -21,7 +21,7 @@ import java.util.concurrent.Callable;
  */
 public class Generator implements Callable<ArrayList<BaseObject>> {
 
-    int AmountOfTiles = 30;
+    int AmountOfTiles = 50;
     public int maxX = 40;
     public int maxY = 40;
     public TileTypes[][] tileSpots = new TileTypes[maxX][maxY];
@@ -47,13 +47,13 @@ public class Generator implements Callable<ArrayList<BaseObject>> {
             }
             Random rand = new Random();
             int n = rand.nextInt(100) + 1;
-            if (n < 25) {
+            if (n < 40) {
                 Pos = new Point(Pos.x + 1, Pos.y);
 
-            } else if (n < 50) {
+            } else if (n < 80) {
                 Pos = new Point(Pos.x - 1, Pos.y);
 
-            } else if (n < 75) {
+            } else if (n < 90) {
                 Pos = new Point(Pos.x, Pos.y + 1);
 
             } else {
@@ -100,23 +100,42 @@ public class Generator implements Callable<ArrayList<BaseObject>> {
                 }
             }
         }
-        for (int i = 0; i < placedTiles.size(); i++) {
-            Point curr = placedTiles.get(i);
-            FloorTileLevelOne f = new FloorTileLevelOne();
-            f.setCords(curr.x * 16, curr.y * 32);
-            tiles.add(f);
-        }
-        try {
-            for (int i = 0; i < placedWalls.size(); i++) {
-                Point curr = placedWalls.get(i);
-                WallTileLevelOne f = wallDef(placedWalls.get(i));
-                f.setCords(curr.x * 16, curr.y * 32);
-                tiles.add(f);
 
+        for (int i = 0; i < maxX; i++) {
+            System.out.println("");
+            for (int j = 0; j < maxY; j++) {
+                Point p = new Point(i, j);
+                if (tileSpots[j][i] == TileTypes.FLOOR) {
+                    FloorTileLevelOne f = new FloorTileLevelOne();
+                    f.setCords(j * 16, i * 32);
+                    tiles.add(f);
+                } else if (tileSpots[j][i] == TileTypes.WALL) {
+                    WallTileLevelOne f = wallDef(new Point(j,i));
+                    f.setCords(j * 16, i * 32);
+                    tiles.add(f);
+                } else {
+                    WallTileLevelOne f = new WallTileLevelOne(Walls.EMPTY);
+                    f.setCords(j * 16, i * 32);
+                    tiles.add(f);
+                }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+
         }
+//
+//        for (int i = 0; i < placedTiles.size(); i++) {
+//            Point curr = placedTiles.get(i);
+//            FloorTileLevelOne f = new FloorTileLevelOne();
+//            f.setCords(curr.x * 16, curr.y * 32);
+//            tiles.add(f);
+//        }
+//
+//        for (int i = 0; i < placedWalls.size(); i++) {
+//            Point curr = placedWalls.get(i);
+//            WallTileLevelOne f = wallDef(placedWalls.get(i));
+//            f.setCords(curr.x * 16, curr.y * 32);
+//            tiles.add(f);
+//
+//        }
 
         for (int i = 0; i < maxX; i++) {
             System.out.println("");
@@ -290,10 +309,10 @@ public class Generator implements Callable<ArrayList<BaseObject>> {
         if (N && E && SE && S && SW && W) {
             wall = new WallTileLevelOne(Walls.N_E_SE_S_SW_W);
         }
-        if(N && NE && E && S && SW && W){
+        if (N && NE && E && S && SW && W) {
             wall = new WallTileLevelOne(Walls.N_NE_E_S_SW_W);
         }
-        if(N && E && SE && S && W && NW){
+        if (N && E && SE && S && W && NW) {
             wall = new WallTileLevelOne(Walls.N_E_SE_S_W_NW);
         }
         if (N && E && SE && S && SW && W && NW) {

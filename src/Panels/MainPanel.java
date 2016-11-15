@@ -22,7 +22,7 @@ import sun.java2d.pipe.BufferedOpCodes;
 public class MainPanel extends JPanel {
 
     public GameScene SC = null;
-    Point camera = new Point(0,0);
+    public Point camera = new Point(0,0);
     int viewX = 800;
     int viewY = 600;
     int WorldX = 1600;
@@ -48,9 +48,9 @@ public class MainPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-//        camX = SC.OC.Hero.getCords().x-viewX/2;
-//        camY = SC.OC.Hero.getCords().y-viewY/2;
-//        g.translate(-camX, -camY);
+        camX = camera.x-viewX/2;
+        camY = camera.y-viewY/2;
+        g.translate(-camX, -camY);
         for (int i = 0; i < SC.OC.units.size(); i++) {
             BaseObject currObject = SC.OC.units.get(i);
             Point point = currObject.nextPos();
