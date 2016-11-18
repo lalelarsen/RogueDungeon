@@ -18,6 +18,6 @@ import javax.imageio.ImageIO;
 public class FloorTileLevelOne extends BaseObject {
 
     public FloorTileLevelOne() {
-        img = SpriteController.loadSingleSpriteDungeon(176, 160, 16, 32);
+        img = SpriteController.loadSingleSpriteDungeon(176*4, 160*4, 16*4, 32*4);
     }
 }

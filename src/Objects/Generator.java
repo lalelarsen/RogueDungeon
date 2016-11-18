@@ -107,15 +107,15 @@ public class Generator implements Callable<ArrayList<BaseObject>> {
                 Point p = new Point(i, j);
                 if (tileSpots[j][i] == TileTypes.FLOOR) {
                     FloorTileLevelOne f = new FloorTileLevelOne();
-                    f.setCords(j * 16, i * 32);
+                    f.setCords(j * 64, i * 128);
                     tiles.add(f);
                 } else if (tileSpots[j][i] == TileTypes.WALL) {
                     WallTileLevelOne f = wallDef(new Point(j,i));
-                    f.setCords(j * 16, i * 32);
+                    f.setCords(j * 64, i * 128);
                     tiles.add(f);
                 } else {
                     WallTileLevelOne f = new WallTileLevelOne(Walls.EMPTY);
-                    f.setCords(j * 16, i * 32);
+                    f.setCords(j * 64, i * 128);
                     tiles.add(f);
                 }
             }

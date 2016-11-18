@@ -16,15 +16,16 @@ import javax.swing.JPanel;
 import Interfaces.Plottable;
 import Components.BaseObject;
 import Components.GameScene;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics2D;
-import sun.java2d.pipe.BufferedOpCodes;
 
 public class MainPanel extends JPanel {
 
     public GameScene SC = null;
-    public Point camera = new Point(0,0);
-    int viewX = 800;
-    int viewY = 600;
+    public static Point camera = new Point(0,0);
+    public static int viewX = 800;
+    public static int viewY = 600;
     int WorldX = 1600;
     int WorldY = 1200;
     int offSetMaxX = WorldX - viewX;
@@ -34,8 +35,8 @@ public class MainPanel extends JPanel {
     int camX = 0;
     int camY = 0;
 
-    public void updateCameraCord(Point p){
-        this.camera = p;
+    public static void updateCameraCord(Point p){
+        camera = p;
     }
     
     public MainPanel(KeyListener KL, GameScene SC) {
@@ -43,6 +44,7 @@ public class MainPanel extends JPanel {
         this.setFocusable(true);
         this.addKeyListener(KL);
         this.SC = SC;
+        this.setPreferredSize(new Dimension(viewX,viewY));
     }
 
     @Override
@@ -66,6 +68,7 @@ public class MainPanel extends JPanel {
                 }
                 g.drawImage(img, point.x, point.y, null);
             }
+            g.setColor(Color.red);
             for (int j = 0; j < currObject.getHitboxes().size(); j++) {
                 g.drawRect(currObject.getCords().x + currObject.getHitboxes().get(j).cords.x, currObject.getCords().y + currObject.getHitboxes().get(j).cords.y, currObject.getHitboxes().get(j).width, currObject.getHitboxes().get(j).height);
             }
@@ -78,7 +81,7 @@ public class MainPanel extends JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setPreferredSize(new java.awt.Dimension(1200, 900));
+        setPreferredSize(new java.awt.Dimension(600, 900));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

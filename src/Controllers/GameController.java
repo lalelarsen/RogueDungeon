@@ -47,13 +47,14 @@ public class GameController {
         //currScene = new SceneOne();
         mp = new MainPanel(KC, currScene);
         JFrame frame = new JFrame("Test");
-        frame.setLayout(new BorderLayout());
+        //frame.setLayout(new BorderLayout());
         frame.add(mp);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-
+//        frame.setResizable(false);
+        
         run(mp);
     }
 
@@ -62,7 +63,7 @@ public class GameController {
             //manage the keys currently pressed
             mp.repaint();
             manageKeys();
-            mp.camera = currScene.getCameraPos();
+            MainPanel.camera = currScene.getCameraPos();
             currScene.frame1();
             if(counter2 == 2){currScene.frame2(); counter2 = 0;}
             if(counter3 == 3){currScene.frame3(); counter3 = 0;}

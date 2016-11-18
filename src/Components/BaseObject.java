@@ -77,7 +77,7 @@ public class BaseObject implements Plottable {
     }
     
     public void addHitbox(int width, int height, Point p, boolean isTrigger) {
-        Hitbox hb = new Hitbox(height, width, this,p,isTrigger);
+        Hitbox hb = new Hitbox(width, height, this,p,isTrigger);
         hitboxes.add(hb);
     }
 

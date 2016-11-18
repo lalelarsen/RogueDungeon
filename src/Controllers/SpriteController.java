@@ -8,6 +8,7 @@ package Controllers;
 import Components.Sprite;
 import enums.FourDir;
 import enums.SpriteSheet;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;

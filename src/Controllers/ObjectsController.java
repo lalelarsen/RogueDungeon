@@ -80,11 +80,11 @@ public class ObjectsController {
                         if (!MainBaseObject.equals(SecondBaseObject)) {
                             if (!SecondBaseObject.getHitboxes().isEmpty()) {
                                 for (int k = 0; k < MainBaseObject.getHitboxes().size(); k++) {
-                                    if (MainBaseObject.getHitboxes().get(k).isTrigger) {
+                                    if (!MainBaseObject.getHitboxes().get(k).isTrigger) {
                                         Hitbox MainHB = MainBaseObject.getHitboxes().get(k);
                                         for (int l = 0; l < SecondBaseObject.getHitboxes().size(); l++) {
                                             Hitbox SecondHB = SecondBaseObject.getHitboxes().get(l);
-                                            if (SecondBaseObject.getHitboxes().get(l).isTrigger) {
+                                            if (!SecondBaseObject.getHitboxes().get(l).isTrigger) {
                                                 if (MainBaseObject.getCords().x + MainHB.cords.x < SecondBaseObject.getCords().x + SecondHB.cords.x + SecondHB.width && MainBaseObject.getCords().x + MainHB.cords.x + MainHB.width > SecondBaseObject.getCords().x + SecondHB.cords.x && MainBaseObject.getCords().y + MainHB.cords.y < SecondBaseObject.getCords().y + SecondHB.cords.y + SecondHB.height && MainBaseObject.getCords().y + MainHB.cords.y + MainHB.height > SecondBaseObject.getCords().y + SecondHB.cords.y) {
                                                     Point aPoint = MainHB.getOverlapped(SecondHB);
                                                     if (aPoint.x < aPoint.y) {

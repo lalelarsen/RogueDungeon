@@ -8,6 +8,7 @@ package Objects.Menues.MainMenu;
 import Components.BaseObject;
 import Objects.Menues.Chooser;
 import Components.GameScene;
+import Panels.MainPanel;
 import enums.SpriteSheet;
 import java.awt.Point;
 
@@ -24,6 +25,6 @@ public class MenuScene extends GameScene{
         OC.units.add(mm);
         OC.units.add(c);
         p1 = c;
-        camera.setCords(0, 0);
+        camera.setCords(MainPanel.viewX/2, MainPanel.viewY/2);
     }
 }
