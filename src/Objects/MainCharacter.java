@@ -53,7 +53,7 @@ public class MainCharacter extends BaseObject implements Plottable, PlayerOne {
 
         addPhysics();
         //getPhysics().setAcceleration(new Point(1,1));
-        addHitbox(16, 16,false);
+        addHitbox(56, 64,new Point(4,0),false);
         
         getPhysics().gravity = false;
 //        getPhysics().resistenceX = false;
