@@ -19,11 +19,12 @@ import Components.GameScene;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.util.Collections;
 
 public class MainPanel extends JPanel {
 
     public GameScene SC = null;
-    public static Point camera = new Point(0,0);
+    public static Point camera = new Point(0, 0);
     public static int viewX = 800;
     public static int viewY = 600;
     int WorldX = 1600;
@@ -35,24 +36,42 @@ public class MainPanel extends JPanel {
     int camX = 0;
     int camY = 0;
 
-    public static void updateCameraCord(Point p){
+    public static void updateCameraCord(Point p) {
         camera = p;
     }
-    
+
     public MainPanel(KeyListener KL, GameScene SC) {
         initComponents();
         this.setFocusable(true);
         this.addKeyListener(KL);
         this.SC = SC;
-        this.setPreferredSize(new Dimension(viewX,viewY));
+        this.setPreferredSize(new Dimension(viewX, viewY));
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        camX = camera.x-viewX/2;
-        camY = camera.y-viewY/2;
+        camX = camera.x - viewX / 2;
+        camY = camera.y - viewY / 2;
         g.translate(-camX, -camY);
+        Collections.sort(SC.OC.units);
+        for (int i = 0; i < SC.OC.bgUnits.size(); i++) {
+            BaseObject currObject = SC.OC.bgUnits.get(i);
+            Point point = currObject.nextPos();
+            if (currObject.getSpriteManager() == null) {
+                g.drawImage(currObject.getImage(), point.x, point.y, null);
+            } else {
+                Image img = null;
+                try {
+                    img = currObject.getSpriteManager().nextImage();
+
+                } catch (Exception e) {
+                    System.out.println(currObject.getClass().getName() + " har intet billede");
+                }
+                g.drawImage(img, point.x, point.y, null);
+            }
+        }
+
         for (int i = 0; i < SC.OC.units.size(); i++) {
             BaseObject currObject = SC.OC.units.get(i);
             Point point = currObject.nextPos();

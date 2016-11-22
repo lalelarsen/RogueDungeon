@@ -19,7 +19,7 @@ import java.util.concurrent.Callable;
  *
  * @author Frederik
  */
-public class Generator implements Callable<ArrayList<BaseObject>> {
+public class Generator implements Callable<ArrayList<ArrayList<BaseObject>>> {
 
     int AmountOfTiles = 50;
     public int maxX = 40;
@@ -27,17 +27,18 @@ public class Generator implements Callable<ArrayList<BaseObject>> {
     public TileTypes[][] tileSpots = new TileTypes[maxX][maxY];
     public ArrayList<Point> placedTiles = new ArrayList();
     public ArrayList<Point> placedWalls = new ArrayList();
-    public ArrayList<BaseObject> tiles = new ArrayList();
+    public ArrayList<BaseObject> wallTiles = new ArrayList();
+    public ArrayList<BaseObject> floorTiles = new ArrayList();
     ArrayList<BaseObject> mainList;
 
     Point Pos = new Point(maxX / 2, maxY / 2);
 
-    public Generator(ArrayList<BaseObject> mainList) {
-        this.mainList = mainList;
+    public Generator() {
+        
     }
 
     @Override
-    public ArrayList<BaseObject> call() {
+    public ArrayList<ArrayList<BaseObject>> call() {
         for (int i = 0; i < AmountOfTiles; i++) {
             i--;
             if (tileSpots[Pos.x][Pos.y] == null) {
@@ -100,23 +101,24 @@ public class Generator implements Callable<ArrayList<BaseObject>> {
                 }
             }
         }
-
         for (int i = 0; i < maxX; i++) {
-            System.out.println("");
             for (int j = 0; j < maxY; j++) {
                 Point p = new Point(i, j);
                 if (tileSpots[j][i] == TileTypes.FLOOR) {
                     FloorTileLevelOne f = new FloorTileLevelOne();
                     f.setCords(j * 64, i * 128);
-                    tiles.add(f);
+                    floorTiles.add(f);
                 } else if (tileSpots[j][i] == TileTypes.WALL) {
-                    WallTileLevelOne f = wallDef(new Point(j,i));
+                    WallTileLevelOne w = wallDef(new Point(j,i));
+                    w.setCords(j * 64, i * 128);
+                    wallTiles.add(w);
+                    FloorTileLevelOne f = new FloorTileLevelOne();
                     f.setCords(j * 64, i * 128);
-                    tiles.add(f);
+                    floorTiles.add(f);
                 } else {
-                    WallTileLevelOne f = new WallTileLevelOne(Walls.EMPTY);
-                    f.setCords(j * 64, i * 128);
-                    tiles.add(f);
+                    WallTileLevelOne w = new WallTileLevelOne(Walls.EMPTY);
+                    w.setCords(j * 64, i * 128);
+                    wallTiles.add(w);
                 }
             }
 
@@ -137,6 +139,7 @@ public class Generator implements Callable<ArrayList<BaseObject>> {
 //
 //        }
 
+        System.out.println("hallo");
         for (int i = 0; i < maxX; i++) {
             System.out.println("");
             for (int j = 0; j < maxY; j++) {
@@ -151,8 +154,12 @@ public class Generator implements Callable<ArrayList<BaseObject>> {
             }
 
         }
-
-        return tiles;
+        
+        ArrayList<ArrayList<BaseObject>> result = new ArrayList();
+        result.add(wallTiles);
+        result.add(floorTiles);
+        
+        return result;
     }
 
     public WallTileLevelOne wallDef(Point p) {

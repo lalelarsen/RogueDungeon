@@ -32,15 +32,15 @@ public class SceneOne extends GameScene {
         p1 = Hero;
         camera = Hero;
         
-        Generator g = new Generator(OC.units);
+        Generator g = new Generator();
         ExecutorService pool = Executors.newFixedThreadPool(3);
-        Future<ArrayList<BaseObject>> future = pool.submit(g);
+        Future<ArrayList<ArrayList<BaseObject>>> future = pool.submit(g);
         
         while (!future.isDone()) {
-            System.out.println(future.isDone());
+            System.out.println("loading");
             try {
-
-                OC.units.addAll(future.get());
+                OC.units.addAll(future.get().get(0));
+                OC.bgUnits.addAll(future.get().get(1));
             } catch (Exception e) {
                 
             }

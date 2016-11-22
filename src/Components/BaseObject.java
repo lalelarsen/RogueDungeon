@@ -18,7 +18,7 @@ import java.util.ArrayList;
  *
  * @author frederik.larsen
  */
-public class BaseObject implements Plottable {
+public class BaseObject implements Plottable, Comparable<BaseObject> {
 
     public Point pos = new Point(0, 0);
     public Image img;
@@ -28,6 +28,7 @@ public class BaseObject implements Plottable {
     public SpriteManager SM;
     public int lastX = 0;
     public int lastY = 0;
+    
 
     @Override
     public void setCords(int x, int y) {
@@ -62,7 +63,7 @@ public class BaseObject implements Plottable {
     public Point getCords() {
         return pos;
     }
-
+    
     public void addSpriteManager(Enum status) {
         SM = new SpriteManager(status);
     }
@@ -97,4 +98,11 @@ public class BaseObject implements Plottable {
         return this.physics;
     }
 
+    @Override
+    public int compareTo(BaseObject o) {
+        return this.getCords().y - o.getCords().y;
+    }
+
+    
+    
 }

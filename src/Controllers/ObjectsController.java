@@ -19,6 +19,7 @@ import java.util.ArrayList;
 public class ObjectsController {
 
     public ArrayList<BaseObject> units = new ArrayList();
+    public ArrayList<BaseObject> bgUnits = new ArrayList();
 
     public ObjectsController() {
 
