@@ -29,7 +29,7 @@ public class ObjectsController {
         for (int i = 0; i < units.size(); i++) {
             BaseObject currGO = units.get(i);
             if (currGO.getPhysics() != null) {
-                updatePhysics(currGO);
+//                updatePhysics(currGO);
             }
         }
     }
@@ -144,4 +144,26 @@ public class ObjectsController {
         }
     }
 
+    public void updateUnits(){
+        for (int i = 0; i < units.size(); i++) {
+            units.get(i).callUpdate();
+        }
+    }
+    
+    public void lowPrioUnitUpdate(){
+        for (int i = 0; i < units.size(); i++) {
+            units.get(i).lowPrioUpdate();
+        }
+    }
+    
+    public ArrayList<BaseObject> findObject(String name){
+        ArrayList<BaseObject> list = new ArrayList();
+        for (int i = 0; i < units.size(); i++) {
+            if(units.get(i).getClass().getSimpleName().equals(name)){
+                list.add(units.get(i));
+            }
+        }
+        return list;
+    }
+    
 }

@@ -9,6 +9,6 @@ package enums;
  *
  * @author frederik.larsen
  */
-public enum SpriteSheet {
-    DUNGEON,KNIGHTANIM,KNIGHTANIM_HIGHRES,BLUEKNIGHTANIM_HIGHRES,POINTER;
+public enum MoveStatus {
+    IDLE,NORTH,SOUTH,WEST,EAST,NORTHWEST,NORTHEAST,SOUTHWEST,SOUTHEAST;
 }

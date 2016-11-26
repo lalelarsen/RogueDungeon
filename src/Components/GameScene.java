@@ -26,11 +26,11 @@ public class GameScene {
     public void frame8(){};
     public void frame7(){};
     public void frame6(){};
-    public void frame5(){};
+    public void frame5(){OC.lowPrioUnitUpdate();};
     public void frame4(){};
     public void frame3(){};
     public void frame2(){};
-    public void frame1(){OC.solidCollisionDetetection();};
+    public void frame1(){OC.solidCollisionDetetection();OC.updateUnits();};
     
     public Point getCameraPos(){
         return camera.getCords();

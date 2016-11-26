@@ -11,7 +11,7 @@ import Interfaces.PlayerOne;
 import Objects.Menues.MainMenu.MenuScene;
 import Objects.SceneOne;
 import Panels.MainPanel;
-import enums.PlayerStatus;
+import enums.MoveStatus;
 import enums.Scenes;
 import java.awt.BorderLayout;
 import java.awt.Point;

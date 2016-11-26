@@ -10,7 +10,7 @@ import Components.GameScene;
 import Controllers.KeyboardController;
 import Controllers.SpriteController;
 import Objects.SceneOne;
-import enums.PlayerStatus;
+import enums.MoveStatus;
 import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.Image;

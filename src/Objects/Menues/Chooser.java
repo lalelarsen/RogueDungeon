@@ -10,7 +10,7 @@ import Components.BaseObject;
 import Interfaces.MenuInterface;
 import Interfaces.PlayerOne;
 import enums.FourDir;
-import enums.PlayerStatus;
+import enums.MoveStatus;
 import enums.SpriteSheet;
 import java.awt.Point;
 import javax.imageio.ImageIO;

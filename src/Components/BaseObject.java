@@ -64,6 +64,14 @@ public class BaseObject implements Plottable, Comparable<BaseObject> {
         return pos;
     }
     
+    public void callUpdate(){
+        
+    }
+    
+    public void lowPrioUpdate(){
+        
+    }
+    
     public void addSpriteManager(Enum status) {
         SM = new SpriteManager(status);
     }

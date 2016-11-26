@@ -89,9 +89,9 @@ public class MainPanel extends JPanel {
             }
             //draw hitboxes
 //            g.setColor(Color.red);
-//            for (int j = 0; j < currObject.getHitboxes().size(); j++) {
-//                g.drawRect(currObject.getCords().x + currObject.getHitboxes().get(j).cords.x, currObject.getCords().y + currObject.getHitboxes().get(j).cords.y, currObject.getHitboxes().get(j).width, currObject.getHitboxes().get(j).height);
-//            }
+            for (int j = 0; j < currObject.getHitboxes().size(); j++) {
+                g.drawRect(currObject.getCords().x + currObject.getHitboxes().get(j).cords.x, currObject.getCords().y + currObject.getHitboxes().get(j).cords.y, currObject.getHitboxes().get(j).width, currObject.getHitboxes().get(j).height);
+            }
 
         }
 

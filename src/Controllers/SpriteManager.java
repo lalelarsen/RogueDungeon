@@ -8,7 +8,7 @@ package Controllers;
 import Components.Sprite;
 import static Controllers.SpriteController.loadSpriteRoll;
 import enums.FourDir;
-import enums.PlayerStatus;
+import enums.MoveStatus;
 import enums.SpriteSheet;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
