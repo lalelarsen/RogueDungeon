@@ -37,7 +37,7 @@ public class SceneOne extends GameScene {
     public SceneOne() {
         Hero = new MainCharacter();
         Hero.setCords(50, 270);
-        Hero.addHitbox(20, 20, new Point(60,30),true);
+//        Hero.addSquareHitbox(20, 20, new Point(60,30),true);
         OC.units.add(Hero);
         
         p1 = Hero;

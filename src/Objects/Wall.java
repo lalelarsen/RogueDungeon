@@ -22,8 +22,8 @@ public class Wall extends BaseObject implements Plottable{
     public Wall(){
         addSpriteManager(MoveStatus.NORTH);
         addPhysics();
-        addHitbox(16, 16, new Point(90,0),false);
-        addHitbox(16, 16, new Point(20,-30),true);
+        addSquareHitbox(16, 16, new Point(90,0),false);
+        addSquareHitbox(16, 16, new Point(20,-30),true);
         getPhysics().gravity = false;
         getPhysics().immovable = true;
         getSpriteManager().addSprite(SpriteSheet.DUNGEON, FourDir.RIGHT, 0, 0, 16, 16, 0, 0, 1, MoveStatus.NORTH);

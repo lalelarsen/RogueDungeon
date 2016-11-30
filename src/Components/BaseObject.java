@@ -5,7 +5,7 @@
  */
 package Components;
 
-import Components.Hitbox;
+import Components.SquareHitbox;
 import Components.Physics;
 import static Controllers.SpriteController.loadSpriteRoll;
 import Controllers.SpriteManager;
@@ -23,7 +23,7 @@ public class BaseObject implements Plottable, Comparable<BaseObject> {
     public Point pos = new Point(0, 0);
     public Image img;
     public Physics physics = null;
-    public Hitbox hitbox = null;
+    public SquareHitbox hitbox = null;
     public ArrayList<Hitbox> hitboxes = new ArrayList<Hitbox>();
     public SpriteManager SM;
     public int lastX = 0;
@@ -80,21 +80,31 @@ public class BaseObject implements Plottable, Comparable<BaseObject> {
         return SM;
     }
 
-    public void addHitbox(int width, int height, boolean isTrigger) {
-        Hitbox hb = new Hitbox(height, width, this,new Point(0,0), isTrigger);
+    public void addSquareHitbox(int width, int height, boolean isTrigger) {
+        SquareHitbox hb = new SquareHitbox(width, height, this,new Point(0,0), isTrigger);
         hitboxes.add(hb);
     }
     
-    public void addHitbox(int width, int height, Point p, boolean isTrigger) {
-        Hitbox hb = new Hitbox(width, height, this,p,isTrigger);
+    public void addSquareHitbox(int width, int height, Point p, boolean isTrigger) {
+        SquareHitbox hb = new SquareHitbox(width, height, this,p,isTrigger);
         hitboxes.add(hb);
     }
 
+    public void addRoundHitbox(int radius, Point p, boolean isTrigger){
+        RoundHitbox hb = new RoundHitbox(p,radius, this, isTrigger);
+        hitboxes.add(hb);
+    }
+    
+    public void addRoundHitbox(int radius, boolean isTrigger){
+        RoundHitbox hb = new RoundHitbox(new Point(0,0),radius, this, isTrigger);
+        hitboxes.add(hb);
+    }
+    
     public ArrayList<Hitbox> getHitboxes(){
         return hitboxes;
     }
     
-    public Hitbox getHitbox() {
+    public SquareHitbox getHitbox() {
         return this.hitbox;
     }
 

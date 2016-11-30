@@ -16,10 +16,13 @@ import javax.swing.JPanel;
 import Interfaces.Plottable;
 import Components.BaseObject;
 import Components.GameScene;
+import Components.RoundHitbox;
+import Components.SquareHitbox;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.util.Collections;
+import sun.security.x509.RDN;
 
 public class MainPanel extends JPanel {
 
@@ -89,9 +92,16 @@ public class MainPanel extends JPanel {
             }
             //draw hitboxes
 //            g.setColor(Color.red);
-            for (int j = 0; j < currObject.getHitboxes().size(); j++) {
-                g.drawRect(currObject.getCords().x + currObject.getHitboxes().get(j).cords.x, currObject.getCords().y + currObject.getHitboxes().get(j).cords.y, currObject.getHitboxes().get(j).width, currObject.getHitboxes().get(j).height);
-            }
+//            for (int j = 0; j < currObject.getHitboxes().size(); j++) {
+//                if(currObject.getHitboxes().get(j).getClass().getSimpleName().equals("SquareHitbox")){
+//                    SquareHitbox sh = (SquareHitbox)currObject.getHitboxes().get(j);
+//                    g.drawRect(currObject.getCords().x + sh.cords.x, currObject.getCords().y + sh.cords.y, sh.width, sh.height);
+//                }
+//                if(currObject.getHitboxes().get(j).getClass().getSimpleName().equals("RoundHitbox")){
+//                    RoundHitbox rh = (RoundHitbox)currObject.getHitboxes().get(j);
+//                    g.drawOval(currObject.getCords().x+rh.cords.x-rh.radius,currObject.getCords().y+rh.cords.y-rh.radius, rh.radius*2, rh.radius*2);
+//                }
+//            }
 
         }
 

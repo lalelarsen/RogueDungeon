@@ -25,7 +25,8 @@ public class LevelOneEnemyOne extends BaseObject {
     public LevelOneEnemyOne() {
 
         addPhysics();
-        addHitbox(56, 64, new Point(4, 0), false);
+//        addSquareHitbox(56, 64, new Point(4, 0), false);
+        addRoundHitbox(32, new Point(32,32), false);
         addSpriteManager(MoveStatus.IDLE);
         getSpriteManager().addSprite(SpriteSheet.BLUEKNIGHTANIM_HIGHRES, FourDir.RIGHT, 160, 32, 64, 64, 64, 0, 2, MoveStatus.SOUTH);
         getSpriteManager().addSprite(SpriteSheet.BLUEKNIGHTANIM_HIGHRES, FourDir.RIGHT, 160, 160, 64, 64, 64, 0, 2, MoveStatus.EAST);
@@ -49,10 +50,10 @@ public class LevelOneEnemyOne extends BaseObject {
             }
             if (Target.getCords().x > getCords().x) {
                 setCords(getCords().x + speed, getCords().y);
-                getSpriteManager().setStatus(MoveStatus.SOUTH);
+                
             } else {
                 setCords(getCords().x - speed, getCords().y);
-                getSpriteManager().setStatus(MoveStatus.NORTH);
+                
             }
         } else {
             getSpriteManager().setStatus(MoveStatus.IDLE);

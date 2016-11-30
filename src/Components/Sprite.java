@@ -32,6 +32,9 @@ public class Sprite {
     public void setStatus(Enum status) {
         this.status = status;
     }
+    public BufferedImage getCurrImage(){
+        return images[counter];
+    }
     
     public BufferedImage getNextImage() {
         BufferedImage curr = images[counter];
