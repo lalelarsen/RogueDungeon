@@ -6,8 +6,10 @@
 package Objects;
 
 import Components.BaseObject;
+import Components.Hitbox;
 import Components.Physics;
 import Components.Sprite;
+import Components.SquareHitbox;
 import Controllers.GameController;
 import static Controllers.SpriteController.loadSpriteRoll;
 import Interfaces.PlayerOne;
@@ -33,11 +35,12 @@ import javafx.scene.chart.PieChart;
  */
 public class MainCharacter extends BaseObject implements Plottable, PlayerOne {
 
-
     public int speed = 4;
+    public int hitCooldown = 1;
+    public long lastHit = 0;
 
     public MainCharacter() {
-
+        lastHit = System.currentTimeMillis();
         addSpriteManager(MoveStatus.NORTH);
 //        getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM, FourDir.RIGHT, 40, 8, 16, 16,16,0, 2, PlayerStatus.SOUTH);
 //        getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM, FourDir.RIGHT, 40, 40, 16, 16,16,0, 2, PlayerStatus.EAST);
@@ -54,12 +57,43 @@ public class MainCharacter extends BaseObject implements Plottable, PlayerOne {
         addPhysics();
         //getPhysics().setAcceleration(new Point(1,1));
 //        addSquareHitbox(56, 64,new Point(4,0),false);
-        addRoundHitbox(32, new Point(32,32), false);
-        
-        
+        addRoundHitbox(32, new Point(32, 32), false, "");
+//        addRoundHitbox(32, true, "new");
+        addSquareHitbox(60, 60, true, "new");
+        getHitbox("new").Deactivate();
+
         getPhysics().gravity = false;
 
+    }
 
+    @Override
+    public void triggered(String mess, Hitbox self, Hitbox hb) {
+        if (!hb.body.getClass().getSimpleName().equals("WallTileLevelOne")) {
+            if (self.cords.y == -40) {
+                hb.body.getPhysics().applyForce(new Point(0, -7));
+
+            }
+            if (self.cords.y == 40) {
+                hb.body.getPhysics().applyForce(new Point(0, +7));
+
+            }
+            if (self.cords.x == 40) {
+                hb.body.getPhysics().applyForce(new Point(+7, 0));
+
+            }
+            if (self.cords.x == -40) {
+                hb.body.getPhysics().applyForce(new Point(-7, 0));
+
+            }
+        }
+    }
+
+    @Override
+    public void lowPrioUpdate() {
+        if (lastHit + 250 < System.currentTimeMillis()) {
+            Hitbox curr = getHitbox("new");
+            curr.Deactivate();
+        }
     }
 
     public void stop() {
@@ -69,14 +103,14 @@ public class MainCharacter extends BaseObject implements Plottable, PlayerOne {
     @Override
     public void up() {
         //physics.applyForce(new Point(0, -1));
-        setCords(getCords().x, getCords().y-speed);
+        setCords(getCords().x, getCords().y - speed);
         getSpriteManager().setStatus(MoveStatus.NORTH);
     }
 
     @Override
     public void down() {
         //physics.applyForce(new Point(0, 1));
-        setCords(getCords().x, getCords().y+speed);
+        setCords(getCords().x, getCords().y + speed);
         getSpriteManager().setStatus(MoveStatus.SOUTH);
     }
 
@@ -96,17 +130,65 @@ public class MainCharacter extends BaseObject implements Plottable, PlayerOne {
 
     @Override
     public void space() {
-        
+        getHitbox(null);
     }
 
     @Override
     public void enter() {
-        
+        getHitbox("new").Deactivate();
     }
 
     @Override
     public void nothing() {
         getSpriteManager().setStatus(MoveStatus.IDLE);
+    }
+
+    @Override
+    public void w() {
+        if (lastHit + hitCooldown * 1000 < System.currentTimeMillis()) {
+            SquareHitbox curr = (SquareHitbox) getHitbox("new");
+            curr.setCords(new Point(32 - 5, -40));
+            curr.width = 10;
+            curr.height = 60;
+            curr.Activate();
+            lastHit = System.currentTimeMillis();
+        }
+    }
+
+    @Override
+    public void s() {
+        if (lastHit + hitCooldown * 1000 < System.currentTimeMillis()) {
+            SquareHitbox curr = (SquareHitbox) getHitbox("new");
+            curr.setCords(new Point(32 - 5, 40));
+            curr.width = 10;
+            curr.height = 60;
+            curr.Activate();
+            lastHit = System.currentTimeMillis();
+        }
+    }
+
+    @Override
+    public void a() {
+        if (lastHit + hitCooldown * 1000 < System.currentTimeMillis()) {
+            SquareHitbox curr = (SquareHitbox) getHitbox("new");
+            curr.setCords(new Point(-40, 32 - 5));
+            curr.width = 60;
+            curr.height = 10;
+            curr.Activate();
+            lastHit = System.currentTimeMillis();
+        }
+    }
+
+    @Override
+    public void d() {
+        if (lastHit + hitCooldown * 1000 < System.currentTimeMillis()) {
+            SquareHitbox curr = (SquareHitbox) getHitbox("new");
+            curr.setCords(new Point(40, 32 - 5));
+            curr.width = 60;
+            curr.height = 10;
+            curr.Activate();
+            lastHit = System.currentTimeMillis();
+        }
     }
 
 }

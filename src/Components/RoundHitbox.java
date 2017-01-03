@@ -14,16 +14,15 @@ import java.util.ArrayList;
  */
 public class RoundHitbox extends Hitbox {
 
-    public Point cords;
     public int radius;
-    public BaseObject body;
     ArrayList<Point> area = new ArrayList<Point>();
-
-    public RoundHitbox(Point p, int radius, BaseObject body, boolean isTrigger) {
+    
+    public RoundHitbox(Point p, int radius, BaseObject body, boolean isTrigger, String id) {
         this.cords = p;
         this.radius = radius;
         this.body = body;
         this.isTrigger = isTrigger;
+        this.id = id;
     }
 
     public int getOffsetRound(RoundHitbox hb, double dist) {

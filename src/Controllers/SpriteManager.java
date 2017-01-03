@@ -18,22 +18,23 @@ import java.util.ArrayList;
  * @author frederik.larsen
  */
 public class SpriteManager {
-    ArrayList<Sprite> images = new ArrayList();
+    ArrayList<Sprite> sprites = new ArrayList();
     Enum status = null;
     
     public SpriteManager(Enum status){
         this.status = status;
     }
     
-    public void addSprite(SpriteSheet sheet, FourDir dir, int x, int y, int width, int height, int wSpace, int hSpace, int amount, Enum status){
-        images.add(loadSpriteRoll(sheet, dir, x, y, width, height, wSpace, hSpace, amount, status));
+    public void addSprite(SpriteSheet sheet, FourDir dir, int x, int y,
+            int width, int height, int wSpace, int hSpace, int amount, Enum status){
+        sprites.add(loadSpriteRoll(sheet, dir, x, y, width, height, wSpace, hSpace, amount, status));
     }
     
     public BufferedImage nextImage(){
         BufferedImage img = null;
-        for (int i = 0; i < images.size(); i++) {
-            if(status == images.get(i).getStatus()){
-                img = images.get(i).getNextImage();
+        for (int i = 0; i < sprites.size(); i++) {
+            if(status == sprites.get(i).getStatus()){
+                img = sprites.get(i).getNextImage();
             }
         }
         return img;

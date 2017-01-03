@@ -49,7 +49,8 @@ public class SpriteController {
         }
     }
     
-    public static Sprite loadSpriteRoll(SpriteSheet sheet, FourDir dir, int x, int y, int width, int height, int wSpace, int hSpace, int amount, Enum status) {
+    public static Sprite loadSpriteRoll(SpriteSheet sheet, FourDir dir, int x, int y, int width, int height,
+            int wSpace, int hSpace, int amount, Enum status) {
         BufferedImage[] images = new BufferedImage[amount];
         BufferedImage curr = null;
         
@@ -70,7 +71,14 @@ public class SpriteController {
         for (int i = 0; i < amount; i++) {
             images[i] = curr.getSubimage(x, y, width, height);
             switch (dir) {
+                case UP:
+                    y = y - height - hSpace;
+                    break;
+                case LEFT:
+                    x = x - width - wSpace;
+                    break;
                 case DOWN:
+                    y = y + height + hSpace;
                     break;
                 case RIGHT:
                     x = x + width + wSpace;

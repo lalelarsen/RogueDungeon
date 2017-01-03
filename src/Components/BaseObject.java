@@ -23,11 +23,11 @@ public class BaseObject implements Plottable, Comparable<BaseObject> {
     public Point pos = new Point(0, 0);
     public Image img;
     public Physics physics = null;
-    public SquareHitbox hitbox = null;
     public ArrayList<Hitbox> hitboxes = new ArrayList<Hitbox>();
     public SpriteManager SM;
     public int lastX = 0;
     public int lastY = 0;
+    public boolean isActive = true;
     
 
     @Override
@@ -80,32 +80,28 @@ public class BaseObject implements Plottable, Comparable<BaseObject> {
         return SM;
     }
 
-    public void addSquareHitbox(int width, int height, boolean isTrigger) {
-        SquareHitbox hb = new SquareHitbox(width, height, this,new Point(0,0), isTrigger);
+    public void addSquareHitbox(int width, int height, boolean isTrigger, String id) {
+        SquareHitbox hb = new SquareHitbox(width, height, this,new Point(0,0), isTrigger, id);
         hitboxes.add(hb);
     }
     
-    public void addSquareHitbox(int width, int height, Point p, boolean isTrigger) {
-        SquareHitbox hb = new SquareHitbox(width, height, this,p,isTrigger);
+    public void addSquareHitbox(int width, int height, Point p, boolean isTrigger, String id) {
+        SquareHitbox hb = new SquareHitbox(width, height, this,p,isTrigger, id);
         hitboxes.add(hb);
     }
 
-    public void addRoundHitbox(int radius, Point p, boolean isTrigger){
-        RoundHitbox hb = new RoundHitbox(p,radius, this, isTrigger);
+    public void addRoundHitbox(int radius, Point p, boolean isTrigger, String id){
+        RoundHitbox hb = new RoundHitbox(p,radius, this, isTrigger, id);
         hitboxes.add(hb);
     }
     
-    public void addRoundHitbox(int radius, boolean isTrigger){
-        RoundHitbox hb = new RoundHitbox(new Point(0,0),radius, this, isTrigger);
+    public void addRoundHitbox(int radius, boolean isTrigger, String id){
+        RoundHitbox hb = new RoundHitbox(new Point(0,0),radius, this, isTrigger, id);
         hitboxes.add(hb);
     }
     
     public ArrayList<Hitbox> getHitboxes(){
         return hitboxes;
-    }
-    
-    public SquareHitbox getHitbox() {
-        return this.hitbox;
     }
 
     public void addPhysics() {
@@ -121,6 +117,18 @@ public class BaseObject implements Plottable, Comparable<BaseObject> {
         return this.getCords().y - o.getCords().y;
     }
 
+    public Hitbox getHitbox(String id){
+        for (int i = 0; i < hitboxes.size(); i++) {
+            if(hitboxes.get(i).id.equals(id)){
+                return hitboxes.get(i);
+            }
+        }
+        return null;
+    }
+    
+    public void triggered(String id,Hitbox self, Hitbox hb){
+        
+    }
     
     
 }

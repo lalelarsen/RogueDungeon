@@ -52,9 +52,9 @@ public class GameController {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setVisible(true);
-//        frame.setResizable(false);
-        
         run(mp);
     }
 
@@ -119,6 +119,18 @@ public class GameController {
         }
         if(currentKeys.contains(KeyEvent.VK_SPACE)){
             currScene.p1.space();
+        }
+        if(currentKeys.contains(KeyEvent.VK_W)){
+            currScene.p1.w();
+        }
+        if(currentKeys.contains(KeyEvent.VK_S)){
+            currScene.p1.s();
+        }
+        if(currentKeys.contains(KeyEvent.VK_D)){
+            currScene.p1.d();
+        }
+        if(currentKeys.contains(KeyEvent.VK_A)){
+            currScene.p1.a();
         }
         if (currentKeys.isEmpty()) {
             //if the player is not pressing keys, the protagonist stands still

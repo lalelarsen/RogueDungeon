@@ -8,8 +8,10 @@ package Objects;
 import Components.BaseObject;
 import Components.GameScene;
 import Objects.Enemies.LevelOneEnemyOne;
+import Objects.Tiles.LadderTileLevelOne;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import static java.util.concurrent.Executors.callable;
@@ -22,72 +24,57 @@ import java.util.concurrent.Future;
 public class SceneOne extends GameScene {
 
     public MainCharacter Hero;
-    public LevelOneEnemyOne enemy1;
-    public LevelOneEnemyOne enemy2;
-    public LevelOneEnemyOne enemy3;
-    public LevelOneEnemyOne enemy4;
-    public LevelOneEnemyOne enemy5;
-    public LevelOneEnemyOne enemy6;
-    public LevelOneEnemyOne enemy7;
-    public LevelOneEnemyOne enemy8;
-    public LevelOneEnemyOne enemy9;
-    public LevelOneEnemyOne enemy10;
-    
+    public LadderTileLevelOne lad;
+    public int numberOffEnemies = 6;
+    public ArrayList<BaseObject> spawnList = new ArrayList();
+    Random rand = new Random();
 
     public SceneOne() {
         Hero = new MainCharacter();
-        Hero.setCords(50, 270);
 //        Hero.addSquareHitbox(20, 20, new Point(60,30),true);
         OC.units.add(Hero);
-        
+
         p1 = Hero;
         camera = Hero;
-        
+
         Generator g = new Generator();
         ExecutorService pool = Executors.newFixedThreadPool(3);
         Future<ArrayList<ArrayList<BaseObject>>> future = pool.submit(g);
-        
+
         while (!future.isDone()) {
-            System.out.println("loading");
-            try {
-                OC.units.addAll(future.get().get(0));
-                OC.bgUnits.addAll(future.get().get(1));
-            } catch (Exception e) {
-                
-            }
+//            System.out.println("loading");
         }
-        
-        enemy1 = new LevelOneEnemyOne();
-        enemy1.setCords(20, 20);
-        OC.units.add(enemy1);
-        
-        enemy2 = new LevelOneEnemyOne();
-        enemy2.setCords(50, 20);
-        OC.units.add(enemy2);
-        enemy3 = new LevelOneEnemyOne();
-        enemy3.setCords(80, 20);
-        OC.units.add(enemy3);
-        enemy4 = new LevelOneEnemyOne();
-        enemy4.setCords(110, 20);
-        OC.units.add(enemy4);
-        enemy5 = new LevelOneEnemyOne();
-        enemy5.setCords(140, 20);
-        OC.units.add(enemy5);
-        enemy6 = new LevelOneEnemyOne();
-        enemy6.setCords(170, 20);
-        OC.units.add(enemy6);
-        enemy7 = new LevelOneEnemyOne();
-        enemy7.setCords(200, 20);
-        OC.units.add(enemy7);
-        enemy8 = new LevelOneEnemyOne();
-        enemy8.setCords(230, 20);
-        OC.units.add(enemy8);
-        enemy9 = new LevelOneEnemyOne();
-        enemy9.setCords(260, 20);
-        OC.units.add(enemy9);
-        enemy10 = new LevelOneEnemyOne();
-        enemy10.setCords(290, 20);
-        OC.units.add(enemy10);
+        try {
+            OC.units.addAll(future.get().get(0));
+            OC.bgUnits.addAll(future.get().get(1));
+            spawnList = future.get().get(2);
+        } catch (Exception e) {
+
+        }
+
+        ArrayList<Point> spawnPoints = new ArrayList();
+        for (int i = 0; i < spawnList.size(); i++) {
+            spawnPoints.add(spawnList.get(i).pos);
+        }
+
+        for (int i = 0; i < numberOffEnemies; i++) {
+            LevelOneEnemyOne enemyTest = new LevelOneEnemyOne();
+            int n = rand.nextInt(spawnPoints.size() - 1);
+            Point p = new Point(spawnPoints.get(n).x, spawnPoints.get(n).y);
+            enemyTest.setCords(p.x, p.y + 8 * 4);
+            spawnPoints.remove(n);
+            OC.units.add(enemyTest);
+        }
+
+        int n = rand.nextInt(spawnPoints.size() - 1);
+        Point p = new Point(spawnPoints.get(n).x, spawnPoints.get(n).y);
+        lad = new LadderTileLevelOne();
+        lad.setCords(p.x, p.y+8*4);
+        OC.units.add(lad);
+
+        int n2 = rand.nextInt(spawnPoints.size() - 1);
+        Point p2 = new Point(spawnPoints.get(n2).x, spawnPoints.get(n2).y);
+        Hero.setCords(p2.x, p2.y+8*4);
 
     }
 

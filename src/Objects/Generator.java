@@ -29,6 +29,7 @@ public class Generator implements Callable<ArrayList<ArrayList<BaseObject>>> {
     public ArrayList<Point> placedWalls = new ArrayList();
     public ArrayList<BaseObject> wallTiles = new ArrayList();
     public ArrayList<BaseObject> floorTiles = new ArrayList();
+    public ArrayList<BaseObject> spawnTiles = new ArrayList();
     ArrayList<BaseObject> mainList;
 
     Point Pos = new Point(maxX / 2, maxY / 2);
@@ -108,6 +109,7 @@ public class Generator implements Callable<ArrayList<ArrayList<BaseObject>>> {
                     FloorTileLevelOne f = new FloorTileLevelOne();
                     f.setCords(j * 64, i * 128);
                     floorTiles.add(f);
+                    spawnTiles.add(f);
                 } else if (tileSpots[j][i] == TileTypes.WALL) {
                     WallTileLevelOne w = wallDef(new Point(j,i));
                     w.setCords(j * 64, i * 128);
@@ -158,6 +160,7 @@ public class Generator implements Callable<ArrayList<ArrayList<BaseObject>>> {
         ArrayList<ArrayList<BaseObject>> result = new ArrayList();
         result.add(wallTiles);
         result.add(floorTiles);
+        result.add(spawnTiles);
         
         return result;
     }

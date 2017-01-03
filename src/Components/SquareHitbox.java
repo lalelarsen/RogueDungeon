@@ -16,16 +16,15 @@ public class SquareHitbox extends Hitbox{
 
     public int width;
     public int height;
-    public Point cords;
-    BaseObject body;
     ArrayList<Point> area = new ArrayList<Point>();
-
-    public SquareHitbox(int width, int height, BaseObject body, Point p, boolean isTrigger) {
+    
+    public SquareHitbox(int width, int height, BaseObject body, Point p, boolean isTrigger, String id) {
         this.width = width;
         this.height = height;
         this.body = body;
         this.cords = p;
         this.isTrigger = isTrigger;
+        this.id = id;
         setArea();
     }
 
@@ -78,8 +77,6 @@ public class SquareHitbox extends Hitbox{
         return new Point(oWidth, oHeight);
     }
 
-    
-    
     public void setArea() {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
@@ -91,7 +88,7 @@ public class SquareHitbox extends Hitbox{
     public ArrayList<Point> getHitboxCords() {
         return area;
     }
-
+    
     public int getWidth() {
         return width;
     }

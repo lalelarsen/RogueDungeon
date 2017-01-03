@@ -30,85 +30,41 @@ public class ObjectsController {
     public void objectsUpdate() {
         for (int i = 0; i < units.size(); i++) {
             BaseObject currGO = units.get(i);
-            if (currGO.getPhysics() != null) {
-//                updatePhysics(currGO);
+            if (currGO.getPhysics() != null && currGO.isActive) {
+                updatePhysics(currGO);
             }
         }
     }
 
-//    public void solidCollisionDetetection() {
-//        for (int j = 0; j < units.size(); j++) {
-//            BaseObject MainBaseObject = units.get(j);
-//            if (MainBaseObject.getPhysics() != null && !MainBaseObject.getHitboxes().isEmpty()) {
-//                if (!MainBaseObject.getPhysics().immovable) {
-//                    for (int i = 0; i < units.size(); i++) {
-//                        BaseObject SecondBaseObject = units.get(i);
-//                        if (!MainBaseObject.equals(SecondBaseObject)) {
-//                            if (!SecondBaseObject.getHitboxes().isEmpty()) {
-//                                for (int k = 0; k < MainBaseObject.getHitboxes().size(); k++) {
-//                                    if (!MainBaseObject.getHitboxes().get(k).isTrigger) {
-//                                        SquareHitbox MainHB = MainBaseObject.getHitboxes().get(k);
-//                                        for (int l = 0; l < SecondBaseObject.getHitboxes().size(); l++) {
-//                                            SquareHitbox SecondHB = SecondBaseObject.getHitboxes().get(l);
-//                                            if (!SecondBaseObject.getHitboxes().get(l).isTrigger) {
-//                                                if (MainBaseObject.getCords().x + MainHB.cords.x < SecondBaseObject.getCords().x + SecondHB.cords.x + SecondHB.width && MainBaseObject.getCords().x + MainHB.cords.x + MainHB.width > SecondBaseObject.getCords().x + SecondHB.cords.x && MainBaseObject.getCords().y + MainHB.cords.y < SecondBaseObject.getCords().y + SecondHB.cords.y + SecondHB.height && MainBaseObject.getCords().y + MainHB.cords.y + MainHB.height > SecondBaseObject.getCords().y + SecondHB.cords.y) {
-//                                                    Point aPoint = MainHB.getOverlapped(SecondHB);
-//                                                    if (aPoint.x < aPoint.y) {
-//                                                        if (MainBaseObject.getCords().x + MainHB.cords.x > SecondBaseObject.getCords().x + SecondHB.cords.x) {
-//                                                            MainBaseObject.setCords(MainBaseObject.getCords().x + aPoint.x, MainBaseObject.getCords().y);
-//                                                            MainBaseObject.getPhysics().setVelocity(new Point(0, MainBaseObject.getPhysics().getVelocity().y));
-//                                                        } else {
-//                                                            MainBaseObject.setCords(MainBaseObject.getCords().x - aPoint.x, MainBaseObject.getCords().y);
-//                                                            MainBaseObject.getPhysics().setVelocity(new Point(0, MainBaseObject.getPhysics().getVelocity().y));
-//                                                        }
-//                                                    } else if (MainBaseObject.getCords().y + MainHB.cords.y > SecondBaseObject.getCords().y + SecondHB.cords.y) {
-//                                                        MainBaseObject.setCords(MainBaseObject.getCords().x, MainBaseObject.getCords().y + aPoint.y);
-//                                                        MainBaseObject.getPhysics().setVelocity(new Point(MainBaseObject.getPhysics().getVelocity().x, 0));
-//                                                    } else {
-//                                                        MainBaseObject.setCords(MainBaseObject.getCords().x, MainBaseObject.getCords().y - aPoint.y);
-//                                                        MainBaseObject.getPhysics().setVelocity(new Point(MainBaseObject.getPhysics().getVelocity().x, 0));
-//                                                    }
-//
-//                                                }
-//                                            }
-//                                        }
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
     public void solidCollisionDetetection() {
         for (int j = 0; j < units.size(); j++) {
             BaseObject MainBaseObject = units.get(j);
-            if (MainBaseObject.getPhysics() != null && !MainBaseObject.getHitboxes().isEmpty()) {
+            if (MainBaseObject.getPhysics() != null && !MainBaseObject.getHitboxes().isEmpty() && MainBaseObject.isActive) {
                 if (!MainBaseObject.getPhysics().immovable) {
                     for (int i = 0; i < units.size(); i++) {
                         BaseObject SecondBaseObject = units.get(i);
-                        if (!MainBaseObject.equals(SecondBaseObject)) {
-                            if (!SecondBaseObject.getHitboxes().isEmpty()) {
-                                for (int k = 0; k < MainBaseObject.getHitboxes().size(); k++) {
-                                    if (!MainBaseObject.getHitboxes().get(k).isTrigger) {
+                        if (SecondBaseObject.isActive) {
+                            if (!MainBaseObject.equals(SecondBaseObject)) {
+                                if (!SecondBaseObject.getHitboxes().isEmpty()) {
+                                    for (int k = 0; k < MainBaseObject.getHitboxes().size(); k++) {
+//                                    if (!MainBaseObject.getHitboxes().get(k).isTrigger) {
                                         Hitbox MainHB = MainBaseObject.getHitboxes().get(k);
                                         for (int l = 0; l < SecondBaseObject.getHitboxes().size(); l++) {
-                                            if (!SecondBaseObject.getHitboxes().get(l).isTrigger) {
-                                                Hitbox SecondHB = SecondBaseObject.getHitboxes().get(l);
+//                                            if (!SecondBaseObject.getHitboxes().get(l).isTrigger) {
+                                            Hitbox SecondHB = SecondBaseObject.getHitboxes().get(l);
 
-                                                if (MainHB.getClass().getSimpleName().equals("SquareHitbox") && SecondHB.getClass().getSimpleName().equals("SquareHitbox")) {
-                                                    squareHitboxOnSquareHitbox((SquareHitbox) MainHB, (SquareHitbox) SecondHB);
-                                                } else if (MainHB.getClass().getSimpleName().equals("RoundHitbox") && SecondHB.getClass().getSimpleName().equals("SquareHitbox")) {
-                                                    circleHitboxOnSquareHitbox((RoundHitbox) MainHB, (SquareHitbox) SecondHB);
-                                                } else if (MainHB.getClass().getSimpleName().equals("SquareHitbox") && SecondHB.getClass().getSimpleName().equals("RoundHitbox")) {
+                                            if (MainHB.getClass().getSimpleName().equals("SquareHitbox") && SecondHB.getClass().getSimpleName().equals("SquareHitbox")) {
+                                                squareHitboxOnSquareHitbox((SquareHitbox) MainHB, (SquareHitbox) SecondHB);
+                                            } else if (MainHB.getClass().getSimpleName().equals("RoundHitbox") && SecondHB.getClass().getSimpleName().equals("SquareHitbox")) {
+                                                circleHitboxOnSquareHitbox((RoundHitbox) MainHB, (SquareHitbox) SecondHB);
+                                            } else if (MainHB.getClass().getSimpleName().equals("SquareHitbox") && SecondHB.getClass().getSimpleName().equals("RoundHitbox")) {
 
-                                                } else if (MainHB.getClass().getSimpleName().equals("RoundHitbox") && SecondHB.getClass().getSimpleName().equals("RoundHitbox")) {
-                                                    circleHitboxOnCircleHitbox((RoundHitbox) MainHB, (RoundHitbox) SecondHB);
-                                                }
-
+                                            } else if (MainHB.getClass().getSimpleName().equals("RoundHitbox") && SecondHB.getClass().getSimpleName().equals("RoundHitbox")) {
+                                                circleHitboxOnCircleHitbox((RoundHitbox) MainHB, (RoundHitbox) SecondHB);
                                             }
+//                                            }
                                         }
+//                                    }
                                     }
                                 }
                             }
@@ -122,34 +78,43 @@ public class ObjectsController {
     public void circleHitboxOnSquareHitbox(RoundHitbox mainHB, SquareHitbox SecondHB) {
         int thisX = mainHB.body.getCords().x + mainHB.cords.x - mainHB.radius;
         int thisY = mainHB.body.getCords().y + mainHB.cords.y - mainHB.radius;
-        
-        if (thisX < SecondHB.getBody().getCords().x + SecondHB.cords.x + SecondHB.width && thisX + mainHB.radius*2 > SecondHB.getBody().getCords().x + SecondHB.cords.x && thisY < SecondHB.getBody().getCords().y + SecondHB.cords.y + SecondHB.height && thisY + mainHB.radius*2 > SecondHB.getBody().getCords().y + SecondHB.cords.y) {
-            
-            Point p = mainHB.getOffsetSquare(SecondHB);
-            mainHB.body.setCords(mainHB.body.getCords().x + p.x, mainHB.body.getCords().y + p.y);
+
+        if (thisX < SecondHB.getBody().getCords().x + SecondHB.cords.x + SecondHB.width && thisX + mainHB.radius * 2 > SecondHB.getBody().getCords().x + SecondHB.cords.x && thisY < SecondHB.getBody().getCords().y + SecondHB.cords.y + SecondHB.height && thisY + mainHB.radius * 2 > SecondHB.getBody().getCords().y + SecondHB.cords.y) {
+            if (!mainHB.isTrigger && !SecondHB.isTrigger) {
+                Point p = mainHB.getOffsetSquare(SecondHB);
+                mainHB.body.setCords(mainHB.body.getCords().x + p.x, mainHB.body.getCords().y + p.y);
+            } else if (mainHB.isTrigger || SecondHB.isTrigger) {
+                mainHB.triggered(SecondHB);
+                SecondHB.triggered(mainHB);
+            }
         }
     }
 
     public void squareHitboxOnSquareHitbox(SquareHitbox MainHB, SquareHitbox SecondHB) {
 
         if (MainHB.getBody().getCords().x + MainHB.cords.x < SecondHB.getBody().getCords().x + SecondHB.cords.x + SecondHB.width && MainHB.getBody().getCords().x + MainHB.cords.x + MainHB.width > SecondHB.getBody().getCords().x + SecondHB.cords.x && MainHB.getBody().getCords().y + MainHB.cords.y < SecondHB.getBody().getCords().y + SecondHB.cords.y + SecondHB.height && MainHB.getBody().getCords().y + MainHB.cords.y + MainHB.height > SecondHB.getBody().getCords().y + SecondHB.cords.y) {
-            Point aPoint = MainHB.getOverlappedSquare(SecondHB);
-            if (aPoint.x < aPoint.y) {
-                if (MainHB.getBody().getCords().x + MainHB.cords.x > SecondHB.getBody().getCords().x + SecondHB.cords.x) {
-                    MainHB.getBody().setCords(MainHB.getBody().getCords().x + aPoint.x, MainHB.getBody().getCords().y);
+            if (!MainHB.isTrigger && !SecondHB.isTrigger) {
+                Point aPoint = MainHB.getOverlappedSquare(SecondHB);
+                if (aPoint.x < aPoint.y) {
+                    if (MainHB.getBody().getCords().x + MainHB.cords.x > SecondHB.getBody().getCords().x + SecondHB.cords.x) {
+                        MainHB.getBody().setCords(MainHB.getBody().getCords().x + aPoint.x, MainHB.getBody().getCords().y);
 //                            MainHB.getBody().getPhysics().setVelocity(new Point(0, MainHB.getBody().getPhysics().getVelocity().y));
+                    } else {
+                        MainHB.getBody().setCords(MainHB.getBody().getCords().x - aPoint.x, MainHB.getBody().getCords().y);
+//                            MainHB.getBody().getPhysics().setVelocity(new Point(0, MainHB.getBody().getPhysics().getVelocity().y));
+                    }
+                } else if (MainHB.getBody().getCords().y + MainHB.cords.y > SecondHB.getBody().getCords().y + SecondHB.cords.y) {
+                    MainHB.getBody().setCords(MainHB.getBody().getCords().x, MainHB.getBody().getCords().y + aPoint.y);
+//                        MainHB.getBody().getPhysics().setVelocity(new Point(MainHB.getBody().getPhysics().getVelocity().x, 0));
                 } else {
-                    MainHB.getBody().setCords(MainHB.getBody().getCords().x - aPoint.x, MainHB.getBody().getCords().y);
-//                            MainHB.getBody().getPhysics().setVelocity(new Point(0, MainHB.getBody().getPhysics().getVelocity().y));
+                    MainHB.getBody().setCords(MainHB.getBody().getCords().x, MainHB.getBody().getCords().y - aPoint.y);
+//                        MainHB.getBody().getPhysics().setVelocity(new Point(MainHB.getBody().getPhysics().getVelocity().x, 0));
                 }
-            } else if (MainHB.getBody().getCords().y + MainHB.cords.y > SecondHB.getBody().getCords().y + SecondHB.cords.y) {
-                MainHB.getBody().setCords(MainHB.getBody().getCords().x, MainHB.getBody().getCords().y + aPoint.y);
-//                        MainHB.getBody().getPhysics().setVelocity(new Point(MainHB.getBody().getPhysics().getVelocity().x, 0));
-            } else {
-                MainHB.getBody().setCords(MainHB.getBody().getCords().x, MainHB.getBody().getCords().y - aPoint.y);
-//                        MainHB.getBody().getPhysics().setVelocity(new Point(MainHB.getBody().getPhysics().getVelocity().x, 0));
-            }
 
+            } else if (MainHB.isTrigger || SecondHB.isTrigger) {
+                MainHB.triggered(SecondHB);
+                SecondHB.triggered(MainHB);
+            }
         }
     }
 
@@ -161,23 +126,29 @@ public class ObjectsController {
         int targetY = SecondHB.body.getCords().y + SecondHB.cords.y;
         double dis = Math.sqrt(((targetX - thisX) * (targetX - thisX)) + ((targetY - thisY) * (targetY - thisY)));
         if (dis <= MainHB.radius + SecondHB.radius) {
-            int offset = MainHB.getOffsetRound(SecondHB, dis);
-            if (thisX > targetX) {
-                if (thisY > targetY) {
-                    MainHB.body.setCords(MainHB.body.getCords().x + offset, MainHB.body.getCords().y + offset);
+            if (!MainHB.isTrigger && !SecondHB.isTrigger) {
+                int offset = MainHB.getOffsetRound(SecondHB, dis);
+                if (thisX > targetX) {
+                    if (thisY > targetY) {
+                        MainHB.body.setCords(MainHB.body.getCords().x + offset, MainHB.body.getCords().y + offset);
 
+                    } else {
+                        MainHB.body.setCords(MainHB.body.getCords().x + offset, MainHB.body.getCords().y - offset);
+
+                    }
                 } else {
-                    MainHB.body.setCords(MainHB.body.getCords().x + offset, MainHB.body.getCords().y - offset);
+                    if (thisY > targetY) {
+                        MainHB.body.setCords(MainHB.body.getCords().x - offset, MainHB.body.getCords().y + offset);
 
+                    } else {
+                        MainHB.body.setCords(MainHB.body.getCords().x - offset, MainHB.body.getCords().y - offset);
+
+                    }
                 }
-            } else {
-                if (thisY > targetY) {
-                    MainHB.body.setCords(MainHB.body.getCords().x - offset, MainHB.body.getCords().y + offset);
 
-                } else {
-                    MainHB.body.setCords(MainHB.body.getCords().x - offset, MainHB.body.getCords().y - offset);
-
-                }
+            } else if (MainHB.isTrigger || SecondHB.isTrigger) {
+                MainHB.triggered(SecondHB);
+                SecondHB.triggered(MainHB);
             }
         }
     }
@@ -211,13 +182,21 @@ public class ObjectsController {
 
     public void updateUnits() {
         for (int i = 0; i < units.size(); i++) {
-            units.get(i).callUpdate();
+            if (units.get(i).isActive) {
+                units.get(i).callUpdate();
+            }
         }
     }
 
     public void lowPrioUnitUpdate() {
+//        System.out.println("------------------------");
         for (int i = 0; i < units.size(); i++) {
-            units.get(i).lowPrioUpdate();
+            if(!units.get(i).getClass().getSimpleName().equals("WallTileLevelOne")){
+//                System.out.println(units.get(i).getClass().getSimpleName());
+            }
+            if (units.get(i).isActive) {
+                units.get(i).lowPrioUpdate();
+            }
         }
     }
 
@@ -264,6 +243,51 @@ public class ObjectsController {
 //                    }
 //                }
 //
+//            }
+//        }
+//    }
+//    public void solidCollisionDetetection() {
+//        for (int j = 0; j < units.size(); j++) {
+//            BaseObject MainBaseObject = units.get(j);
+//            if (MainBaseObject.getPhysics() != null && !MainBaseObject.getHitboxes().isEmpty()) {
+//                if (!MainBaseObject.getPhysics().immovable) {
+//                    for (int i = 0; i < units.size(); i++) {
+//                        BaseObject SecondBaseObject = units.get(i);
+//                        if (!MainBaseObject.equals(SecondBaseObject)) {
+//                            if (!SecondBaseObject.getHitboxes().isEmpty()) {
+//                                for (int k = 0; k < MainBaseObject.getHitboxes().size(); k++) {
+//                                    if (!MainBaseObject.getHitboxes().get(k).isTrigger) {
+//                                        SquareHitbox MainHB = MainBaseObject.getHitboxes().get(k);
+//                                        for (int l = 0; l < SecondBaseObject.getHitboxes().size(); l++) {
+//                                            SquareHitbox SecondHB = SecondBaseObject.getHitboxes().get(l);
+//                                            if (!SecondBaseObject.getHitboxes().get(l).isTrigger) {
+//                                                if (MainBaseObject.getCords().x + MainHB.cords.x < SecondBaseObject.getCords().x + SecondHB.cords.x + SecondHB.width && MainBaseObject.getCords().x + MainHB.cords.x + MainHB.width > SecondBaseObject.getCords().x + SecondHB.cords.x && MainBaseObject.getCords().y + MainHB.cords.y < SecondBaseObject.getCords().y + SecondHB.cords.y + SecondHB.height && MainBaseObject.getCords().y + MainHB.cords.y + MainHB.height > SecondBaseObject.getCords().y + SecondHB.cords.y) {
+//                                                    Point aPoint = MainHB.getOverlapped(SecondHB);
+//                                                    if (aPoint.x < aPoint.y) {
+//                                                        if (MainBaseObject.getCords().x + MainHB.cords.x > SecondBaseObject.getCords().x + SecondHB.cords.x) {
+//                                                            MainBaseObject.setCords(MainBaseObject.getCords().x + aPoint.x, MainBaseObject.getCords().y);
+//                                                            MainBaseObject.getPhysics().setVelocity(new Point(0, MainBaseObject.getPhysics().getVelocity().y));
+//                                                        } else {
+//                                                            MainBaseObject.setCords(MainBaseObject.getCords().x - aPoint.x, MainBaseObject.getCords().y);
+//                                                            MainBaseObject.getPhysics().setVelocity(new Point(0, MainBaseObject.getPhysics().getVelocity().y));
+//                                                        }
+//                                                    } else if (MainBaseObject.getCords().y + MainHB.cords.y > SecondBaseObject.getCords().y + SecondHB.cords.y) {
+//                                                        MainBaseObject.setCords(MainBaseObject.getCords().x, MainBaseObject.getCords().y + aPoint.y);
+//                                                        MainBaseObject.getPhysics().setVelocity(new Point(MainBaseObject.getPhysics().getVelocity().x, 0));
+//                                                    } else {
+//                                                        MainBaseObject.setCords(MainBaseObject.getCords().x, MainBaseObject.getCords().y - aPoint.y);
+//                                                        MainBaseObject.getPhysics().setVelocity(new Point(MainBaseObject.getPhysics().getVelocity().x, 0));
+//                                                    }
+//
+//                                                }
+//                                            }
+//                                        }
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
 //            }
 //        }
 //    }

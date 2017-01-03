@@ -17,4 +17,9 @@ public interface PlayerOne {
     public void space();
     public void enter();
     public void nothing();
+    public void w();
+    public void s();
+    public void a();
+    public void d();
+    
 }
