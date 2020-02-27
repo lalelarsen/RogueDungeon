@@ -26,6 +26,7 @@ public class SpriteController {
     public static BufferedImage knightAnim;
     public static BufferedImage knightAnimHiRes;
     public static BufferedImage blueKnightAnimHiRes;
+    public static BufferedImage fred;
 
     public SpriteController() {
         try {
@@ -33,6 +34,7 @@ public class SpriteController {
             knightAnim = ImageIO.read(this.getClass().getResourceAsStream("/pictures/knightanim3.png"));
             knightAnimHiRes = ImageIO.read(this.getClass().getResourceAsStream("/pictures/knightanim3_HiRes.png"));
             blueKnightAnimHiRes = ImageIO.read(this.getClass().getResourceAsStream("/pictures/blueKnightanim3_HiRes.png"));
+            fred = ImageIO.read(this.getClass().getResourceAsStream("/pictures/fred_sheet.png"));
         } catch (IOException e) {
             System.out.println("The image was not loaded.");
         }
@@ -44,6 +46,7 @@ public class SpriteController {
             knightAnim = ImageIO.read(new File("/pictures/knightanim3.png"));
             knightAnimHiRes = ImageIO.read(new File("/pictures/knightanim3_HiRes.png"));
             blueKnightAnimHiRes = ImageIO.read(new File("/pictures/knightanim3_HiRes.png"));
+            fred = ImageIO.read(new File("/pictures/fred_sheet.png"));
         } catch (IOException e) {
             System.out.println("The image was not loaded.");
         }
@@ -66,6 +69,9 @@ public class SpriteController {
                 break;
             case BLUEKNIGHTANIM_HIGHRES:
                 curr = blueKnightAnimHiRes;
+                break;
+            case FRED:
+                curr = fred;
                 break;
         }
         for (int i = 0; i < amount; i++) {

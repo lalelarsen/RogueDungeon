@@ -25,11 +25,11 @@ public class Generator implements Callable<ArrayList<ArrayList<BaseObject>>> {
     public int maxX = 40;
     public int maxY = 40;
     public TileTypes[][] tileSpots = new TileTypes[maxX][maxY];
-    public ArrayList<Point> placedTiles = new ArrayList();
-    public ArrayList<Point> placedWalls = new ArrayList();
-    public ArrayList<BaseObject> wallTiles = new ArrayList();
-    public ArrayList<BaseObject> floorTiles = new ArrayList();
-    public ArrayList<BaseObject> spawnTiles = new ArrayList();
+    public ArrayList<Point> placedTiles = new ArrayList<Point>();
+    public ArrayList<Point> placedWalls = new ArrayList<Point>();
+    public ArrayList<BaseObject> wallTiles = new ArrayList<BaseObject>();
+    public ArrayList<BaseObject> floorTiles = new ArrayList<BaseObject>();
+    public ArrayList<BaseObject> spawnTiles = new ArrayList<BaseObject>();
     ArrayList<BaseObject> mainList;
 
     Point Pos = new Point(maxX / 2, maxY / 2);

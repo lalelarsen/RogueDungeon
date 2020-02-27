@@ -18,12 +18,12 @@ import Components.BaseObject;
 import Components.GameScene;
 import Components.RoundHitbox;
 import Components.SquareHitbox;
+import Settings.Settings;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.util.Collections;
-import sun.security.x509.RDN;
 
 public class MainPanel extends JPanel {
 
@@ -67,7 +67,7 @@ public class MainPanel extends JPanel {
             BaseObject currObject = SC.OC.bgUnits.get(i);
             Point point = currObject.nextPos();
             if (currObject.getSpriteManager() == null) {
-                g.drawImage(currObject.getImage(), point.x, point.y, null);
+                g.drawImage(currObject.getImage(), point.x, point.y, currObject.getImage().getWidth(null)*Settings.getScale(),currObject.getImage().getHeight(null)*Settings.getScale(),null);
             } else {
                 Image img = null;
                 try {
@@ -77,7 +77,8 @@ public class MainPanel extends JPanel {
                     System.out.println(currObject.getClass().getName() + " har intet billede");
                     e.printStackTrace();
                 }
-                g.drawImage(img, point.x, point.y, null);
+
+                g.drawImage(img, point.x, point.y, img.getWidth(null)*Settings.getScale(),img.getHeight(null)*Settings.getScale(),null);
             }
         }
 
@@ -87,7 +88,7 @@ public class MainPanel extends JPanel {
                 Point point = currObject.nextPos();
 
                 if (currObject.getSpriteManager() == null) {
-                    g.drawImage(currObject.getImage(), point.x, point.y, null);
+                    g.drawImage(currObject.getImage(), point.x, point.y, currObject.getImage().getWidth(null)*Settings.getScale(),currObject.getImage().getHeight(null)*Settings.getScale(),null);
                 } else {
                     Image img = null;
                     try {
@@ -96,7 +97,7 @@ public class MainPanel extends JPanel {
                     } catch (Exception e) {
                         System.out.println(currObject.getClass().getName() + " har intet billede");
                     }
-                    g.drawImage(img, point.x, point.y, null);
+                    g.drawImage(img, point.x, point.y, img.getWidth(null)*Settings.getScale(),img.getHeight(null)*Settings.getScale(),null);
                 }
             }
             //draw hitboxes
