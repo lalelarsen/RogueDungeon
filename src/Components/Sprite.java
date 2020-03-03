@@ -7,6 +7,7 @@ package Components;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -18,11 +19,16 @@ public class Sprite {
     int counter = 0;
     int speedCounter = 0;
     int speed = 10; //higher = slower
+    long lastTimeStamp = 0;
+    long timeBetweenFrames = 400;
     Enum status;
+    Date date;
 
-    public Sprite(BufferedImage[] images, Enum status) {
+    public Sprite(BufferedImage[] images, Enum status, long timeBetweenFrames) {
         this.images = images;
         this.status = status;
+        // this.timeBetweenFrames = timeBetweenFrames;
+        date = new Date();
     }
 
     public Enum getStatus() {
@@ -36,20 +42,33 @@ public class Sprite {
         return images[counter];
     }
     
-    public BufferedImage getNextImage() {
-        BufferedImage curr = images[counter];
-        speedCounter++;
-        if (speedCounter == speed) {
-            counter++;
-            speedCounter = 0;
-        }
-        if (counter == images.length) {
-            counter = 0;
-        }
-        return curr;
+    // public BufferedImage getNextImage() {
+    //     BufferedImage curr = images[counter];
+    //     speedCounter++;
+    //     if (speedCounter == speed) {
+    //         counter++;
+    //         speedCounter = 0;
+    //     }
+    //     if (counter == images.length) {
+    //         counter = 0;
+    //     }
+    //     return curr;
 
-    }
+    // }
     
+    public BufferedImage getNextImage() {
+        date = new Date();
+        if(timeBetweenFrames < date.getTime()-lastTimeStamp){
+            counter++;
+            if (counter == images.length) {
+                counter = 0;
+            }
+            lastTimeStamp = date.getTime();
+            return images[counter];
+        }
+        return images[counter];
+    }
+
     public void reset(){
         counter = 0;
         speedCounter = 0;

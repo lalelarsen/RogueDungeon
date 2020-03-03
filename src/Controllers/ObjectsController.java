@@ -29,9 +29,8 @@ public class ObjectsController {
 
     public void objectsUpdate() {
         for (int i = 0; i < units.size(); i++) {
-            BaseObject currGO = units.get(i);
-            if (currGO.getPhysics() != null && currGO.isActive) {
-                updatePhysics(currGO);
+            if (units.get(i).getPhysics() != null && units.get(i).isActive) {
+                updatePhysics(units.get(i));
             }
         }
     }

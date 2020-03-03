@@ -63,6 +63,23 @@ public class Generator implements Callable<ArrayList<ArrayList<BaseObject>>> {
 
             }
         }
+
+        // System.out.println("hallo");
+        // for (int i = 0; i < maxX; i++) {
+        //     System.out.println("");
+        //     for (int j = 0; j < maxY; j++) {
+        //         Point p = new Point(i, j);
+        //         if (tileSpots[j][i] == TileTypes.FLOOR) {
+        //             System.out.print(" T ");
+        //         } else if (tileSpots[j][i] == TileTypes.WALL) {
+        //             System.out.print(" W ");
+        //         } else {
+        //             System.out.print(" - ");
+        //         }
+        //     }
+
+        // }
+
         for (int i = 0; i < AmountOfTiles; i++) {
             Point curr = placedTiles.get(i);
             boolean soloHor = true;
@@ -90,6 +107,7 @@ public class Generator implements Callable<ArrayList<ArrayList<BaseObject>>> {
                 tileSpots[curr.x][curr.y + 1] = TileTypes.FLOOR;
             }
         }
+
         for (int i = 0; i < placedTiles.size(); i++) {
             Point curr = placedTiles.get(i);
             for (int j = -1; j < 2; j++) {
@@ -102,6 +120,7 @@ public class Generator implements Callable<ArrayList<ArrayList<BaseObject>>> {
                 }
             }
         }
+
         for (int i = 0; i < maxX; i++) {
             for (int j = 0; j < maxY; j++) {
                 Point p = new Point(i, j);
@@ -140,22 +159,6 @@ public class Generator implements Callable<ArrayList<ArrayList<BaseObject>>> {
 //            tiles.add(f);
 //
 //        }
-
-        System.out.println("hallo");
-        for (int i = 0; i < maxX; i++) {
-            System.out.println("");
-            for (int j = 0; j < maxY; j++) {
-                Point p = new Point(i, j);
-                if (tileSpots[j][i] == TileTypes.FLOOR) {
-                    System.out.print(" T ");
-                } else if (tileSpots[j][i] == TileTypes.WALL) {
-                    System.out.print(" W ");
-                } else {
-                    System.out.print(" - ");
-                }
-            }
-
-        }
         
         ArrayList<ArrayList<BaseObject>> result = new ArrayList();
         result.add(wallTiles);

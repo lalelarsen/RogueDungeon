@@ -34,25 +34,25 @@ import java.util.Date;
  */
 public class MainCharacter extends BaseObject implements Plottable, PlayerOne {
 
-    public int speed = 4;
+    public int speed = 1;
     public int hitCooldown = 1;
     public long lastHit = 0;
 
     public MainCharacter() {
         lastHit = System.currentTimeMillis();
         addSpriteManager(MoveStatus.NORTH);
-//        getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM, FourDir.RIGHT, 40, 8, 16, 16,16,0, 2, PlayerStatus.SOUTH);
-//        getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM, FourDir.RIGHT, 40, 40, 16, 16,16,0, 2, PlayerStatus.EAST);
-//        getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM, FourDir.RIGHT, 40, 104, 16, 16,16,0, 2, PlayerStatus.NORTH);
-//        getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM, FourDir.RIGHT, 40, 168, 16, 16,16,0, 2, PlayerStatus.WEST);
-//        getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM, FourDir.RIGHT, 8, 8, 16, 16, 0, 0, 1, PlayerStatus.IDLE);
+       getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM, FourDir.RIGHT, 40, 8, 16, 16,16,0, 2, MoveStatus.SOUTH, 16);
+       getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM, FourDir.RIGHT, 40, 40, 16, 16,16,0, 2, MoveStatus.EAST, 16);
+       getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM, FourDir.RIGHT, 40, 104, 16, 16,16,0, 2, MoveStatus.NORTH, 16);
+       getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM, FourDir.RIGHT, 40, 168, 16, 16,16,0, 2, MoveStatus.WEST, 16);
+       getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM, FourDir.RIGHT, 8, 8, 16, 16, 0, 0, 1, MoveStatus.IDLE, 16);
 
         // getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM_HIGHRES, FourDir.RIGHT, 160, 32, 64, 64, 64, 0, 2, MoveStatus.SOUTH);
-        getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM_HIGHRES, FourDir.RIGHT, 160, 160, 64, 64, 64, 0, 2, MoveStatus.EAST);
-        getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM_HIGHRES, FourDir.RIGHT, 160, 416, 64, 64, 64, 0, 2, MoveStatus.NORTH);
-        getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM_HIGHRES, FourDir.RIGHT, 160, 672, 64, 64, 64, 0, 2, MoveStatus.WEST);
-        getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM_HIGHRES, FourDir.RIGHT, 32, 32, 64, 64, 0, 0, 1, MoveStatus.IDLE);
-        getSpriteManager().addSprite(SpriteSheet.FRED, FourDir.DOWN, 128, 0, 32, 32, 0, 0, 2, MoveStatus.SOUTH);
+        // getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM_HIGHRES, FourDir.RIGHT, 160, 160, 64, 64, 64, 0, 2, MoveStatus.EAST);
+        // getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM_HIGHRES, FourDir.RIGHT, 160, 416, 64, 64, 64, 0, 2, MoveStatus.NORTH);
+        // getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM_HIGHRES, FourDir.RIGHT, 160, 672, 64, 64, 64, 0, 2, MoveStatus.WEST);
+        // getSpriteManager().addSprite(SpriteSheet.KNIGHTANIM_HIGHRES, FourDir.RIGHT, 32, 32, 64, 64, 0, 0, 1, MoveStatus.IDLE);
+        // getSpriteManager().addSprite(SpriteSheet.FRED, FourDir.DOWN, 128, 0, 32, 32, 0, 0, 2, MoveStatus.SOUTH);
         // getSpriteManager().addSprite(SpriteSheet.FRED, FourDir.DOWN, 160, 160, 64, 64, 64, 0, 2, MoveStatus.EAST);
         // getSpriteManager().addSprite(SpriteSheet.FRED, FourDir.DOWN, 160, 416, 64, 64, 64, 0, 2, MoveStatus.NORTH);
         // getSpriteManager().addSprite(SpriteSheet.FRED, FourDir.DOWN, 160, 672, 64, 64, 64, 0, 2, MoveStatus.WEST);

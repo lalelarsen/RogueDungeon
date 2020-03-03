@@ -33,7 +33,7 @@ public class SpriteController {
             dungeon = ImageIO.read(this.getClass().getResourceAsStream("/pictures/dungeon_sheet.png"));
             knightAnim = ImageIO.read(this.getClass().getResourceAsStream("/pictures/knightanim3.png"));
             knightAnimHiRes = ImageIO.read(this.getClass().getResourceAsStream("/pictures/knightanim3_HiRes.png"));
-            blueKnightAnimHiRes = ImageIO.read(this.getClass().getResourceAsStream("/pictures/blueKnightanim3_HiRes.png"));
+            blueKnightAnimHiRes = ImageIO.read(this.getClass().getResourceAsStream("/pictures/blueKnightanim3.png"));
             fred = ImageIO.read(this.getClass().getResourceAsStream("/pictures/fred_sheet.png"));
         } catch (IOException e) {
             System.out.println("The image was not loaded.");
@@ -53,7 +53,7 @@ public class SpriteController {
     }
     
     public static Sprite loadSpriteRoll(SpriteSheet sheet, FourDir dir, int x, int y, int width, int height,
-            int wSpace, int hSpace, int amount, Enum status) {
+            int wSpace, int hSpace, int amount, Enum status, long timeBetweenFrames) {
         BufferedImage[] images = new BufferedImage[amount];
         BufferedImage curr = null;
         
@@ -67,7 +67,7 @@ public class SpriteController {
             case KNIGHTANIM_HIGHRES:
                 curr = knightAnimHiRes;
                 break;
-            case BLUEKNIGHTANIM_HIGHRES:
+            case BLUEKNIGHTANIM:
                 curr = blueKnightAnimHiRes;
                 break;
             case FRED:
@@ -91,7 +91,7 @@ public class SpriteController {
                     break;
             }
         }
-        Sprite s = new Sprite(images, status);
+        Sprite s = new Sprite(images, status, timeBetweenFrames);
         return s;
     }
 

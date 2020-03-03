@@ -6,16 +6,9 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Debug (Launch) - Current File",
+            "name": "CodeLens (Launch) - Engine",
             "request": "launch",
-            "mainClass": "${file}"
-        },
-        {
-            "type": "java",
-            "name": "Debug (Launch)-Engine<RogueDungeon_4c18d7cd>",
-            "request": "launch",
-            "mainClass": "engine.Engine",
-            "projectName": "RogueDungeon_4c18d7cd"
+            "mainClass": "engine.Engine"
         }
     ]
 }

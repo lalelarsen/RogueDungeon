@@ -26,8 +26,8 @@ public class LadderTileLevelOne extends BaseObject {
         addRoundHitbox(16, new Point(32, 32), true, "ladder");
         addRoundHitbox(16, new Point(32, 32), false, "");
         addSpriteManager(ioStatus.OFF);
-        getSpriteManager().addSprite(SpriteSheet.DUNGEON, FourDir.RIGHT, 128 * 4, 96 * 4, 16 * 4, 16 * 4, 0, 0, 1, ioStatus.OFF);
-        getSpriteManager().addSprite(SpriteSheet.DUNGEON, FourDir.RIGHT, 208 * 4, 96 * 4, 16 * 4, 16 * 4, 0, 0, 2, ioStatus.ON);
+        getSpriteManager().addSprite(SpriteSheet.DUNGEON, FourDir.RIGHT, 128, 96, 16, 16, 0, 0, 1, ioStatus.OFF, 16);
+        getSpriteManager().addSprite(SpriteSheet.DUNGEON, FourDir.RIGHT, 208, 96, 16, 16, 0, 0, 2, ioStatus.ON, 16);
     }
 
     @Override

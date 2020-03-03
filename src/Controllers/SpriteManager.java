@@ -20,18 +20,19 @@ import java.util.ArrayList;
 public class SpriteManager {
     ArrayList<Sprite> sprites = new ArrayList();
     Enum status = null;
+    BufferedImage img;
     
     public SpriteManager(Enum status){
         this.status = status;
+        this.img = null;
     }
     
     public void addSprite(SpriteSheet sheet, FourDir dir, int x, int y,
-            int width, int height, int wSpace, int hSpace, int amount, Enum status){
-        sprites.add(loadSpriteRoll(sheet, dir, x, y, width, height, wSpace, hSpace, amount, status));
+            int width, int height, int wSpace, int hSpace, int amount, Enum status, long timeBetweenFrames){
+        sprites.add(loadSpriteRoll(sheet, dir, x, y, width, height, wSpace, hSpace, amount, status, timeBetweenFrames));
     }
     
     public BufferedImage nextImage(){
-        BufferedImage img = null;
         for (int i = 0; i < sprites.size(); i++) {
             if(status == sprites.get(i).getStatus()){
                 img = sprites.get(i).getNextImage();

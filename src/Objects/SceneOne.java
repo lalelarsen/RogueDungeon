@@ -49,7 +49,7 @@ public class SceneOne extends GameScene {
             OC.bgUnits.addAll(future.get().get(1));
             spawnList = future.get().get(2);
         } catch (Exception e) {
-
+            System.err.println("Something went wrong2");
         }
 
         ArrayList<Point> spawnPoints = new ArrayList();

@@ -22,7 +22,7 @@ public class LevelOneEnemyOne extends BaseObject {
     BaseObject Target;
     double distanceToTarget = 0;
     int chaseRange = 100;
-    public int speed = 2;
+    public int speed = 1;
     int hp = 5;
     long lastHitted = 0;
 
@@ -33,11 +33,11 @@ public class LevelOneEnemyOne extends BaseObject {
         addRoundHitbox(32, new Point(32, 32), false, "");
 //        addRoundHitbox(40, new Point(32,32), true, "hallo");
         addSpriteManager(MoveStatus.IDLE);
-        getSpriteManager().addSprite(SpriteSheet.BLUEKNIGHTANIM_HIGHRES, FourDir.RIGHT, 160, 32, 64, 64, 64, 0, 2, MoveStatus.SOUTH);
-        getSpriteManager().addSprite(SpriteSheet.BLUEKNIGHTANIM_HIGHRES, FourDir.RIGHT, 160, 160, 64, 64, 64, 0, 2, MoveStatus.EAST);
-        getSpriteManager().addSprite(SpriteSheet.BLUEKNIGHTANIM_HIGHRES, FourDir.RIGHT, 160, 416, 64, 64, 64, 0, 2, MoveStatus.NORTH);
-        getSpriteManager().addSprite(SpriteSheet.BLUEKNIGHTANIM_HIGHRES, FourDir.RIGHT, 160, 672, 64, 64, 64, 0, 2, MoveStatus.WEST);
-        getSpriteManager().addSprite(SpriteSheet.BLUEKNIGHTANIM_HIGHRES, FourDir.RIGHT, 32, 32, 64, 64, 0, 0, 1, MoveStatus.IDLE);
+        getSpriteManager().addSprite(SpriteSheet.BLUEKNIGHTANIM, FourDir.RIGHT, 40, 8, 16, 16, 16, 0, 2, MoveStatus.SOUTH, 16);
+        getSpriteManager().addSprite(SpriteSheet.BLUEKNIGHTANIM, FourDir.RIGHT, 40, 40, 16, 16, 16, 0, 2, MoveStatus.EAST, 16);
+        getSpriteManager().addSprite(SpriteSheet.BLUEKNIGHTANIM, FourDir.RIGHT, 40, 104, 16, 16, 16, 0, 2, MoveStatus.NORTH, 16);
+        getSpriteManager().addSprite(SpriteSheet.BLUEKNIGHTANIM, FourDir.RIGHT, 40, 168, 16, 16, 16, 0, 2, MoveStatus.WEST, 16);
+        getSpriteManager().addSprite(SpriteSheet.BLUEKNIGHTANIM, FourDir.RIGHT, 8, 8, 16, 16, 0, 0, 1, MoveStatus.IDLE, 16);
     }
 
     public void loseHP(int hp){

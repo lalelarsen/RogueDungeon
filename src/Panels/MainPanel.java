@@ -29,6 +29,7 @@ public class MainPanel extends JPanel {
 
     public GameScene SC = null;
     public static Point camera = new Point(0, 0);
+    public int scale;
     public static int viewX = 0;
     public static int viewY = 0;
 //    int WorldX = 1600;
@@ -39,14 +40,16 @@ public class MainPanel extends JPanel {
 //    int offSetMinY = 0;
     int camX = 0;
     int camY = 0;
-
+    
     public static void updateCameraCord(Point p) {
         camera = p;
     }
 
     public MainPanel(KeyListener KL, GameScene SC) {
         initComponents();
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        // Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension screenSize = new Dimension();
+        screenSize.setSize(1600, 1200);
         viewX = screenSize.width;
         viewY = screenSize.height;
         this.setFocusable(true);
@@ -54,6 +57,7 @@ public class MainPanel extends JPanel {
         this.SC = SC;
         this.setLocation(0, 0);
         this.setPreferredSize(screenSize);
+        this.scale = Settings.getScale();
     }
 
     @Override
@@ -67,7 +71,7 @@ public class MainPanel extends JPanel {
             BaseObject currObject = SC.OC.bgUnits.get(i);
             Point point = currObject.nextPos();
             if (currObject.getSpriteManager() == null) {
-                g.drawImage(currObject.getImage(), point.x, point.y, currObject.getImage().getWidth(null)*Settings.getScale(),currObject.getImage().getHeight(null)*Settings.getScale(),null);
+                g.drawImage(currObject.getImage(), point.x, point.y, currObject.getImage().getWidth(null)*scale,currObject.getImage().getHeight(null)*scale,null);
             } else {
                 Image img = null;
                 try {
@@ -78,7 +82,7 @@ public class MainPanel extends JPanel {
                     e.printStackTrace();
                 }
 
-                g.drawImage(img, point.x, point.y, img.getWidth(null)*Settings.getScale(),img.getHeight(null)*Settings.getScale(),null);
+                g.drawImage(img, point.x, point.y, img.getWidth(null)*scale,img.getHeight(null)*scale,null);
             }
         }
 
@@ -88,7 +92,7 @@ public class MainPanel extends JPanel {
                 Point point = currObject.nextPos();
 
                 if (currObject.getSpriteManager() == null) {
-                    g.drawImage(currObject.getImage(), point.x, point.y, currObject.getImage().getWidth(null)*Settings.getScale(),currObject.getImage().getHeight(null)*Settings.getScale(),null);
+                    g.drawImage(currObject.getImage(), point.x, point.y, currObject.getImage().getWidth(null)*scale,currObject.getImage().getHeight(null)*scale,null);
                 } else {
                     Image img = null;
                     try {
@@ -97,25 +101,25 @@ public class MainPanel extends JPanel {
                     } catch (Exception e) {
                         System.out.println(currObject.getClass().getName() + " har intet billede");
                     }
-                    g.drawImage(img, point.x, point.y, img.getWidth(null)*Settings.getScale(),img.getHeight(null)*Settings.getScale(),null);
+                    g.drawImage(img, point.x, point.y, img.getWidth(null)*scale,img.getHeight(null)*scale,null);
                 }
             }
             //draw hitboxes
-            g.setColor(Color.red);
-            for (int j = 0; j < currObject.getHitboxes().size(); j++) {
-                if (currObject.getHitboxes().get(j).getClass().getSimpleName().equals("SquareHitbox")) {
-                    SquareHitbox sh = (SquareHitbox) currObject.getHitboxes().get(j);
-                    if (sh.isActive) {
-                        g.drawRect(currObject.getCords().x + sh.cords.x, currObject.getCords().y + sh.cords.y, sh.width, sh.height);
-                    }
-                }
-                if (currObject.getHitboxes().get(j).getClass().getSimpleName().equals("RoundHitbox")) {
-                    RoundHitbox rh = (RoundHitbox) currObject.getHitboxes().get(j);
-                    if (rh.isActive) {
-                        g.drawOval(currObject.getCords().x + rh.cords.x - rh.radius, currObject.getCords().y + rh.cords.y - rh.radius, rh.radius * 2, rh.radius * 2);
-                    }
-                }
-            }
+            // g.setColor(Color.red);
+            // for (int j = 0; j < currObject.getHitboxes().size(); j++) {
+            //     if (currObject.getHitboxes().get(j).getClass().getSimpleName().equals("SquareHitbox")) {
+            //         SquareHitbox sh = (SquareHitbox) currObject.getHitboxes().get(j);
+            //         if (sh.isActive) {
+            //             g.drawRect(currObject.getCords().x + sh.cords.x, currObject.getCords().y + sh.cords.y, sh.width, sh.height);
+            //         }
+            //     }
+            //     if (currObject.getHitboxes().get(j).getClass().getSimpleName().equals("RoundHitbox")) {
+            //         RoundHitbox rh = (RoundHitbox) currObject.getHitboxes().get(j);
+            //         if (rh.isActive) {
+            //             g.drawOval(currObject.getCords().x + rh.cords.x - rh.radius, currObject.getCords().y + rh.cords.y - rh.radius, rh.radius * 2, rh.radius * 2);
+            //         }
+            //     }
+            // }
 
         }
 
