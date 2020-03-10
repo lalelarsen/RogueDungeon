@@ -7,6 +7,10 @@ package Components;
 
 import Controllers.ObjectsController;
 import Interfaces.PlayerOne;
+import enums.FourDir;
+import enums.MoveStatus;
+import enums.SpriteSheet;
+
 import java.awt.Point;
 
 /**
@@ -21,18 +25,31 @@ public class GameScene {
     public GameScene(){
         OC = new ObjectsController();
     }
-    public void frame10(){};
+    public void frame10(){
+        OC.lowPrioUnitUpdate();
+        OC.updateUnits();
+    };
     public void frame9(){};
     public void frame8(){};
     public void frame7(){};
     public void frame6(){};
     public void frame5(){};
-    public void frame4(){};
+    public void frame4(){
+        OC.solidCollisionDetetection();
+        OC.objectsUpdate();
+    };
     public void frame3(){};
     public void frame2(){};
-    public void frame1(){OC.solidCollisionDetetection();OC.updateUnits();OC.objectsUpdate();OC.lowPrioUnitUpdate();};
+    public void frame1(){
+        sceneUpdate();
+        OC.highPrioUnitUpdate();
+    };
     
     public Point getCameraPos(){
         return camera.getCords();
+    }
+
+    public void sceneUpdate(){
+
     }
 }

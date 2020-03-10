@@ -25,9 +25,10 @@ public class SceneOne extends GameScene {
 
     public MainCharacter Hero;
     public LadderTileLevelOne lad;
-    public int numberOffEnemies = 6;
+    public int numberOffEnemies = 1;
     public ArrayList<BaseObject> spawnList = new ArrayList();
     Random rand = new Random();
+    CameraObject CO;
 
     public SceneOne() {
         Hero = new MainCharacter();
@@ -35,7 +36,8 @@ public class SceneOne extends GameScene {
         OC.units.add(Hero);
 
         p1 = Hero;
-        camera = Hero;
+        // camera = Hero;
+
 
         Generator g = new Generator();
         ExecutorService pool = Executors.newFixedThreadPool(3);
@@ -51,11 +53,19 @@ public class SceneOne extends GameScene {
         } catch (Exception e) {
             System.err.println("Something went wrong2");
         }
-
+        
         ArrayList<Point> spawnPoints = new ArrayList();
         for (int i = 0; i < spawnList.size(); i++) {
             spawnPoints.add(spawnList.get(i).pos);
         }
+        
+        
+        CO = new CameraObject();
+        int n1 = rand.nextInt(spawnPoints.size() - 1);
+        Point p1 = new Point(spawnPoints.get(n1).x, spawnPoints.get(n1).y);
+        CO.setCords(p1.x, p1.y);
+        OC.units.add(CO);
+
 
         for (int i = 0; i < numberOffEnemies; i++) {
             LevelOneEnemyOne enemyTest = new LevelOneEnemyOne();
@@ -78,4 +88,9 @@ public class SceneOne extends GameScene {
 
     }
 
+    @Override
+    public void sceneUpdate() {
+        CO.updateCameraPos();
+        camera.pos = CO.pos;
+    }
 }

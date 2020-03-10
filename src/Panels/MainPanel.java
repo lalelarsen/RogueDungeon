@@ -19,6 +19,8 @@ import Components.GameScene;
 import Components.RoundHitbox;
 import Components.SquareHitbox;
 import Settings.Settings;
+
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
@@ -40,6 +42,7 @@ public class MainPanel extends JPanel {
 //    int offSetMinY = 0;
     int camX = 0;
     int camY = 0;
+    Graphics2D g2d;
     
     public static void updateCameraCord(Point p) {
         camera = p;
@@ -61,8 +64,10 @@ public class MainPanel extends JPanel {
     }
 
     @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
+    public void paint(Graphics g) {
+        // super.paintComponent(g);
+        g2d = (Graphics2D) g.create();
+        g2d.setComposite(AlphaComposite.SrcOver.derive(0.2f));
         camX = camera.x - viewX / 2 + 100;
         camY = camera.y - viewY / 2 + 100;
         g.translate(-camX, -camY);
@@ -92,7 +97,9 @@ public class MainPanel extends JPanel {
                 Point point = currObject.nextPos();
 
                 if (currObject.getSpriteManager() == null) {
-                    g.drawImage(currObject.getImage(), point.x, point.y, currObject.getImage().getWidth(null)*scale,currObject.getImage().getHeight(null)*scale,null);
+                    if(currObject.getImage()!= null){
+                        g.drawImage(currObject.getImage(), point.x, point.y, currObject.getImage().getWidth(null)*scale,currObject.getImage().getHeight(null)*scale,null);
+                    }
                 } else {
                     Image img = null;
                     try {
@@ -120,6 +127,9 @@ public class MainPanel extends JPanel {
             //         }
             //     }
             // }
+
+            // g.setColor(Color.BLUE);
+            // g.drawOval(camera.x, camera.y, 10, 20);
 
         }
 

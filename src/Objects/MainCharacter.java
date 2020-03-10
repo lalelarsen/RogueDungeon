@@ -71,6 +71,12 @@ public class MainCharacter extends BaseObject implements Plottable, PlayerOne {
     }
 
     @Override
+    public void callUpdate() {
+        // setCords(getCords().x + speed, getCords().y - speed);
+        // getSpriteManager().setStatus(MoveStatus.SOUTH);
+    }
+
+    @Override
     public void triggered(String mess, Hitbox self, Hitbox hb) {
         if (!hb.body.getClass().getSimpleName().equals("WallTileLevelOne")) {
             if (self.cords.y == -40) {

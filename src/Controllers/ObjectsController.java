@@ -179,6 +179,14 @@ public class ObjectsController {
         }
     }
 
+    public void highPrioUnitUpdate(){
+        for (int i = 0; i < units.size(); i++) {
+            if (units.get(i).isActive) {
+                units.get(i).callHighUpdate();
+            }
+        }
+    }
+
     public void updateUnits() {
         for (int i = 0; i < units.size(); i++) {
             if (units.get(i).isActive) {

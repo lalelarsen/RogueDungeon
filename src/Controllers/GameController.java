@@ -29,7 +29,7 @@ public class GameController {
     static GameScene currScene;
     KeyboardController KC = new KeyboardController();
     static MainPanel mp;
-    int FRAMES60_PER_SECOND = 16;
+    int FRAMES60_PER_SECOND = 2;
     int counter1 = 1;
     int counter2 = 1;
     int counter3 = 1;
@@ -66,33 +66,61 @@ public class GameController {
         while (true) {
             mp.repaint();
             
-            MainPanel.camera = currScene.getCameraPos();
             date = new Date();
             if(timeBetweenFrames < date.getTime()-lastTimeStamp){
                 lastTimeStamp = date.getTime();
                 
+                currScene.frame1();
+                MainPanel.camera = currScene.getCameraPos();
                 //manage the keys currently pressed
                 manageKeys();
-                currScene.frame1();
-                // if(counter2 == 2){currScene.frame2(); counter2 = 0;}
-                // if(counter3 == 3){currScene.frame3(); counter3 = 0;}
-                // if(counter4 == 4){currScene.frame4(); counter4 = 0;}
-                // if(counter5 == 5){currScene.frame5(); counter5 = 0;}
-                // if(counter6 == 6){currScene.frame6(); counter6 = 0;}
-                // if(counter7 == 7){currScene.frame7(); counter7 = 0;}
-                // if(counter8 == 8){currScene.frame8(); counter8 = 0;}
-                // if(counter9 == 9){currScene.frame9(); counter9 = 0;}
-                // if(counter10 == 10){currScene.frame10(); counter10 = 0;}
-                // counter1++;
-                // counter2++;
-                // counter3++;
-                // counter4++;
-                // counter5++;
-                // counter6++;
-                // counter7++;
-                // counter8++;
-                // counter9++; 
-                // counter10++;
+                if(counter2 == 2){
+                    currScene.frame2(); 
+                    counter2 = 0;
+                }
+                if(counter3 == 3){
+                    currScene.frame3(); 
+                    counter3 = 0;
+                }
+                if(counter4 == 4){
+                    currScene.frame4(); 
+                    counter4 = 0;
+                }
+                if(counter5 == 5){
+                    currScene.frame5(); 
+                    counter5 = 0;
+                }
+                if(counter6 == 6){
+                    currScene.frame6(); 
+                    counter6 = 0;
+                }
+                if(counter7 == 7){
+                    currScene.frame7(); 
+                    counter7 = 0;
+                }
+                if(counter8 == 8){
+                    currScene.frame8(); 
+                    counter8 = 0;
+                }
+                if(counter9 == 9){
+                    currScene.frame9(); 
+                    counter9 = 0;
+                }
+                if(counter10 == 10){
+                    
+                    currScene.frame10(); 
+                    counter10 = 0;
+                }
+                counter1++;
+                counter2++;
+                counter3++;
+                counter4++;
+                counter5++;
+                counter6++;
+                counter7++;
+                counter8++;
+                counter9++; 
+                counter10++;
             }
             
             // try {

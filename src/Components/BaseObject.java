@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class BaseObject implements Plottable, Comparable<BaseObject> {
 
     public Point pos = new Point(0, 0);
-    public Image img;
+    public Image img = null;
     public Physics physics = null;
     public ArrayList<Hitbox> hitboxes = new ArrayList<Hitbox>();
     public SpriteManager SM;
@@ -129,6 +129,9 @@ public class BaseObject implements Plottable, Comparable<BaseObject> {
     public void triggered(String id,Hitbox self, Hitbox hb){
         
     }
+
+	public void callHighUpdate() {
+	}
     
     
 }

@@ -21,9 +21,9 @@ public class LevelOneEnemyOne extends BaseObject {
 
     BaseObject Target;
     double distanceToTarget = 0;
-    int chaseRange = 100;
-    public int speed = 1;
-    int hp = 5;
+    int chaseRange = 300;
+    public int speed = 4;
+    int hp = 3;
     long lastHitted = 0;
 
     public LevelOneEnemyOne() {
